@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :product do
-    name { "MyString" }
-    price { "MyString" }
+    name { FFaker::Name.name}
+    price { 50.0 }
   end
 end
