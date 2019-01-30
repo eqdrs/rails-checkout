@@ -29,5 +29,14 @@ module Vendas
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
+
+    # Whitelist locales available for the application
+    I18n.available_locales = [:'pt-BR']
+
+    # Set default locale
+    I18n.default_locale = :'pt-BR'
+    
   end
 end
