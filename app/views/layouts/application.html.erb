@@ -10,6 +10,91 @@
   </head>
 
   <body>
-    <%= yield %>
+  <<body>
+  <div class="ls-topbar ">
+
+    <!-- Barra de Notificações -->
+    <div class="ls-notification-topbar">
+
+      <!-- Links de apoio -->
+      <!-- <div class="ls-alerts-list">
+        <a href="#" class="ls-ico-bell-o" data-counter="8" data-ls-module="topbarCurtain" data-target="#ls-notification-curtain"><span>Notificações</span></a>
+        <a href="#" class="ls-ico-bullhorn" data-ls-module="topbarCurtain" data-target="#ls-help-curtain"><span>Ajuda</span></a>
+        <a href="#" class="ls-ico-question" data-ls-module="topbarCurtain" data-target="#ls-feedback-curtain"><span>Sugestões</span></a>
+      </div> -->
+
+      <!-- Dropdown com detalhes da conta de usuário -->
+      <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
+        <a href="#" class="ls-ico-user">
+          <span class="ls-name" ></span>
+        </a>
+
+        <nav class="ls-dropdown-nav ls-user-menu">
+          <ul>
+            <li><%= link_to 'logout', method: 'DELETE' %></li>
+           </ul>
+        </nav>
+      </div>
+    </div>
+
+    <span class="ls-show-sidebar ls-ico-menu"></span>
+    <!-- Nome do produto/marca com sidebar -->
+    <h1 class="ls-brand-name" id='header_title'>
+      <a href="/" class="ls-ico-earth">
+        <small><%= 'title' %></small>
+        <%= 'subtitle' %>
+      </a>
+    </h1>
+    <!-- Nome do produto/marca sem sidebar quando for o pre-painel  -->
+  </div>
+
+
+  <aside class="ls-sidebar">
+    <div class="ls-sidebar-inner">
+        <nav class="ls-menu" id='side_menu'>
+          <ul>
+            <li><%= link_to 'promotions', class: 'ls-ico-dashboard', role: 'menuitem'%></li>
+            <li><%= link_to 'new_promotion', class: 'ls-ico-plus', role: 'menuitem'%></li>
+          </ul>
+        </nav>
+    </div>
+  </aside>
+
+
+  <main class="ls-main ">
+    <div class="container-fluid">
+      <h1 class="ls-title-intro ls-ico-home" id='user_presentation'><%=  %></h1>
+      <div class="alert alert-notice"><p><%= flash[:notice] %></p></div>
+      <div class="alert alert-warning"><p><%= flash[:alert] %></p></div>
+      <%= yield %>
+    </div>
+  </main>
+
+  <aside class="ls-notification">
+    <nav class="ls-notification-list" id="ls-notification-curtain" style="left: 1716px;">
+      <h3 class="ls-title-2"><%=  %></h3>
+      <ul>
+
+      </ul>
+    </nav>
+
+    <nav class="ls-notification-list" id="ls-help-curtain" style="left: 1756px;">
+      <h3 class="ls-title-2"><%= %></h3>
+      <ul>
+
+      </ul>
+    </nav>
+
+    <nav class="ls-notification-list" id="ls-feedback-curtain" style="left: 1796px;">
+      <h3 class="ls-title-2"><%= 'help' %></h3>
+      <ul>
+        <li class="ls-txt-center hidden-xs">
+          <a href="#" class="ls-btn-dark ls-btn-tour"><%= 'tour' %></a>
+        </li>
+        <li><a href="#"><%= 'guide' %></a></li>
+        <li><a href="#"><%= 'wiki' %></a></li>
+      </ul>
+    </nav>
+  </aside>
   </body>
 </html>
