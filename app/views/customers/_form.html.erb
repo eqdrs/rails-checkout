@@ -1,0 +1,29 @@
+<% if @customer.errors.any? %>
+ <% @customer.errors.full_messages.each do |i| %>
+  <%= i %>
+  <% end %>
+<% end %>
+
+<%= form_for customer, class: 'mt-4', local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :name, 'Nome' %>
+    <%= f.text_field :name, class: 'form-control col-md-6' %>
+  </div>
+  <div class="form-group">
+  <%= f.label :email, 'E-mail' %>
+  <%= f.text_area :email, class: 'form-control col-md-6' %>
+  </div>
+  <div class="form-group">
+  <%= f.label :address, 'Endereço' %>
+  <%= f.text_field :address, class: 'form-control col-md-6' %>
+  </div>
+  <div class="form-group">
+  <%= f.label :cpf, 'CPF' %>
+  <%= f.number_field :cpf, class: 'form-control col-md-6' %>
+  </div>
+  <div class="form-group">
+  <%= f.label :phone, 'Telefone' %>
+  <%= f.text_field :phone, class: 'form-control col-md-6' %>
+  </div>
+  <%= f.submit 'Cadastrar', class: 'btn btn-primary' %>
+<% end %>
