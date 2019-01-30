@@ -1,0 +1,12 @@
+<% if @order.errors.any? %>
+  <% @order.errors.full_messages.each do |msg| %>
+  <p><%= msg %></p>
+  <% end %>
+<% end %>
+<%= form_with model: @order, local: true do |f| %>
+  <%= f.label :cpf, 'CPF' %>
+  <%= f.text_field :cpf %>
+  <%= f.label :product_id, 'Produtos' %>
+  <%= f.collection_select :product_id, Product.all, :id, :name %>
+  <%= f.submit 'Cadastrar'%>
+<% end %>

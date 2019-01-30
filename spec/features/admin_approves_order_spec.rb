@@ -4,7 +4,6 @@ feature 'Admin approves order' do
   scenario 'Successfully' do
     skip
     order = create(:order)
-    
     visit root_path
     click_on 'Pedidos'
     click_on order.name
