@@ -4,6 +4,8 @@ feature 'Seller register order' do
   scenario 'Successfully' do
     customer = create(:client)
     product = create(:product)
+    mail_spy = spy(CustomerMailer)
+    stub_const('CustomerMailer', mail_spy)
 
     visit root_path
     click_on 'Cadastrar Pedido'
@@ -15,6 +17,7 @@ feature 'Seller register order' do
     expect(page).to have_content(product.price)
     expect(page).to have_content(customer.name)
     expect(page).to have_content('Em Aberto')
+    expect(mail_spy).to have_received(:order_summary)
   end
 
   scenario 'and must fill in all fields' do

@@ -8,6 +8,7 @@ class OrdersController < ApplicationController
     product = Product.find(params[:order][:product_id])
     @order = Order.new(client: customer, product: product, status: 0)
     if @order.save
+      CustomerMailer.order_summary(@order.id).deliver
       redirect_to @order
     else
       render :new
