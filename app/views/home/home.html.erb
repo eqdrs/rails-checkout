@@ -1,0 +1,5 @@
+<% if user_signed_in? %>
+  <%= "Olá, #{current_user.email}" %>
+<% end %>
+
+<%= link_to 'Cadastrar usuário', new_user_registration_path %>
