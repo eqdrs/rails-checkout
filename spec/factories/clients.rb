@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :client do
-    name { 'MyString' }
+    name { FFaker::Name.name }
     adress { 'MyString' }
-    cpf { 'MyString' }
+    cpf { FFaker::IdentificationBR.cpf }
     email { 'MyString' }
     phone { 'MyString' }
   end

@@ -1,4 +1,9 @@
 <% if user_signed_in? %>
+  <%= form_tag search_customer_path, method: :get do %>
+    <%= label_tag :cpf, 'Buscar cliente por CPF' %>
+    <%= text_field_tag :cpf %>
+    <%= submit_tag 'Buscar' %>
+  <% end %>
   <%= "Olá, #{current_user.email}" %>
   <%= link_to 'Sair', destroy_user_session_path %>
 <% else %>
