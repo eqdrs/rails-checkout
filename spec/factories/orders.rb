@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :order do
-    status { 1 }
-    client { nil }
-    product { nil }
+    status { 0 }
+    client
+    product
   end
 end
