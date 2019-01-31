@@ -17,7 +17,6 @@ feature 'Vendor sign in' do
   end
 
   scenario 'and cant sign in with invalid email' do
-
     visit root_path
     click_on 'Entrar'
     fill_in 'Email', with: 'invalido@teste.com'
@@ -25,6 +24,6 @@ feature 'Vendor sign in' do
     click_on 'Entrar'
 
     expect(current_path).to eq new_user_session_path
-    expect(page).to have_content "Email ou senha inválida."
+    expect(page).to have_content 'Email ou senha inválida.'
   end
 end
