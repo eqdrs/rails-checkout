@@ -5,7 +5,8 @@ feature 'Admin approves order' do
     skip
     customer = create(:customer)
     product = create(:product)
-    order = Order.create!(status: :pending, customer: customer, product: product)
+    order = Order.create!(status: :pending, customer: customer,
+                          product: product)
 
     visit order_index_path
     click_on 'Detalhes'

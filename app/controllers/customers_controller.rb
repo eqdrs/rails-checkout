@@ -4,7 +4,7 @@ class CustomersController < ApplicationController
   def search
     @customer = Customer.find_by('cpf = ?', params[:cpf])
   end
-  
+
   def new
     @customer = Customer.new
   end
@@ -13,7 +13,7 @@ class CustomersController < ApplicationController
     @customer = Customer.new(customer_params)
     if @customer.save
       redirect_to @customer
-    else 
+    else
       render :new
     end
   end
@@ -30,6 +30,6 @@ class CustomersController < ApplicationController
 
   def customer_params
     params.require(:customer).permit(:name, :address, :email,
-                                   :cpf, :phone)
+                                     :cpf, :phone)
   end
 end

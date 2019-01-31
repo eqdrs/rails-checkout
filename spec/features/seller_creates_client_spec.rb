@@ -11,7 +11,6 @@ feature 'Seller creates customer' do
     click_on 'Cadastrar'
 
     expect(current_path).to eq customer_path(1)
-    #expect(page).to have_content('Seu cliente foi cadastrado com sucesso.')
     expect(page).to have_content('Kamyla Costa de Almeida')
     expect(page).to have_content('Rua das palmas n 23 - Jundiá - MG')
     expect(page).to have_content('148.804.177-69')
@@ -35,5 +34,4 @@ feature 'Seller creates customer' do
     expect(page).to have_content('Email Este campo é obrigatório')
     expect(page).to have_content('Phone Este campo é obrigatório')
   end
-
 end
