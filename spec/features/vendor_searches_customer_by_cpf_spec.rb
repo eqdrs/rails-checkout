@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Vendor searches for a customer by cpf' do
   scenario 'successfully' do
     vendor = create(:user)
-    customer = create(:client, cpf: '36746239861')
+    customer = create(:customer, cpf: '36746239861')
     login_as(vendor, scope: :user)
 
     visit root_path
@@ -29,7 +29,7 @@ feature 'Vendor searches for a customer by cpf' do
 
   scenario 'and cpf length must be valid' do
     vendor = create(:user)
-    create(:client, cpf: '36746239861')
+    create(:customer, cpf: '36746239861')
     login_as(vendor, scope: :user)
 
     visit root_path

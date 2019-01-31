@@ -1,0 +1,12 @@
+<h1>
+  Pedido #<%= @order.id %> 
+  <small>(<%= t(".#{@order.status}") %>)</small>
+</h1>
+
+<h1>Produto</h1>
+<p><%= @order.product.name %></p>
+<p><%= @order.product.price %></p>
+
+<h1>Cliente</h1>
+<p><%= @order.customer.name %></p>
+
