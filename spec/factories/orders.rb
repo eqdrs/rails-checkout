@@ -3,5 +3,6 @@ FactoryBot.define do
     status { 0 }
     client
     product
+    user
   end
 end

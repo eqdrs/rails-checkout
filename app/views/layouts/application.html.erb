@@ -10,7 +10,6 @@
   </head>
 
   <body>
-  <<body>
   <div class="ls-topbar ">
 
     <!-- Barra de Notificações -->
@@ -26,14 +25,21 @@
       <!-- Dropdown com detalhes da conta de usuário -->
       <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
         <a href="#" class="ls-ico-user">
-          <span class="ls-name" ></span>
+          <span class="ls-name" >
+            <% if user_signed_in? %>
+              <%= "Olá, #{current_user.email}" %>
+            <% end %>
+          </span>
         </a>
+        
 
-        <nav class="ls-dropdown-nav ls-user-menu">
+        <!--<nav class="ls-dropdown-nav ls-user-menu">-->
           <ul>
-            <li><%= link_to 'logout', method: 'DELETE' %></li>
+            <% if user_signed_in? %>
+              <li><%= link_to 'Sair', destroy_user_session_path, method: :delete %></li>
+            <% end %>
            </ul>
-        </nav>
+        <!--</nav>-->
       </div>
     </div>
 
@@ -45,6 +51,7 @@
         <%= 'subtitle' %>
       </a>
     </h1>
+
     <!-- Nome do produto/marca sem sidebar quando for o pre-painel  -->
   </div>
 
@@ -54,6 +61,7 @@
         <nav class="ls-menu" id='side_menu'>
           <ul>
             <li><%= link_to 'Cadastrar Pedido', new_order_path, class: 'ls-ico-plus', role: 'menuitem'%></li>
+            <li><%= link_to 'Cadastrar usuário', new_user_registration_path, class: 'ls-ico-plus', role: 'menuitem' %></li>
           </ul>
         </nav>
     </div>

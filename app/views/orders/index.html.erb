@@ -1,0 +1,23 @@
+<h1>Pedidos cadastrados</h1>
+<% if @orders.any? %>
+<table class="ls-table">
+  <thead>
+    <tr>
+      <th>Identificador</th>
+      <th>Cliente</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+    <tr>
+      <td><%= link_to order.id, order %></td>
+      <td><%= order.client.name %></td>
+      <td><%= t("orders.show.#{order.status}") %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+<p><%= t('.no_orders') %></p>
+<% end %>
