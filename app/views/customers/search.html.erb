@@ -1,0 +1,10 @@
+<h2>Resultados da busca</h2>
+<%= flash[:notice] %>
+<% if @customer.nil? %>
+  <p>Nenhum usuário encontrado.</p>
+<% else %>
+  <p>Nome: <%= @customer.name %></p>
+  <p>E-mail: <%= @customer.email %></p>
+  <p>CPF: <%= @customer.cpf %></p>
+  <p>Tel: <%= @customer.phone %></p>
+<% end %>

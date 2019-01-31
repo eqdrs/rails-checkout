@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Seller creates client' do
+feature 'Seller creates customer' do
   scenario 'successfully' do
     visit new_customer_path
     fill_in 'Nome', with: 'Kamyla Costa de Almeida'
