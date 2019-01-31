@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Seller register order' do
   scenario 'Successfully' do
-    customer = create(:client)
+    customer = create(:customer)
     product = create(:product)
     mail_spy = spy(CustomerMailer)
     stub_const('CustomerMailer', mail_spy)

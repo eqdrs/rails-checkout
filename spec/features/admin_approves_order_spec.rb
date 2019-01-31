@@ -2,6 +2,7 @@ require 'rails_helper'
 
 feature 'Admin approves order' do
   scenario 'successfully' do
+    skip
     customer = create(:customer)
     product = create(:product)
     order = Order.create!(status: :pending, customer: customer, product: product)

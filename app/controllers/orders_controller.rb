@@ -4,9 +4,9 @@ class OrdersController < ApplicationController
   end
 
   def create
-    customer = Client.find_by(cpf: params[:order][:cpf])
+    customer = Customer.find_by(cpf: params[:order][:cpf])
     product = Product.find(params[:order][:product_id])
-    @order = Order.new(client: customer, product: product, status: 0)
+    @order = Order.new(customer: customer, product: product, status: 0)
     if @order.save
       CustomerMailer.order_summary(@order.id).deliver
       redirect_to @order
