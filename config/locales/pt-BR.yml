@@ -1,0 +1,6 @@
+pt-BR:
+  orders:
+    show:
+      open: 'Em Aberto'
+      approved: 'Aprovado'
+      cancelled: 'Cancelado'

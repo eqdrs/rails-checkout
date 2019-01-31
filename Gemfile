@@ -25,6 +25,15 @@ gem 'devise'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'locastyle'
+gem 'jquery-rails'
+gem 'locastyle'
+gem 'puma', '~> 3.11'
+gem 'rails', '~> 5.2.2'
+gem 'sass-rails', '~> 5.0'
+gem 'sqlite3'
+gem 'turbolinks', '~> 5'
+gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger
@@ -44,6 +53,7 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'web-console', '>= 3.3.0'
 end
 
 group :test do
