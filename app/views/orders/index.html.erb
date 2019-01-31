@@ -1,0 +1,22 @@
+<table class="ls-table">
+  <thead>
+    <tr>
+      <th>Número</th>
+      <th class="hidden-xs">E-mail</th>
+      <th>Nome</th>
+      <th>Status</th>
+      <th class="hidden-xs">Info</th>
+    </tr>
+  </thead>
+  <tbody>
+   <% @orders.each do |order| %>
+    <tr>
+      <td><a href="" title=""><%= order.id %></a></td>
+      <td class="hidden-xs"><%= order.customer.email %></td>
+      <td><%= order.product.name %></td>
+      <td class="hidden-xs"><%= order.status %></td>
+      <td><%= link_to 'Detalhes', order, class: 'ls-btn' %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

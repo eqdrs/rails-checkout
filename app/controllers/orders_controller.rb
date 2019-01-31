@@ -1,4 +1,9 @@
 class OrdersController < ApplicationController
+
+  def index
+    @orders = Order.all
+  end
+
   def new
     @order = Order.new
   end
@@ -17,5 +22,12 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+  end
+
+  def approve
+    @order = Order.find(params[:id])
+    @order.create_order_approval(user: current_user)
+    @order.approved!
+    render :show
   end
 end

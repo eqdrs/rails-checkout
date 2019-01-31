@@ -9,4 +9,10 @@
 
 <h1>Cliente</h1>
 <p><%= @order.customer.name %></p>
+<p><%= @order.customer.email %></p>
+
+<% unless @order.approved?%>
+  <%= link_to 'Aprovar pedido', approve_order_path(@order),
+  method: :post, class: 'ls-btn' %>
+<% end %>
 

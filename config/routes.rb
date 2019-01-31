@@ -4,5 +4,10 @@ Rails.application.routes.draw do
   resources :customers
   root to: 'home#home'
 
-  resources :orders, only: %i(new create show)
+  resources :orders, only: %i(new create show index) do 
+    member do
+      post 'approve'
+    end
+  end
+  
 end
