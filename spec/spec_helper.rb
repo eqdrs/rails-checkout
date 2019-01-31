@@ -1,3 +1,9 @@
+require 'simplecov'
+SimpleCov.start 'rails' do
+  add_filter 'app/channels/application_cable'
+  add_filter 'app/jobs/application_job.rb'
+end
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true

@@ -13,5 +13,29 @@ describe CustomerMailer do
       expect(mail.body).to include(order.product.name)
       expect(mail.body).to include(order.product.price)
     end
+
+    it '#approved_order' do
+      customer = create(:customer)
+      order = create(:order, status: 10, customer: customer)
+
+      mail = CustomerMailer.approved_order(order.id)
+
+      expect(mail.to).to eq [customer.email]
+      expect(mail.subject).to eq 'Seu pedido foi aprovado'
+      expect(mail.body).to include "Seu pedido #{order.product.name} "\
+                                   'foi aprovado'
+    end
+
+    it '#cancelled_order' do
+      customer = create(:customer)
+      order = create(:order, status: 20, customer: customer)
+
+      mail = CustomerMailer.cancelled_order(order.id)
+
+      expect(mail.to).to eq [customer.email]
+      expect(mail.subject).to eq 'Seu pedido foi cancelado'
+      expect(mail.body).to include "Seu pedido #{order.product.name} "\
+                                   'foi cancelado'
+    end
   end
 end

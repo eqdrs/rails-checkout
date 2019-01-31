@@ -24,8 +24,6 @@ include Warden::Test::Helpers
 # Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
 require 'capybara/rails'
-require 'simplecov'
-SimpleCov.start 'rails'
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
