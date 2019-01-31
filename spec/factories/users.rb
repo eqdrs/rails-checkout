@@ -3,6 +3,5 @@ FactoryBot.define do
     email { FFaker::Internet.email }
     password { '12345678' }
     role { :admin }
-    
   end
 end

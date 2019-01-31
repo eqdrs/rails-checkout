@@ -33,9 +33,9 @@ feature 'Vendor searches for a customer by cpf' do
     login_as(vendor, scope: :user)
 
     visit root_path
-    fill_in 'Buscar cliente por CPF', with: '36746239'
+    fill_in 'Buscar cliente por CPF', with: '36746239000'
     click_on 'Buscar'
 
-    expect(page).to have_content 'CPF inválido.'
+    expect(page).to have_content 'CPF inválido'
   end
 end
