@@ -11,3 +11,9 @@
 <% end %>
 
 <%= link_to 'Cadastrar usuário', new_user_registration_path %>
+
+<% if @orders.any? %>
+    <%= render @orders %>
+<% else %>
+ <p>Não há pedidos cadastrados.</p>
+<% end %>

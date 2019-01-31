@@ -1,3 +1,5 @@
 class HomeController < ApplicationController
-  def home; end
+  def home
+    @orders = Order.all
+  end
 end

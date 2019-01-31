@@ -1,0 +1,20 @@
+<div class='col-md-3 col-sm-6'>
+  <div class='ls-box'>
+    <header class='ls-box-head'>
+      <h2 class='ls-title-3'><%= order.product.name %></h2>
+    </header>
+    <div class='ls-box-body'>
+      
+      <p class="description"><small>Nome do cliente:</small>
+      <%= order.customer.name %></p>
+      <p>
+        <small>Status:</small>
+        <%= order.status %>
+      </p>
+      <p>
+        <small>Preço:</small>
+        <strong><%= order.product.price %></strong>
+      </p>
+    </div>
+  </div>
+</div>
