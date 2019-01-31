@@ -9,6 +9,9 @@ describe CustomerMailer do
 
       expect(mail.to).to include(order.client.email)
       expect(mail.subject).to eq 'Resumo do pedido'
+      expect(mail.body).to include(order.client.name)
+      expect(mail.body).to include(order.product.name)
+      expect(mail.body).to include(order.product.price)
     end
   end
 end
