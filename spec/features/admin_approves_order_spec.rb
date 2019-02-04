@@ -5,7 +5,7 @@ feature 'Admin approves order' do
     user = create(:user)
     customer = create(:customer)
     product = create(:product)
-    order = Order.create!(status: :open, customer: customer, product: product, 
+    order = Order.create!(status: :open, customer: customer, product: product,
                           user: user)
 
     login_as user

@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
     @order.approved!
     render :show
   end
-  
+
   private
 
   def order_build(cpf, product_id)
