@@ -1,0 +1,14 @@
+<% if @user.errors.any? %>
+  <% @user.errors.full_messages.each do |msg| %>
+  <p><%= msg %></p>
+  <% end %>
+<% end %>
+<%= form_for @user do |f| %>
+  <%= f.label :email, 'Email' %>
+  <%= f.text_field :email %>
+  <%= f.label :cpf, 'CPF' %>
+  <%= f.text_field :cpf %>
+  <%= f.label :role, 'Função'%>
+  <%= f.select(:role, [ ['Admin', :admin], ['Vendedor', :vendor] ] ) %>
+  <%= f.submit 'Cadastrar' %>
+<% end %>

@@ -2,30 +2,35 @@ require 'rails_helper'
 
 feature 'Admin register vendor' do
   scenario 'successfully' do
+    admin = create(:user, role: :admin)
+
+    login_as(admin, scope: :user)
     visit root_path
     click_on 'Cadastrar usuário'
+    save_page
     fill_in 'Email', with: 'teste@vendas.com'
-    fill_in 'Senha', with: '123456'
-    fill_in 'Confirme sua senha', with: '123456'
+    fill_in 'CPF', with: '123456'
     select 'Vendedor', from: 'Função'
     click_on 'Cadastrar'
 
-    expect(page).to have_content('Login efetuado com sucesso. '\
-                                 'Se não foi autorizado, a confirmação '\
-                                 'será enviada por e-mail.')
+    expect(page).to have_content('Usuário cadastrado com sucesso!')
     expect(current_path).to eq root_path
-    expect(page).to have_content 'Olá, teste@vendas.com'
+    expect(User.last.email).to eq 'teste@vendas.com'
   end
 
-  scenario 'and must fill empty fields' do
+  scenario 'and must fill in required fields' do
+    admin = create(:user, role: :admin)
+
+    login_as(admin, scope: :user)
     visit root_path
     click_on 'Cadastrar usuário'
+    save_page
     fill_in 'Email', with: ''
-    fill_in 'Senha', with: '12345678'
-    fill_in 'Confirme sua senha', with: '12345678'
+    fill_in 'CPF', with: ''
     select 'Vendedor', from: 'Função'
     click_on 'Cadastrar'
 
-    expect(page).to have_content('O campo email não pode ficar em branco.')
+    expect(page).to have_content('Você deve informar todos os campos obrigatórios')
+    expect(current_path).to eq register_path  
   end
 end
