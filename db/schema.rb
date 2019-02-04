@@ -36,9 +36,11 @@ ActiveRecord::Schema.define(version: 2019_01_31_184253) do
     t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.integer "customer_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["product_id"], name: "index_orders_on_product_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "products", force: :cascade do |t|

@@ -1,3 +1,5 @@
+<h1>Pedidos cadastrados</h1>
+<% if @orders.any? %>
 <table class="ls-table">
   <thead>
     <tr>
@@ -11,12 +13,16 @@
   <tbody>
    <% @orders.each do |order| %>
     <tr>
-      <td><a href="" title=""><%= order.id %></a></td>
+      <td><%= link_to order.id, order %></td>
       <td class="hidden-xs"><%= order.customer.email %></td>
       <td><%= order.product.name %></td>
-      <td class="hidden-xs"><%= order.status %></td>
+       <td><%= t("orders.show.#{order.status}") %></td>
       <td><%= link_to 'Detalhes', order, class: 'ls-btn' %></td>
     </tr>
     <% end %>
   </tbody>
 </table>
+<% else %>
+<p><%= t('.no_orders') %></p>
+<% end %>
+

@@ -1,7 +1,12 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
 
   def index
-    @orders = Order.all
+    @orders = if current_user.admin?
+                Order.all
+              else
+                Order.where(user: current_user)
+              end
   end
 
   def new
@@ -9,9 +14,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    customer = Customer.find_by(cpf: params[:order][:cpf])
-    product = Product.find(params[:order][:product_id])
-    @order = Order.new(customer: customer, product: product, status: 0)
+    @order = order_build(params[:order][:cpf], params[:order][:product_id])
     if @order.save
       CustomerMailer.order_summary(@order.id).deliver
       redirect_to @order
@@ -29,5 +32,14 @@ class OrdersController < ApplicationController
     @order.create_order_approval(user: current_user)
     @order.approved!
     render :show
+  end
+  
+  private
+
+  def order_build(cpf, product_id)
+    customer = Customer.find_by(cpf: cpf)
+    product = Product.find(product_id)
+    current_user.orders.new(customer: customer, product: product,
+                            status: 0)
   end
 end

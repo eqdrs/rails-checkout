@@ -2,10 +2,13 @@ require 'rails_helper'
 
 feature 'Admin approves order' do
   scenario 'successfully' do
+    user = create(:user)
     customer = create(:customer)
     product = create(:product)
-    order = Order.create!(status: :open, customer: customer, product: product)
+    order = Order.create!(status: :open, customer: customer, product: product, 
+                          user: user)
 
+    login_as user
     visit root_path
     click_on 'Visualizar Pedidos'
     click_on 'Detalhes'

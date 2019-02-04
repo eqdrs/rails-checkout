@@ -1,5 +1,7 @@
 pt-BR:
   orders:
+    index:
+      no_orders: 'Não há pedidos cadastrados'
     show:
       open: 'Em Aberto'
       approved: 'Aprovado'

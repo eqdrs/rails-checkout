@@ -1,8 +1,0 @@
-<% if user_signed_in? %>
-  <%= "Olá, #{current_user.email}" %>
-  <%= link_to 'Sair', destroy_user_session_path %>
-<% else %>
-  <%= link_to 'Entrar', new_user_session_path %>
-<% end %>
-
-<%= link_to 'Cadastrar usuário', new_user_registration_path %>

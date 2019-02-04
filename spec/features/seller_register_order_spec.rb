@@ -2,15 +2,17 @@ require 'rails_helper'
 
 feature 'Seller register order' do
   scenario 'Successfully' do
+    user = create(:user)
     customer = create(:customer)
     product = create(:product)
     mail_spy = spy(CustomerMailer)
     stub_const('CustomerMailer', mail_spy)
+    login_as user
 
     visit root_path
     click_on 'Cadastrar Pedido'
     fill_in 'CPF', with: customer.cpf
-    select product.name, from: 'Produtos'
+    select product.name, from: 'Produto'
     click_on 'Cadastrar'
 
     expect(page).to have_content(product.name)
@@ -21,7 +23,9 @@ feature 'Seller register order' do
   end
 
   scenario 'and must fill in all fields' do
+    user = create(:user)
     create(:product)
+    login_as user
 
     visit new_order_path
     fill_in 'CPF', with: ''
@@ -31,7 +35,9 @@ feature 'Seller register order' do
   end
 
   scenario 'and customer must exist' do
+    user = create(:user)
     create(:product)
+    login_as user
 
     visit new_order_path
     fill_in 'CPF', with: '12345678910'

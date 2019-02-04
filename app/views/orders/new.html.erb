@@ -11,7 +11,7 @@
   <%= f.text_field :cpf, class: 'form-control col-md-2' %>
   </div>
   <div class="ls-label col-md-2 col-sm-4">
-  <b class="ls-label-text">Produto</b>
+  <%= f.label :product_id, 'Produto', class: "ls-label-text"%>
   <div class="ls-custom-select">
   <%= f.collection_select :product_id, Product.all, :id, :name, class: "ls-select"%>
   </div>

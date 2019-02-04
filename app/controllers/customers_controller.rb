@@ -1,4 +1,9 @@
 class CustomersController < ApplicationController
+  before_action :validate_cpf, only: [:search]
+
+  def search
+    @customer = Customer.find_by('cpf = ?', params[:cpf])
+  end
 
   def new
     @customer = Customer.new
@@ -8,7 +13,7 @@ class CustomersController < ApplicationController
     @customer = Customer.new(customer_params)
     if @customer.save
       redirect_to @customer
-    else 
+    else
       render :new
     end
   end
@@ -19,8 +24,12 @@ class CustomersController < ApplicationController
 
   private
 
+  def validate_cpf
+    !CPF.valid?(params[:cpf]) && (redirect_to root_path, notice: 'CPF inválido')
+  end
+
   def customer_params
     params.require(:customer).permit(:name, :address, :email,
-                                   :cpf, :phone)
+                                     :cpf, :phone)
   end
 end
