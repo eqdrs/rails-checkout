@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_31_165009) do
+ActiveRecord::Schema.define(version: 2019_02_04_180411) do
+
+  create_table "cancelled_orders", force: :cascade do |t|
+    t.text "internal_reason"
+    t.text "client_reason"
+    t.integer "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_cancelled_orders_on_order_id"
+  end
 
   create_table "customers", force: :cascade do |t|
     t.string "name"

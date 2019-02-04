@@ -10,3 +10,15 @@
 <h1>Cliente</h1>
 <p><%= @order.customer.name %></p>
 
+<% if @order.cancelled_order %>
+<h1><%= t('.cancel_section') %></h1>
+<% unless @order.cancelled_order.internal_reason.blank? %>
+  <h3><%= t('.internal_reason') %></h3>
+  <p><%= @order.cancelled_order.internal_reason %></p>
+<% end %>
+<h3><%= t('.client_reason') %></h3>
+<p><%= @order.cancelled_order.client_reason %></p>
+<% end %>
+
+<%= link_to 'Cancelar', cancel_form_order_path(@order) %>
+

@@ -1,0 +1,19 @@
+<div class="col-md-6 col-md-offset-3">
+  <h1>Cancelamento do pedido <%= @order.id %></h1>
+  <br>
+  <h3>Cliente: <%= @order.customer.name %></h3>
+  <br>
+  <%= form_with url: cancel_order_path(@order), local: true do |f| %>
+    <fieldset>
+    <label class="ls-label">
+      <b class="ls-label-text">Motivo interno</b>
+      <%= f.text_area :internal_reason %>
+    </label>
+    <label class="ls-label">
+      <b class="ls-label-text">Motivo para o cliente</b>
+      <%= f.text_area :client_reason %>
+    </label>
+    </fieldset>
+    <%= f.submit 'Enviar', class: 'ls-btn ls-btn-block ls-btn-primary' %>
+  <% end %>
+</div>

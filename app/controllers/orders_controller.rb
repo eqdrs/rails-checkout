@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_order, only: %i[show cancel_form cancel]
 
   def index
     @orders = if current_user.admin?
@@ -23,11 +24,20 @@ class OrdersController < ApplicationController
     end
   end
 
-  def show
-    @order = Order.find(params[:id])
+  def show; end
+
+  def cancel_form; end
+
+  def cancel
+    @order.cancel_order(params[:internal_reason], params[:client_reason])
+    redirect_to root_path, notice: t('.cancel_message')
   end
 
   private
+
+  def set_order
+    @order = Order.find(params[:id])
+  end
 
   def order_build(cpf, product_id)
     customer = Customer.find_by(cpf: cpf)

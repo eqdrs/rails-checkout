@@ -5,5 +5,8 @@ Rails.application.routes.draw do
   root to: 'orders#index'
   get '/search_customer', to: 'customers#search'
 
-  resources :orders, only: %i(index new create show)
+  resources :orders, only: %i(index new create show) do
+    get 'cancel_form', on: :member
+    post 'cancel', on: :member
+  end
 end
