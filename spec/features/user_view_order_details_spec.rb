@@ -10,7 +10,6 @@ feature 'user view order details' do
     click_on 'Visualizar Pedidos'
     click_on 'Detalhes'
 
-    expect(page).to have_content(order.id)
     expect(page).to have_content(order.customer.email)
     expect(page).to have_content(order.product.name)
     expect(page).to have_content('Em Aberto')

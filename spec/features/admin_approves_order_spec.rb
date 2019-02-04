@@ -11,7 +11,6 @@ feature 'Admin approves order' do
     click_on 'Detalhes'
     click_on 'Aprovar pedido'
 
-    expect(page).to have_content(order.id)
     expect(page).to have_content(order.customer.email)
     expect(page).to have_content(order.product.name)
     expect(page).to have_content('Aprovado')
