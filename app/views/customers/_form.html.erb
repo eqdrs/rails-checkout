@@ -1,29 +1,37 @@
+<h1>Cadastrar cliente</h1><br>
+
 <% if @customer.errors.any? %>
  <% @customer.errors.full_messages.each do |i| %>
   <%= i %>
   <% end %>
 <% end %>
 
-<%= form_for customer, class: 'mt-4', local: true do |f| %>
-  <div class="form-group">
-    <%= f.label :name, 'Nome' %>
-    <%= f.text_field :name, class: 'form-control col-md-6' %>
+<%= form_for customer, class: "ls-form row", local: true do |f| %>
+ <fieldset>
+  <div class="ls-label col-md-5">
+  <%= f.label :name, 'Nome', class: "ls-label-text"%>
+  <%= f.text_field :name, class: 'form-control col-md-6' %>
   </div>
-  <div class="form-group">
-  <%= f.label :email, 'E-mail' %>
-  <%= f.text_area :email, class: 'form-control col-md-6' %>
+  <div class="ls-label col-md-5">
+  <%= f.label :email, 'E-mail', class: "ls-label-text" %>
+  <%= f.text_area :email, class: 'form-control col-md-6'  %>
   </div>
-  <div class="form-group">
-  <%= f.label :address, 'Endereço' %>
+  <div class="ls-label col-md-5">
+  <%= f.label :address, 'Endereço', class: "ls-label-text" %>
   <%= f.text_field :address, class: 'form-control col-md-6' %>
   </div>
-  <div class="form-group">
-  <%= f.label :cpf, 'CPF' %>
+  <div class="ls-label col-md-5">
+  <%= f.label :cpf, 'CPF', class: "ls-label-text" %>
   <%= f.number_field :cpf, class: 'form-control col-md-6' %>
   </div>
-  <div class="form-group">
-  <%= f.label :phone, 'Telefone' %>
+  <div class="ls-label col-md-5">
+  <%= f.label :phone, 'Telefone', class: "ls-label-text" %>
   <%= f.text_field :phone, class: 'form-control col-md-6' %>
   </div>
-  <%= f.submit 'Cadastrar', class: 'btn btn-primary' %>
+  </fieldset>
+    <div class="ls-actions-btn">
+  <%= f.submit 'Cadastrar', class: 'ls-btn-primary' %>
+  </div>
+   
 <% end %>
+

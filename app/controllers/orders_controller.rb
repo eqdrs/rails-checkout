@@ -33,6 +33,13 @@ class OrdersController < ApplicationController
     redirect_to root_path, notice: t('.cancel_message')
   end
 
+  def approve
+    @order = Order.find(params[:id])
+    @order.create_order_approval(user: current_user)
+    @order.approved!
+    render :show
+  end
+
   private
 
   def set_order

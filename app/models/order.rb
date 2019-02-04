@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
   belongs_to :customer
   belongs_to :product
+  has_one :order_approval, dependent: :destroy
   belongs_to :user
   has_one :cancelled_order, dependent: :destroy
 

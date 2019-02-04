@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   resources :orders, only: %i(index new create show) do
     get 'cancel_form', on: :member
     post 'cancel', on: :member
+    post 'approve', on: :member
   end
 end

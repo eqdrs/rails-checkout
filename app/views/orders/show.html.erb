@@ -1,14 +1,33 @@
-<h1>
-  Pedido #<%= @order.id %> 
-  <small>(<%= t(".#{@order.status}") %>)</small>
-</h1>
-
-<h1>Produto</h1>
-<p><%= @order.product.name %></p>
-<p><%= @order.product.price %></p>
-
-<h1>Cliente</h1>
-<p><%= @order.customer.name %></p>
+<div class="ls-list">
+  <header class="ls-list-header">
+    <div class="ls-list-title col-md-9">
+      <a href="#" ><%= @order.customer.name %></a>
+      <small><%= @order.customer.email %></small>
+    </div>
+    <div class="col-md-3 ls-txt-right">
+      <% unless @order.approved?%>
+        <%= link_to 'Aprovar pedido', approve_order_path(@order),
+        method: :post, class: "ls-btn-primary" %>
+      <% end %>
+      <%= link_to 'Cancelar', cancel_form_order_path(@order) %>
+    </div>
+  </header>
+  <div class="ls-list-content ">
+    <div class="col-xs-12 col-md-4">
+      <span class="ls-list-label">Status</span>
+      <strong> (<%= t(".#{@order.status}") %>)</strong>
+    </div>
+    <div class="col-xs-12 col-md-4">
+      <span class="ls-list-label">Produto</span>
+      <strong><%= @order.product.name %></strong>
+    </div>
+    <div class="col-xs-12 col-md-4">
+      <span class="ls-list-label">Preço</span>
+      <strong>
+    <%= @order.product.price %></strong>
+    </div>
+  </div>
+</div>
 
 <% if @order.cancelled_order %>
 <h1><%= t('.cancel_section') %></h1>
@@ -19,6 +38,4 @@
 <h3><%= t('.client_reason') %></h3>
 <p><%= @order.cancelled_order.client_reason %></p>
 <% end %>
-
-<%= link_to 'Cancelar', cancel_form_order_path(@order) %>
 
