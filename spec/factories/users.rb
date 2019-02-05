@@ -4,5 +4,8 @@ FactoryBot.define do
     password { '12345678' }
     role { :admin }
     cpf { CPF.generate }
+    factory :vendor do
+      role { :vendor }
+    end
   end
 end

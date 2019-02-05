@@ -12,6 +12,15 @@
 
 ActiveRecord::Schema.define(version: 2019_02_04_194304) do
 
+  create_table "cancelled_orders", force: :cascade do |t|
+    t.text "internal_reason"
+    t.text "client_reason"
+    t.integer "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_cancelled_orders_on_order_id"
+  end
+
   create_table "customers", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -36,8 +45,8 @@ ActiveRecord::Schema.define(version: 2019_02_04_194304) do
     t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "customer_id"
     t.integer "user_id"
+    t.integer "customer_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["product_id"], name: "index_orders_on_product_id"
     t.index ["user_id"], name: "index_orders_on_user_id"

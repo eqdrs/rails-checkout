@@ -9,10 +9,10 @@ Rails.application.routes.draw do
   get '/search_customer', to: 'customers#search'
   resources :users, only: %i(new create)
 
-  resources :orders, only: %i(new create show index) do 
-    member do
-      post 'approve'
-    end
+  resources :orders, only: %i(index new create show) do
+    get 'cancel_form', on: :member
+    post 'cancel', on: :member
+    post 'approve', on: :member
   end
   
   namespace :api, defaults: { format: :json } do
