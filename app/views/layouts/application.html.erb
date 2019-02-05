@@ -14,7 +14,7 @@
 
     <!-- Barra de Notificações -->
     <div class="ls-notification-topbar">
-      <%= form_with url: 'search_customer', method: :get, local: true do |f| %>
+      <%= form_with url: search_customer_path, method: :get, local: true do |f| %>
         <%= f.label :cpf, 'Buscar cliente por CPF' %>
         <%= f.text_field :cpf %>
         <%= f.submit 'Buscar' %>
