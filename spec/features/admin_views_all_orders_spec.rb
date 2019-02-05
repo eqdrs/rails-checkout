@@ -9,7 +9,7 @@ feature 'Seller view orders' do
     visit root_path
 
     expect(page).to have_link(order.id)
-    expect(page).to have_css('td', text: order.customer.name)
+    expect(page).to have_css('td', text: order.product.name)
     expect(page).to have_css('td', text: I18n.t("orders.show.#{order.status}"))
   end
 
@@ -33,7 +33,7 @@ feature 'Seller view orders' do
     expect(current_path).to eq(order_path(order))
     expect(page).to have_content(order.product.name)
     expect(page).to have_content(order.product.price)
-    expect(page).to have_content(order.customer.name)
+    expect(page).to have_content(order.customer.email)
     expect(page).to have_content('Em Aberto')
   end
 
@@ -45,10 +45,10 @@ feature 'Seller view orders' do
 
     visit root_path
     expect(page).to have_link(order.id)
-    expect(page).to have_css('td', text: order.customer.name)
+    expect(page).to have_css('td', text: order.product.name)
     expect(page).to have_css('td', text: I18n.t("orders.show.#{order.status}"))
     expect(page).to have_link(other_order.id)
-    expect(page).to have_css('td', text: other_order.customer.name)
+    expect(page).to have_css('td', text: other_order.customer.email)
     expect(page).to have_css('td', text: I18n.t("orders.show.#{other_order
                                                                .status}"))
   end

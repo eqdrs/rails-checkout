@@ -3,17 +3,21 @@
 <table class="ls-table">
   <thead>
     <tr>
-      <th>Identificador</th>
-      <th>Cliente</th>
+      <th>Número</th>
+      <th class="hidden-xs">E-mail</th>
+      <th>Nome</th>
       <th>Status</th>
+      <th class="hidden-xs">Info</th>
     </tr>
   </thead>
   <tbody>
-    <% @orders.each do |order| %>
+   <% @orders.each do |order| %>
     <tr>
       <td><%= link_to order.id, order %></td>
-      <td><%= order.customer.name %></td>
-      <td><%= t("orders.show.#{order.status}") %></td>
+      <td class="hidden-xs"><%= order.customer.email %></td>
+      <td><%= order.product.name %></td>
+       <td><%= t("orders.show.#{order.status}") %></td>
+      <td><%= link_to 'Detalhes', order, class: 'ls-btn' %></td>
     </tr>
     <% end %>
   </tbody>
@@ -21,3 +25,4 @@
 <% else %>
 <p><%= t('.no_orders') %></p>
 <% end %>
+

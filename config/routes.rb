@@ -7,6 +7,12 @@ Rails.application.routes.draw do
   resources :customers
   root to: 'orders#index'
   get '/search_customer', to: 'customers#search'
-  resources :orders, only: %i(index new create show)
   resources :users, only: %i(new create)
+
+  resources :orders, only: %i(new create show index) do 
+    member do
+      post 'approve'
+    end
+  end
+  
 end

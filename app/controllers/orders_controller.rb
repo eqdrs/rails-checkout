@@ -27,6 +27,13 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
+  def approve
+    @order = Order.find(params[:id])
+    @order.create_order_approval(user: current_user)
+    @order.approved!
+    render :show
+  end
+
   private
 
   def order_build(cpf, product_id)

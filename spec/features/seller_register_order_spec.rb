@@ -12,7 +12,7 @@ feature 'Seller register order' do
     visit root_path
     click_on 'Cadastrar Pedido'
     fill_in 'CPF', with: customer.cpf
-    select product.name, from: 'Produtos'
+    select product.name, from: 'Produto'
     click_on 'Cadastrar'
 
     expect(page).to have_content(product.name)
