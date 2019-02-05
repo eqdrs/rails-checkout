@@ -29,8 +29,14 @@ class OrdersController < ApplicationController
   def cancel_form; end
 
   def cancel
-    @order.cancel_order(params[:internal_reason], params[:client_reason])
-    redirect_to root_path, notice: t('.cancel_message')
+    if @order.cancel_order(
+        internal: params[:internal_reason],
+        client: params[:client_reason]
+      )
+      redirect_to @order, notice: t('.cancel_message')
+    else
+      render :cancel_form
+    end
   end
 
   def approve
