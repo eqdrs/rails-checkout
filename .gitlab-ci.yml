@@ -1,0 +1,28 @@
+image: ruby:2.6.1
+
+variables:
+  RAILS_ENV: test
+  TZ: America/Sao_Paulo
+
+stages:
+  - tests
+  - quality
+
+before_script:
+  - gem install bundler
+  - bundle install --without development production -j $(nproc)
+
+rspec:
+  stage: tests
+  except:
+    - tags
+  script:
+    - bundle exec rake db:drop db:create db:migrate
+    - bundle exec rspec
+
+rubocop:
+  stage: quality
+  except:
+    - tags
+  script:
+      - bundle exec rubocop
