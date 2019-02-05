@@ -1,11 +1,4 @@
 pt-BR:
-  activerecord:
-    models:
-      cancelled_order: 'Pedido cancelado'
-    attributes:
-      cancelled_order:
-        client_reason: 'Motivo para o cliente'
-        internal_reason: 'Motivo interno'
   orders:
     index:
       no_orders: 'Não há pedidos cadastrados'
@@ -13,8 +6,3 @@ pt-BR:
       open: 'Em Aberto'
       approved: 'Aprovado'
       cancelled: 'Cancelado'
-      cancel_section: 'Cancelamento'
-      internal_reason: 'Motivo interno'
-      client_reason: 'Motivo para o cliente'
-    cancel:
-      cancel_message: 'Pedido cancelado com sucesso'

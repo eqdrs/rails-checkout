@@ -28,8 +28,7 @@ describe CustomerMailer do
 
     it '#cancelled_order' do
       customer = create(:customer)
-      order = create(:order, customer: customer)
-      create(:cancelled_order, order: order)
+      order = create(:order, status: 20, customer: customer)
 
       mail = CustomerMailer.cancelled_order(order.id)
 
@@ -37,7 +36,6 @@ describe CustomerMailer do
       expect(mail.subject).to eq 'Seu pedido foi cancelado'
       expect(mail.body).to include "Seu pedido #{order.product.name} "\
                                    'foi cancelado'
-      expect(mail.body).to include order.cancelled_order.client_reason
     end
   end
 end

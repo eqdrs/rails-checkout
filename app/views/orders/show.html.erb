@@ -5,11 +5,9 @@
       <small><%= @order.customer.email %></small>
     </div>
     <div class="col-md-3 ls-txt-right">
-      <% unless @order.approved? || @order.cancelled? %>
+      <% unless @order.approved?%>
         <%= link_to 'Aprovar pedido', approve_order_path(@order),
         method: :post, class: "ls-btn-primary" %>
-        <%= link_to 'Cancelar pedido', cancel_form_order_path(@order), 
-            class: "ls-btn-danger" %>
       <% end %>
     </div>
   </header>
@@ -29,26 +27,3 @@
     </div>
   </div>
 </div>
-
-<% if @order.cancelled_order %>
-  <div class="ls-list">
-    <header class="ls-list-header">
-      <div class="ls-list-title col-md-9"> 
-       <h3><%= t('.cancel_section') %></h3>
-      </div>
-    </header>
-    <div class="ls-list-content ">
-      <div class="col-xs-12 col-md-6">
-        <% unless @order.cancelled_order.internal_reason.blank? %>
-          <span class="ls-list-label"><%= t('.internal_reason') %></span>
-          <strong><%= @order.cancelled_order.internal_reason %></strong>
-        <% end %>
-      </div>
-      <div class="col-xs-12 col-md-6">
-        <span class="ls-list-label"><%= t('.client_reason') %></span>
-        <strong><%= @order.cancelled_order.client_reason %></strong>
-      </div>
-    </div>
-  </div>
-<% end %>
-
