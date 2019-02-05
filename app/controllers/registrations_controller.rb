@@ -1,5 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   skip_before_action :require_no_authentication
+  before_action :verify_user, only: %i[new create]
 
   def new
     @user = User.new
@@ -25,5 +26,11 @@ class RegistrationsController < Devise::RegistrationsController
     User.new(email: params[:user][:email],
              password: params[:user][:cpf],
              role: params[:user][:role], cpf: params[:user][:cpf])
+  end
+
+  def verify_user
+    current_user.vendor? &&
+      (redirect_to root_path, notice: 'Você não tem permissão para realizar '\
+                                      'esta ação')
   end
 end

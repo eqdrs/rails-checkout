@@ -38,4 +38,24 @@ feature 'Admin register vendor' do
     )
     expect(current_path).to eq register_path
   end
+
+  scenario 'and only admin can register user' do
+    vendor = create(:user, role: :vendor)
+
+    login_as(vendor, scope: :user)
+    visit root_path
+
+    expect(page).not_to have_link 'Cadastrar usuário'
+  end
+
+  scenario 'and vendor can not access user register path' do
+    vendor = create(:user, role: :vendor)
+
+    login_as(vendor, scope: :user)
+    visit register_path
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content 'Você não tem permissão para realizar esta '\
+                                 'ação'
+  end
 end
