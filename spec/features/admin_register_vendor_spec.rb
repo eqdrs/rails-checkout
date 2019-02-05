@@ -3,6 +3,8 @@ require 'rails_helper'
 feature 'Admin register vendor' do
   scenario 'successfully' do
     admin = create(:user, role: :admin)
+    mail_spy = spy(UserMailer)
+    stub_const('UserMailer', mail_spy)
 
     login_as(admin, scope: :user)
     visit root_path
@@ -16,6 +18,7 @@ feature 'Admin register vendor' do
     expect(page).to have_content('Usuário cadastrado com sucesso!')
     expect(current_path).to eq root_path
     expect(User.last.email).to eq 'teste@vendas.com'
+    expect(mail_spy).to have_received(:registered_user)
   end
 
   scenario 'and must fill in required fields' do
