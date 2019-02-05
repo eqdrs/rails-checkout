@@ -15,4 +15,11 @@ Rails.application.routes.draw do
     end
   end
   
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :orders, only: %i(index) do
+      end
+    end
+  end
+
 end
