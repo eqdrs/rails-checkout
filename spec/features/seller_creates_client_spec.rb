@@ -2,6 +2,9 @@ require 'rails_helper'
 
 feature 'Seller creates customer' do
   scenario 'successfully' do
+    user = create(:user)
+
+    login_as user
     visit new_customer_path
     fill_in 'Nome', with: 'Kamyla Costa de Almeida'
     fill_in 'Endereço', with: 'Rua das palmas n 23 - Jundiá - MG'
@@ -20,6 +23,9 @@ feature 'Seller creates customer' do
   end
 
   scenario 'and must fill all fields' do
+    user = create(:user)
+
+    login_as user
     visit new_customer_path
     fill_in 'Nome', with: ''
     fill_in 'Endereço', with: ''
@@ -34,4 +40,15 @@ feature 'Seller creates customer' do
     expect(page).to have_content('Email Este campo é obrigatório')
     expect(page).to have_content('Phone Este campo é obrigatório')
   end
+
+  scenario 'and must be loged in' do
+    user = create(:user)
+
+    visit root_path
+    click_on 'Cadastrar Cliente'
+
+    expect(current_path).to_not eq new_customer_path
+    expect(page).to_not have_css('h1', text: 'Cadastrar Cliente')
+    expect(page).to have_content('Log in')
+  end 
 end

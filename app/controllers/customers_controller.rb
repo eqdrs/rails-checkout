@@ -1,5 +1,6 @@
 class CustomersController < ApplicationController
   before_action :validate_cpf, only: [:search]
+  before_action :authenticate_user!
 
   def search
     @customer = Customer.find_by('cpf = ?', params[:cpf])
