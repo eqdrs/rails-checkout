@@ -33,8 +33,9 @@ feature 'Admin register vendor' do
     select 'Vendedor', from: 'Função'
     click_on 'Cadastrar'
 
-    expect(page).to have_content('Você deve informar todos os campos '\
-                                 'obrigatórios')
+    expect(page).to have_content(
+      'Você deve informar todos os campos obrigatórios'
+    )
     expect(current_path).to eq register_path
   end
 
