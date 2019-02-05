@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: {:registrations => "registrations"}
+  devise_for :users, controllers: {
+    registrations: "registrations",
+    sessions: "users/sessions"
+  }
   as :user do
     get "/register", to: "registrations#new", as: "register"
   end

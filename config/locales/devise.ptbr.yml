@@ -27,7 +27,7 @@ pt-BR:
       last_attempt: "Você tem mais uma tentativa antes de bloquear sua conta."
       not_found_in_database: "%{authentication_keys} ou senha inválida."
       timeout: "Sua sessão expirou, por favor, efetue login novamente para continuar."
-      unauthenticated: "Para continuar, efetue login ou registre-se."
+      unauthenticated: "Para continuar, efetue login."
       unconfirmed: "Antes de continuar, confirme a sua conta."
     mailer:
       confirmation_instructions:
