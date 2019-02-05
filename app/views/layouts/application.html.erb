@@ -65,9 +65,11 @@
         <nav class="ls-menu" id='side_menu'>
           <ul>
             <li><%= link_to 'Cadastrar Pedido', new_order_path, class: 'ls-ico-plus', role: 'menuitem'%></li>
-            <li><%= link_to 'Cadastrar usuário', register_path, class: 'ls-ico-plus', role: 'menuitem' %></li>
             <li><%= link_to 'Cadastrar Cliente', new_customer_path, class: 'ls-ico-plus', role: 'menuitem'%></li>
             <li><%= link_to 'Visualizar Pedidos', orders_path, class: 'ls-ico-plus', role: 'menuitem'%></li>
+            <% if user_signed_in? && current_user.admin? %>
+              <li><%= link_to 'Cadastrar usuário', register_path, class: 'ls-ico-plus', role: 'menuitem' %></li>
+            <% end %>
           </ul>
         </nav>
     </div>
