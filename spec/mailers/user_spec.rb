@@ -11,7 +11,7 @@ RSpec.describe UserMailer do
       expect(mail.subject).to eq 'Sua conta no Vendas Locaweb foi criada com '\
                                  'sucesso'
       expect(mail.body).to include "Olá, #{user.email}! Sua conta no Vendas "\
-                                   "Locaweb foi criada com sucesso!"
+                                   'Locaweb foi criada com sucesso!'
       expect(mail.body).to include "Username: #{user.email}"
       expect(mail.body).to include "Senha: #{user.cpf}"
     end

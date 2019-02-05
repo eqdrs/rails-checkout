@@ -8,12 +8,12 @@ class Order < ApplicationRecord
   enum status: { open: 0, approved: 10, cancelled: 20 }
 
   def cancel_order(internal:, client:)
-    @cancelled = CancelledOrder.new(internal_reason: internal, 
+    @cancelled = CancelledOrder.new(internal_reason: internal,
                                     client_reason: client,
                                     order: self)
-    if @cancelled.save
-      CustomerMailer.cancelled_order(id).deliver
-      cancelled!
-    end
+    return unless @cancelled.save
+
+    CustomerMailer.cancelled_order(id).deliver
+    cancelled!
   end
 end

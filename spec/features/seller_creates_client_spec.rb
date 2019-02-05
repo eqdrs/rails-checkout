@@ -42,7 +42,7 @@ feature 'Seller creates customer' do
   end
 
   scenario 'and must be loged in' do
-    user = create(:user)
+    create(:user)
 
     visit root_path
     click_on 'Cadastrar Cliente'
@@ -50,5 +50,5 @@ feature 'Seller creates customer' do
     expect(current_path).to_not eq new_customer_path
     expect(page).to_not have_css('h1', text: 'Cadastrar Cliente')
     expect(page).to have_content('Log in')
-  end 
+  end
 end
