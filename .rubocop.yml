@@ -4,12 +4,15 @@ Rails:
   Enabled: true
 Style/FrozenStringLiteralComment:
   Enabled: false
+ClassAndModuleChildren:
+  EnforcedStyle: compact
 AllCops:
   TargetRubyVersion: 2.6
   Exclude:
     - 'bin/**/*'
     - 'vendor/**/*'
     - 'db/**/*'
+    - 'app/channels/**/*'
     - 'config/**/*'
     - 'script/**/*'
     - 'spec/rails_helper.rb'
