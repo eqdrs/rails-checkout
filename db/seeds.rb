@@ -12,3 +12,4 @@ customer = Customer.create(name: 'kamyla', address: 'rua X', cpf: '2344561290', 
 
 Order.create(product: product, status: 0, customer: customer)
 User.create(email: 'vendor@vendas.com', password: '12345678', role: :vendor)
+User.create(email: 'admin@vendas.com', password: '12345678', role: :admin)

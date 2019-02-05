@@ -33,8 +33,9 @@ feature 'Admin register vendor' do
     select 'Vendedor', from: 'Função'
     click_on 'Cadastrar'
 
-    expect(page).to have_content('Você deve informar todos os campos obrigatórios')
-    expect(current_path).to eq register_path  
+    expect(page).to have_content('Você deve informar todos os campos '\
+                                 'obrigatórios')
+    expect(current_path).to eq register_path
   end
 
   scenario 'and only admin can register user' do
@@ -53,7 +54,7 @@ feature 'Admin register vendor' do
     visit register_path
 
     expect(current_path).to eq root_path
-    expect(page).to have_content 'Você não tem permissão para realizar esta '
+    expect(page).to have_content 'Você não tem permissão para realizar esta '\
                                  'ação'
   end
 end
