@@ -20,7 +20,7 @@ Rails.application.routes.draw do
       resources :orders, only: %i(index)
       resources :customers, only: %i(index) do 
         member do
-          get 'orders', to: 'customers#get_orders'
+          get 'orders', to: 'customers#orders'
         end
       end
     end

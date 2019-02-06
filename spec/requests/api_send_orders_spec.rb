@@ -9,7 +9,6 @@ describe 'Api send orders' do
 
     get '/api/v1/orders'
     resp = JSON.parse response.body
-    puts response.body
 
     expect(response.content_type).to eq('application/json')
     expect(response).to have_http_status(:ok)
@@ -32,8 +31,6 @@ describe 'Api send orders' do
     expect(resp[3]['product_id']).to eq order_three.product_id
     expect(resp[3]['customer_id']).to eq order_three.customer_id
     expect(resp[3]['status']).to eq order_three.status
-
-
   end
 
   it 'of specific customer_id' do
@@ -50,5 +47,15 @@ describe 'Api send orders' do
     expect(resp[0]['id']).to eq order.id
     expect(resp[0]['product_id']).to eq order.product_id
     expect(resp[0]['customer_id']).to eq order.customer_id
+  end
+
+  it 'and the customer must exist' do
+    get "/api/v1/customers/#{10}/orders"
+    resp = JSON.parse response.body
+
+    expect(response.content_type).to eq('application/json')
+    expect(response).to have_http_status(:precondition_failed)
+    expect(resp["message"]).to eq('non-existent customer')
+
   end
 end
