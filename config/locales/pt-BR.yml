@@ -14,7 +14,10 @@ pt-BR:
       approved: 'Aprovado'
       cancelled: 'Cancelado'
       cancel_section: 'Cancelamento'
+      approval_section: 'Aprovação'
       internal_reason: 'Motivo interno'
       client_reason: 'Motivo para o cliente'
+      approved_at: 'Aprovada em'
+      approved_by: 'Aprovada por'
     cancel:
       cancel_message: 'Pedido cancelado com sucesso'
