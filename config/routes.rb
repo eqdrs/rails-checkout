@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   as :user do
     get "/register", to: "registrations#new", as: "register"
   end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :customers
   root to: 'orders#index'
   get '/search_customer', to: 'customers#search'
@@ -20,7 +19,11 @@ Rails.application.routes.draw do
   
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :orders, only: %i(index) do
+      resources :orders, only: %i(index)
+      resources :customers, only: %i(index) do 
+        member do
+          get 'orders', to: 'customers#orders'
+        end
       end
     end
   end
