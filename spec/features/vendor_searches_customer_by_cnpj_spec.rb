@@ -1,23 +1,25 @@
 require 'rails_helper'
 
-feature 'Vendor searches for a customer by cpf' do
+feature 'Vendor searches for a customer by cnpj' do
   scenario 'successfully' do
     vendor = create(:user)
-    customer = create(:individual, cpf: '288.135.104-20')
+    customer = create(:company, cnpj: '17.298.092/0001-30')
     login_as(vendor, scope: :user)
 
     visit root_path
     click_on 'Pesquisar cliente'
-    fill_in 'Por CPF', with: '288.135.104-20'
-    within('form#individual') do
+    fill_in 'Por CNPJ', with: '17.298.092/0001-30'
+    within('form#company') do
       click_on 'Buscar'
     end
 
-    expect(current_path).to eq individual_path(customer)
-    expect(page).to have_content customer.name
+    expect(current_path).to eq company_path(customer)
+    expect(page).to have_content customer.company_name
     expect(page).to have_content customer.email
-    expect(page).to have_content customer.cpf
+    expect(page).to have_content customer.cnpj
     expect(page).to have_content customer.phone
+    expect(page).to have_content customer.contact
+    expect(page).to have_content customer.address
   end
 
   scenario 'and customer doesn\'t exist' do
@@ -26,8 +28,8 @@ feature 'Vendor searches for a customer by cpf' do
 
     visit root_path
     click_on 'Pesquisar cliente'
-    fill_in 'Por CPF', with: '288.135.104-20'
-    within('form#individual') do
+    fill_in 'Por CNPJ', with: '17.298.092/0001-30'
+    within('form#company') do
       click_on 'Buscar'
     end
 

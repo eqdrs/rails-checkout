@@ -8,8 +8,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 product = Product.create(name: 'host', price: 24.0)
-customer = Customer.create(name: 'kamyla', address: 'rua X', cpf: '2344561290', phone: '1234534', email: 'email@email.com.br')
+customer = Customer.create(name: 'kamyla', address: 'rua X', cpf: '288.135.104-20 ', phone: '1234534', email: 'email@email.com.br')
 
-Order.create(product: product, status: 0, customer: customer)
-User.create(email: 'vendor@vendas.com', password: '12345678', role: :vendor)
+user = User.create(email: 'vendor@vendas.com', password: '12345678', role: :vendor)
 User.create(email: 'admin@vendas.com', password: '12345678', role: :admin)
+Order.create(product: product, status: 0, customer: customer, user: user)

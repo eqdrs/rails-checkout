@@ -1,10 +1,23 @@
-<h2>Resultados da busca</h2>
-<%= flash[:notice] %>
-<% if @customer.nil? %>
-  <p>Nenhum usuário encontrado.</p>
-<% else %>
-  <p>Nome: <%= @customer.name %></p>
-  <p>E-mail: <%= @customer.email %></p>
-  <p>CPF: <%= @customer.cpf %></p>
-  <p>Tel: <%= @customer.phone %></p>
+<h3>Pesquisar pessoa física</h3>
+<%= form_with url: search_individuals_path, id: 'individual', 
+              method: :get, local: true do |f| %>
+<fieldset>
+  <label class="ls-label">
+    <b class="ls-label-text">Por CPF</b>
+    <%= f.text_field :cpf %>
+  </label>
+</fieldset>
+<%= f.submit 'Buscar' %>
+<% end %>
+
+<h3>Pesquisar pessoa jurídica</h3>
+<%= form_with url: search_companies_path, id: 'company', 
+              method: :get, local: true do |f| %>
+<fieldset>
+  <label class="ls-label">
+    <b class="ls-label-text">Por CNPJ</b>
+    <%= f.text_field :cnpj %>
+  </label>
+</fieldset>
+<%= f.submit 'Buscar' %>
 <% end %>

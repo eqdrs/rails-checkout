@@ -14,7 +14,7 @@
 
     <!-- Barra de Notificações -->
     <div class="ls-notification-topbar">
-      <%= form_with url: 'search_customer', method: :get, local: true do |f| %>
+      <%= form_with url: search_customer_path, method: :get, local: true do |f| %>
         <%= f.label :cpf, 'Buscar cliente por CPF' %>
         <%= f.text_field :cpf %>
         <%= f.submit 'Buscar' %>
@@ -37,13 +37,12 @@
         </a>
         
 
-        <!--<nav class="ls-dropdown-nav ls-user-menu">-->
+        <nav class="ls-dropdown-nav ls-user-menu">
           <ul>
             <% if user_signed_in? %>
               <li><%= link_to 'Sair', destroy_user_session_path, method: :delete %></li>
             <% end %>
            </ul>
-        <!--</nav>-->
       </div>
     </div>
 
@@ -65,7 +64,14 @@
         <nav class="ls-menu" id='side_menu'>
           <ul>
             <li><%= link_to 'Cadastrar Pedido', new_order_path, class: 'ls-ico-plus', role: 'menuitem'%></li>
-            <li><%= link_to 'Cadastrar Cliente', new_customer_path, class: 'ls-ico-plus', role: 'menuitem'%></li>
+            <li class="ls-submenu">
+              <a href="#" class="ls-ico-cog">Cadastrar cliente</a>
+              <ul role="menu">
+                <li><%= link_to 'Pessoa física', new_individual_path, class: 'ls-submenu-item' %></li>
+                <li><%= link_to 'Pessoa jurídica', new_company_path, class: 'ls-submenu-item' %></li>
+              </ul>
+            </li>
+            <li><%= link_to 'Pesquisar cliente', search_customer_path, class: 'ls-submenu-item' %></li>
             <li><%= link_to 'Visualizar Pedidos', orders_path, class: 'ls-ico-plus', role: 'menuitem'%></li>
             <% if user_signed_in? && current_user.admin? %>
               <li><%= link_to 'Cadastrar usuário', register_path, class: 'ls-ico-plus', role: 'menuitem' %></li>
@@ -79,8 +85,9 @@
   <main class="ls-main ">
     <div class="container-fluid">
       <h1 class="ls-title-intro ls-ico-home" id='user_presentation'><%=  %></h1>
-      <div class="alert alert-notice"><p><%= flash[:notice] %></p></div>
-      <div class="alert alert-warning"><p><%= flash[:alert] %></p></div>
+      <% flash.each do |name, msg| %>
+        <div class="ls-alert-<%= name %>"><%= msg %></div>
+      <% end %>
       <%= yield %>
     </div>
   </main>

@@ -6,6 +6,16 @@ pt-BR:
       cancelled_order:
         client_reason: 'Motivo para o cliente'
         internal_reason: 'Motivo interno'
+      customer: 
+        name: 'Nome'
+        address: 'Endereço'
+        phone: 'Telefone'
+        company_name: 'Razão social'
+        contact: 'Contato'
+        cnpj: 'CNPJ'
+        cpf: 'CPF'
+        email: 'E-mail'
+
   orders:
     index:
       no_orders: 'Não há pedidos cadastrados'
@@ -18,3 +28,9 @@ pt-BR:
       client_reason: 'Motivo para o cliente'
     cancel:
       cancel_message: 'Pedido cancelado com sucesso'
+  companies:
+    create:
+      success: 'Cliente cadastrado com sucesso'
+  individuals:
+    search:
+      not_found: 'CPF não encontrado'    
