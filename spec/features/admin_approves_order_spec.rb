@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Admin approves order' do
   scenario 'successfully' do
-    user = create(:user)
+    user = create(:user, role: :admin)
     customer = create(:customer)
     product = create(:product)
     order = Order.create!(status: :open, customer: customer, product: product,
@@ -14,6 +14,7 @@ feature 'Admin approves order' do
     click_on 'Detalhes'
     click_on 'Aprovar pedido'
 
+    expect(page).to have_content('Pedido aprovado com sucesso!')
     expect(page).to have_content(order.customer.email)
     expect(page).to have_content(order.product.name)
     expect(page).to have_content('Aprovado')

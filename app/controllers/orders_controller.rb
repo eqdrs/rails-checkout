@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_order, only: %i[show cancel_form cancel]
+  before_action :verify_user, only: %i[approve]
 
   def index
     @orders = if current_user.admin?
@@ -41,10 +42,14 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order.create_order_approval(user: current_user)
     @order.approved!
-    render :show
+    redirect_to @order, notice: 'Pedido aprovado com sucesso!'
   end
 
   private
+
+  def verify_user
+    current_user.admin?
+  end
 
   def set_order
     @order = Order.find(params[:id])
