@@ -1,0 +1,70 @@
+<h1 class="ls-title-intro ls-ico-users" id='all_clients'>Visualizar clientes</h1>
+
+<div class="col-md-6">
+<div class="ls-box">
+  <header class="ls-info-header">
+    <h2 class="ls-title-3">Pessoa física</h2>
+  </header>
+  <% if @individuals.any? %>
+    <table class="ls-table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th class="hidden-xs">E-mail</th>
+          <th>CPF</th>
+          <th>Phone</th>
+          <th class="hidden-xs">Info</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @individuals.each do |individual| %>
+          <tr>
+            <td><%= link_to individual.name, individual %></td>
+            <td class="hidden-xs"><%= individual.email %></td>
+            <td><%= individual.cpf %></td>
+            <td><%= individual.phone %></td>
+            <td><%= link_to 'Detalhes', individual, class: 'ls-btn' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+  <p>Não há clientes pessoa física cadastrados.</p>
+  <% end %>
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="ls-box">
+  <header class="ls-info-header">
+    <h2 class="ls-title-3">Pessoa jurídica</h2>
+  </header>
+  <% if @companies.any? %>
+    <table class="ls-table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th class="hidden-xs">E-mail</th>
+          <th>CNPJ</th>
+          <th>Phone</th>
+          <th class="hidden-xs">Info</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @companies.each do |company| %>
+          <tr>
+            <td><%= link_to company.company_name, company %></td>
+            <td class="hidden-xs"><%= company.email %></td>
+            <td><%= company.cnpj %></td>
+            <td><%= company.phone %></td>
+            <td><%= link_to 'Detalhes', company, class: 'ls-btn' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+  <p>Não há clientes pessoa jurídica cadastrados.</p>
+  <% end %>
+</div>
+</div>
+

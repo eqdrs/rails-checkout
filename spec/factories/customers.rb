@@ -4,6 +4,7 @@ FactoryBot.define do
     address { FFaker::AddressUS.street_name }
     email { FFaker::Internet.email }
     phone { FFaker::PhoneNumber.phone_number }
+    user
     factory :individual, class: 'Individual' do
       name { FFaker::Name.name }
       cpf { FFaker::IdentificationBR.cpf }

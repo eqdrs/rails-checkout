@@ -1,12 +1,13 @@
 class CompaniesController < ApplicationController
   before_action :authenticate_user!
-
+  
   def new
     @company = Company.new
   end
-
+  
   def create
     @company = Company.new company_params
+    @company.user = current_user
     if @company.save
       redirect_to @company, notice: I18n.t('.success')
     else
@@ -32,6 +33,6 @@ class CompaniesController < ApplicationController
 
   def company_params
     params.require(:company).permit(:company_name, :cnpj, :contact, :address,
-                                    :phone, :email)
+                                    :phone, :email, :user_id)
   end
 end

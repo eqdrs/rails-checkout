@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     post 'approve', on: :member
   end
 
+  resources :customers, only: %i[index show]
+
   resources :individuals, only: %i[show new create] do
     get 'search', on: :collection
   end
