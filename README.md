@@ -74,8 +74,46 @@
 ```
 
 
+# Requisições feitas por essa aplicação
 
+## Para "Clientes"
+Após uma aprovação do pedido uma requisição POST será enviada para a aplicação de clientes com informações do pedido.
 
+### Header da requisição
+```
+Content-Type: application/json
+token: 'TOKEN DA APLICAÇÃO (A DEFINIR)'
+```
+
+### Body da requisição
+```
+{
+  customer: {
+    id,
+    name,
+    address,
+    cpf,
+    email,
+    phone,
+    type,
+    company_name,
+    cnpj,
+    contact,
+    created_at,
+    updated_at
+  },
+  product: {
+    id,
+    name,
+    price,
+    created_at,
+    updated_at
+  }
+}
+```
+
+### Notas sobre os dados da requisição
+O cliente está dividido entre pessoa física e pessoa jurídica. O valor de `customer` no JSON vai refletir o tipo de cliente. Clientes que são pessoas físicas vão ter os campos `cnpj`, `company_name`, `contact` como `NULL`. Clientes que são pessoas jurídicas terão os campos `name` e `cpf` como `NULL`. Todos os outros campos possuirão valores (diferentes de nulo) presentes em ambos. O valor de `type` poderá ser `Individual` (para pessoa física) ou `Company` (pessoa jurídica).  
 
 
 ------------------------------------------------

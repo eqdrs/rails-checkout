@@ -17,6 +17,9 @@ pt-BR:
         email: 'E-mail'
 
   orders:
+    approve:
+      success: 'Pedido aprovado com sucesso!'
+      failure: 'O pedido #%{order_id} não pôde ser aprovado'
     index:
       no_orders: 'Não há pedidos cadastrados'
     show:

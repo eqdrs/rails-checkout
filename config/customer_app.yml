@@ -1,0 +1,6 @@
+development:
+  approve_url: 'Após aprovação será enviado um POST para essa URL'
+  token: ''
+test:
+  approve_url: 'Após aprovação será enviado um POST para essa URL'
+  token: ''

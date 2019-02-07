@@ -8,6 +8,11 @@ feature 'Admin approves order' do
     order = Order.create!(status: :open, customer: customer, product: product,
                           user: user)
 
+    expect(Net::HTTP).to receive(:post).with(
+      Rails.configuration.customer_app['approve_url'],
+      any_args
+    )
+
     login_as user
     visit root_path
     click_on 'Visualizar Pedidos'
@@ -18,6 +23,22 @@ feature 'Admin approves order' do
     expect(page).to have_content(order.customer.email)
     expect(page).to have_content(order.product.name)
     expect(page).to have_content('Aprovado')
+    expect(page).not_to have_link('Aprovar pedido')
+  end
+
+  scenario 'and cant approve an approved order' do
+    user = create(:user, role: :admin)
+    customer = create(:customer)
+    product = create(:product)
+    order = Order.create!(status: :open, customer: customer, product: product,
+                          user: user)
+    order.approve_order(user: user)
+
+    login_as user
+    visit root_path
+    click_on 'Visualizar Pedidos'
+    click_on 'Detalhes'
+    
     expect(page).not_to have_link('Aprovar pedido')
   end
 end

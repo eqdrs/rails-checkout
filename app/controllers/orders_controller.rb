@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order, only: %i[show cancel_form cancel]
+  before_action :set_order, only: %i[show cancel_form cancel approve]
   before_action :verify_user, only: %i[approve]
 
   def index
@@ -39,10 +39,13 @@ class OrdersController < ApplicationController
   end
 
   def approve
-    @order = Order.find(params[:id])
-    @order.create_order_approval(user: current_user)
-    @order.approved!
-    redirect_to @order, notice: 'Pedido aprovado com sucesso!'
+    if @order.approve_order(user: current_user)
+      data = { customer: @order.customer, product: @order.product }
+      post_to(url: Rails.configuration.customer_app['approve_url'], data: data)
+      redirect_to @order, notice: t('orders.approve.success')
+    else
+      redirect_to @order, alert: t('orders.approve.failure')
+    end
   end
 
   private

@@ -17,6 +17,13 @@ class Order < ApplicationRecord
     cancelled!
   end
 
+  def approve_order(user:)
+    return if !open? || !user.admin?
+
+    create_order_approval(user: user)
+    approved!
+  end
+
   def approved?
     order_approval
   end
