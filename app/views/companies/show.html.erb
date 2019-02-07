@@ -1,5 +1,5 @@
 <div>
-<h1><%= @company.company_name %></h1>
+<h1></h1>
 <ul>
   <li>E-mail: <%= @company.email %></li>
   <li>Endereço: <%= @company.address %></li>
@@ -9,3 +9,34 @@
 </ul>
 <%= link_to 'Cadastrar pedido' %>
 </div>
+
+<h1 class="ls-title-intro ls-ico-user"><%= @company.company_name %></h1>
+
+<form action="" class="ls-form row" data-ls-module="form">
+    <fieldset id="domain-form" class="ls-form-disable ls-form-text">
+      <label class="ls-label col-md-6 col-lg-8">
+        <b class="ls-label-text">Nome</b>
+        <input type="text" value="Fulano de tal" required>
+      </label>
+      <label class="ls-label col-md-6 col-lg-8">
+        <b class="ls-label-text">login/E-mail:</b>
+        <input type="text" value="emaildocliente@cliente.com.br" required>
+      </label>
+      <label class="ls-label col-md-6 col-lg-8">
+        <b class="ls-label-text">Status:</b>
+        <input type="text" value="Ativo" required>
+      </label>
+      <label class="ls-label col-md-6 col-lg-8">
+        <b class="ls-label-text">Data de cadastro:</b>
+        <input type="text" value="18/05/1987" required>
+      </label>
+      <label class="ls-label col-md-6 col-lg-8">
+        <b class="ls-label-text">Informações:</b>
+        <textarea name="" id="" cols="30" rows="5">com Fulano de Tal no telefone: 11 5555-5555. Horários entre 12:00 e 16:00 dias úteis.</textarea>
+      </label>
+    </fieldset>
+    <div class="domain-actions ls-display-none">
+      <button type="submit" class="ls-btn-primary">Salvar</button>
+      <button class="ls-btn" data-ls-fields-enable="#domain-form" data-toggle-class="ls-display-none" data-target=".domain-actions" >Cancelar</button>
+    </div>
+  </form>
