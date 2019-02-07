@@ -2,10 +2,15 @@ pt-BR:
   activerecord:
     models:
       cancelled_order: 'Pedido cancelado'
+      user: 'Usuário'
     attributes:
       cancelled_order:
         client_reason: 'Motivo para o cliente'
         internal_reason: 'Motivo interno'
+      user:
+        password: 'Senha'
+        password_confirmation: 'Confirmar senha'
+        current_password: 'Senha atual'
   orders:
     index:
       no_orders: 'Não há pedidos cadastrados'

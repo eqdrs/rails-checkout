@@ -1,0 +1,19 @@
+<h1 class="ls-title-intro ls-ico-pencil2" id='change_password'>Alterar senha</h1>
+
+<%= form_for current_user, url: passwords_path do |f| %>
+  <label class="ls-label col-md-3">
+    <%= f.label :current_password %><br />
+    <%= f.password_field :current_password %><br />
+  </label>
+  <label class="ls-label col-md-3">
+    <%= f.label :password %><br />
+    <%= f.password_field :password %><br />
+  </label>
+  <label class="ls-label col-md-3">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %><br />
+  </label>
+  <br />
+  <hr>
+  <%= f.submit 'Alterar senha',  class: "ls-btn-primary" %>
+<% end %>
