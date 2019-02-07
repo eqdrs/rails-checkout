@@ -1,5 +1,5 @@
 <% individual.errors.full_messages.each do |message| %>
-  <%= message %>
+  <div class="ls-alert-notice"><%= message %></div>
 <% end %>
 
 <%= form_for individual, class: "ls-form row", local: true do |f| %>

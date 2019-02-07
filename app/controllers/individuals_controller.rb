@@ -19,7 +19,7 @@ class IndividualsController < ApplicationController
   end
 
   def search
-    @individual = Individual.find_by(cpf: params[:cpf])
+    @individual = Individual.find_by(cpf: CPF.new(params[:cpf]).stripped)
     if !@individual.nil?
       redirect_to @individual
     else

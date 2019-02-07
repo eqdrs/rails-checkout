@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html class="ls-theme-green">
   <head>
-    <title>Vendas</title>
+    <title>Vendas Locaweb</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -14,11 +14,6 @@
 
     <!-- Barra de Notificações -->
     <div class="ls-notification-topbar">
-      <%= form_with url: search_customer_path, method: :get, local: true do |f| %>
-        <%= f.label :cpf, 'Buscar cliente por CPF' %>
-        <%= f.text_field :cpf %>
-        <%= f.submit 'Buscar' %>
-      <% end %>
       <!-- Links de apoio -->
       <!-- <div class="ls-alerts-list">
         <a href="#" class="ls-ico-bell-o" data-counter="8" data-ls-module="topbarCurtain" data-target="#ls-notification-curtain"><span>Notificações</span></a>
@@ -35,23 +30,21 @@
             <% end %>
           </span>
         </a>
-        
 
         <nav class="ls-dropdown-nav ls-user-menu">
           <ul>
-            <% if user_signed_in? %>
-              <li><%= link_to 'Sair', destroy_user_session_path, method: :delete %></li>
-            <% end %>
+            <li><%= link_to 'Sair', destroy_user_session_path, method: 'DELETE' %></li>
            </ul>
+        </nav>
       </div>
     </div>
 
     <span class="ls-show-sidebar ls-ico-menu"></span>
     <!-- Nome do produto/marca com sidebar -->
     <h1 class="ls-brand-name" id='header_title'>
-      <a href="/" class="ls-ico-earth">
-        <small><%= 'title' %></small>
-        <%= 'subtitle' %>
+      <a href="/" class="ls-ico-cart">
+        <small>Sistema de Vendas Locaweb</small>
+        Vendas Locaweb
       </a>
     </h1>
 
@@ -74,7 +67,7 @@
             <li><%= link_to 'Pesquisar cliente', search_customer_path, class: 'ls-submenu-item' %></li>
             <li><%= link_to 'Visualizar Pedidos', orders_path, class: 'ls-ico-plus', role: 'menuitem'%></li>
             <% if user_signed_in? && current_user.admin? %>
-              <li><%= link_to 'Cadastrar usuário', register_path, class: 'ls-ico-plus', role: 'menuitem' %></li>
+              <li><%= link_to 'Cadastrar usuário', register_path, class: 'ls-ico-user-add', role: 'menuitem' %></li>
             <% end %>
           </ul>
         </nav>
@@ -84,7 +77,6 @@
 
   <main class="ls-main ">
     <div class="container-fluid">
-      <h1 class="ls-title-intro ls-ico-home" id='user_presentation'><%=  %></h1>
       <% flash.each do |name, msg| %>
         <div class="ls-alert-<%= name %>"><%= msg %></div>
       <% end %>
@@ -118,5 +110,10 @@
       </ul>
     </nav>
   </aside>
+
+    <!-- We recommended use jQuery 1.10 or up -->
+  <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="http://assets.locaweb.com.br/locastyle/3.8.2/javascripts/locastyle.js" type="text/javascript"></script>
+
   </body>
 </html>

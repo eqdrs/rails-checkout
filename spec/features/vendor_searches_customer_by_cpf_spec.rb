@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Vendor searches for a customer by cpf' do
   scenario 'successfully' do
     vendor = create(:user)
-    customer = create(:individual, cpf: '288.135.104-20')
+    customer = create(:individual, cpf: '28813510420')
     login_as(vendor, scope: :user)
 
     visit root_path
@@ -16,7 +16,7 @@ feature 'Vendor searches for a customer by cpf' do
     expect(current_path).to eq individual_path(customer)
     expect(page).to have_content customer.name
     expect(page).to have_content customer.email
-    expect(page).to have_content customer.cpf
+    expect(page).to have_content customer.formatted_cpf
     expect(page).to have_content customer.phone
   end
 

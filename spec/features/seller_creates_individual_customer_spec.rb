@@ -46,10 +46,8 @@ feature 'Seller creates individual customer' do
     skip
 
     visit root_path
-    click_on 'Cadastrar Cliente'
 
-    expect(current_path).to_not eq new_customer_path
-    expect(page).to_not have_css('h1', text: 'Cadastrar Cliente')
-    expect(page).to have_content('Log in')
+    expect(current_path).to eq new_user_session_path
+    expect(page).to_not have_link 'Cadastrar cliente'
   end
 end

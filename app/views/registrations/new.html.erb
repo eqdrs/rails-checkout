@@ -1,16 +1,30 @@
+<h1 class="ls-title-intro ls-ico-user-add" id='user_presentation'>Cadastro de usuário</h1>
+
 <% if @user.errors.any? %>
   <% @user.errors.full_messages.each do |msg| %>
   <p><%= msg %></p>
   <% end %>
 <% end %>
-<h1>Cadastro de usuários</h1>
-<hr>
+
 <%= form_for @user do |f| %>
-  <%= f.label :email, 'Email' %>
-  <%= f.text_field :email %>
-  <%= f.label :cpf, 'CPF' %>
-  <%= f.text_field :cpf %>
-  <%= f.label :role, 'Função'%>
-  <%= f.select(:role, [ ['Admin', :admin], ['Vendedor', :vendor] ] ) %>
-  <%= f.submit 'Cadastrar' %>
+  <div class='row'>
+    <label class="ls-label col-md-3">
+    <%= f.label :email, 'Email' %>
+    <%= f.text_field :email %>
+    </label>
+  </div>
+  <div class='row'> 
+    <label class="ls-label col-md-3">
+    <%= f.label :cpf, 'CPF' %>
+    <%= f.text_field :cpf %>
+    </label>
+  </div>
+  <div class='row'>
+    <label class="ls-label col-md-3">
+    <%= f.label :role, 'Função'%>
+    <%= f.select(:role, [ ['Admin', :admin], ['Vendedor', :vendor] ], {}, class: "ls-custom-select ls-field-sm" ) %>
+    </label>
+  </div>
+  <hr>
+  <%= f.submit 'Cadastrar', class: "ls-btn-primary" %>
 <% end %>

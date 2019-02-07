@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: {:registrations => "registrations"}
+  devise_for :users, controllers: {
+    registrations: "registrations",
+    sessions: "users/sessions"
+  }
   as :user do
     get "/register", to: "registrations#new", as: "register"
   end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
   root to: 'orders#index'
   get '/search_customer', to: 'customers#search'
   resources :users, only: %i(new create)
@@ -23,9 +26,12 @@ Rails.application.routes.draw do
   
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :orders, only: %i(index) do
+      resources :orders, only: %i(index)
+      resources :customers, only: %i(index) do 
+        member do
+          get 'orders', to: 'customers#orders'
+        end
       end
     end
   end
-
 end
