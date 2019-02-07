@@ -32,8 +32,6 @@ describe 'Api send orders' do
     expect(resp[3]['product_id']).to eq order_three.product_id
     expect(resp[3]['customer_id']).to eq order_three.customer_id
     expect(resp[3]['status']).to eq order_three.status
-
-
   end
 
   it 'of specific customer_id' do
