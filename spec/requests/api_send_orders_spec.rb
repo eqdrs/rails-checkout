@@ -9,7 +9,6 @@ describe 'Api send orders' do
 
     get '/api/v1/orders'
     resp = JSON.parse response.body
-    puts response.body
 
     expect(response.content_type).to eq('application/json')
     expect(response).to have_http_status(:ok)
