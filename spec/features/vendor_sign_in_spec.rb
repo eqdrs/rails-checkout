@@ -10,7 +10,7 @@ feature 'Vendor sign in' do
     fill_in 'Senha', with: '12345678'
     click_on 'Entrar'
 
-    expect(current_path).to eq root_path
+    expect(current_path).to eq edit_passwords_path
     expect(page).to_not have_link 'Entrar'
     expect(page).to have_link 'Sair'
     expect(page).to have_content "Olá, #{vendor.email}"
