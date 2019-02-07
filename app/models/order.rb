@@ -16,4 +16,8 @@ class Order < ApplicationRecord
     CustomerMailer.cancelled_order(id).deliver
     cancelled!
   end
+
+  def approved?
+    order_approval
+  end
 end

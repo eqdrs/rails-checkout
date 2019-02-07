@@ -21,12 +21,6 @@ class RegistrationsController < Devise::RegistrationsController
 
   private
 
-  def user_build
-    User.new(email: params[:user][:email],
-             password: params[:user][:cpf],
-             role: params[:user][:role], cpf: params[:user][:cpf])
-  end
-
   def verify_user
     current_user.vendor? &&
       (redirect_to root_path, notice: 'Você não tem permissão para realizar '\

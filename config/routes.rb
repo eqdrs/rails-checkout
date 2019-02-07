@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   as :user do
     get "/register", to: "registrations#new", as: "register"
   end
-  resources :customers
+
   root to: 'orders#index'
   get '/search_customer', to: 'customers#search'
   resources :users, only: %i(new create)
@@ -15,6 +15,13 @@ Rails.application.routes.draw do
     get 'cancel_form', on: :member
     post 'cancel', on: :member
     post 'approve', on: :member
+  end
+
+  resources :individuals, only: %i[show new create] do
+    get 'search', on: :collection
+  end
+  resources :companies, only: %i[show new create] do
+    get 'search', on: :collection
   end
   
   namespace :api, defaults: { format: :json } do
