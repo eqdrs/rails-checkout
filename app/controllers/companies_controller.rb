@@ -1,10 +1,10 @@
 class CompaniesController < ApplicationController
   before_action :authenticate_user!
-  
+
   def new
     @company = Company.new
   end
-  
+
   def create
     @company = Company.new company_params
     @company.user = current_user

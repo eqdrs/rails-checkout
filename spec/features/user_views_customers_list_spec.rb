@@ -19,7 +19,6 @@ feature 'User views customers list' do
   scenario 'Seller should view only his clients' do
     user = create(:user, role: :vendor)
     other_user = create(:user, role: :vendor)
-    
     customer = create(:individual, user: user)
     other_customer = create(:individual, user: other_user)
     login_as user
