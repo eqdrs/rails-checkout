@@ -4,12 +4,12 @@ class Company < Customer
   validate :cnpj_validation
 
   def save
-    self.cnpj = CNPJ.new(self.cnpj).stripped
+    self.cnpj = CNPJ.new(cnpj).stripped
     super
   end
 
   def formatted_cnpj
-    CNPJ.new(cnpj).formatted    
+    CNPJ.new(cnpj).formatted
   end
 
   private
