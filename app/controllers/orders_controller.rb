@@ -12,11 +12,12 @@ class OrdersController < ApplicationController
   end
 
   def new
+    @individual = Individual.find(params[:customer_id])
     @order = Order.new
   end
 
   def create
-    @order = order_build(params[:order][:cpf], params[:order][:product_id])
+    @order = order_build(params[:order][:product_id])
     if @order.save
       CustomerMailer.order_summary(@order.id).deliver
       redirect_to @order
@@ -55,8 +56,8 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
-  def order_build(cpf, product_id)
-    customer = Customer.find_by(cpf: cpf)
+  def order_build(product_id)
+    customer = Customer.find(params[:customer_id])
     product = Product.find(product_id)
     current_user.orders.new(customer: customer, product: product,
                             status: 0)
