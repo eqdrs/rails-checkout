@@ -14,6 +14,7 @@ pt-BR:
               blank: "O campo senha não pode ficar em branco."
             password_confirmation:
               blank: "O campo confirmação de senha não pode ficar em branco."
+
   devise:
     confirmations:
       confirmed: "Sua conta foi confirmada com sucesso. Você está logado."
@@ -72,3 +73,6 @@ pt-BR:
       not_saved:
         one: "Não foi possível salvar %{resource}: 1 erro"
         other: "Não foi possível salvar %{resource}: %{count} erros."
+  passwords:
+    edit:
+      password: 'Senha'
