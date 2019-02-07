@@ -6,15 +6,25 @@
 <% end %>
 
 <div>
-<h1><%= @individual.name %></h1>
-<ul>
-  <li>E-mail: <%= @individual.email %></li>
-  <li>Endereço: <%= @individual.address %></li>
-  <li>CPF: <%= @individual.formatted_cpf %></li>
-  <li>Telefone: <%= @individual.phone %></li>
-</ul>
-
-<%= form_with model: @order, url: customer_orders_path(@individual), class: "ls-form row", local: true do |f|%>
+ <h1><%= @customer.name %></h1>
+<% if @customer.type == 'Individual'%>
+  <ul>
+    <li>E-mail: <%= @customer.email %></li>
+    <li>Endereço: <%= @customer.address %></li>
+    <li>CPF: <%= @customer.formatted_cpf %></li>
+    <li>Telefone: <%= @customer.phone %></li>
+  </ul>
+<% else %>
+  <ul>
+    <li>E-mail: <%= @customer.email %></li>
+    <li>Endereço: <%= @customer.address %></li>
+    <li>CNPJ: <%= @customer.formatted_cnpj %></li>
+    <li>Telefone: <%= @customer.phone %></li>
+    <li>Contato: <%= @customer.contact %></li>
+  </ul>
+<% end %>
+  
+<%= form_with model: @order, url: customer_orders_path(@customer), class: "ls-form row", local: true do |f|%>
   <fieldset>
   <div class="ls-label col-md-2 col-sm-4">
   <%= f.label :product_id, 'Produto', class: "ls-label-text"%>

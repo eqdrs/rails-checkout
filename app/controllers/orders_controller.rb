@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @individual = Individual.find(params[:customer_id])
+    @customer = Customer.find(params[:customer_id])
     @order = Order.new
   end
 

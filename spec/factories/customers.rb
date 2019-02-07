@@ -3,13 +3,12 @@ FactoryBot.define do
     address { FFaker::AddressUS.street_name }
     email { FFaker::Internet.email }
     phone { FFaker::PhoneNumber.phone_number }
+    name { FFaker::Name.name }
     factory :individual, class: 'Individual' do
-      name { FFaker::Name.name }
       cpf { FFaker::IdentificationBR.cpf }
       type { 'Individual' }
     end
     factory :company, class: 'Company' do
-      company_name { FFaker::Lorem.word }
       cnpj { FFaker::IdentificationBR.cnpj }
       contact { FFaker::Lorem.word }
       type { 'Company' }
