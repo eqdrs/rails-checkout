@@ -38,7 +38,7 @@ feature 'Admin approves order' do
     visit root_path
     click_on 'Visualizar Pedidos'
     click_on 'Detalhes'
-    
+
     expect(page).not_to have_link('Aprovar pedido')
   end
 end
