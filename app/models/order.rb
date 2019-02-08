@@ -5,6 +5,8 @@ class Order < ApplicationRecord
   belongs_to :user
   has_one :cancelled_order, dependent: :destroy
 
+  validates :product, presence: { notice: 'Você deve selecionar um produto' }
+
   enum status: { open: 0, approved: 10, cancelled: 20 }
 
   def cancel_order(internal:, client:)

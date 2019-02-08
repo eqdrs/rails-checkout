@@ -57,7 +57,7 @@ class OrdersController < ApplicationController
 
   def order_build(cpf, product_id)
     customer = Customer.find_by(cpf: cpf)
-    product = Product.find(product_id)
+    product = Product.find_by('id = ?', product_id)
     current_user.orders.new(customer: customer, product: product,
                             status: 0)
   end

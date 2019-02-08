@@ -23,8 +23,8 @@
             </div>
             <div class="col-md-10">
               <h3 class="ls-title-5"><strong>
-              <%= f.radio_button :product_id, product.name %>
-              <%= f.label :product_id, product.name, class: "inline" %>
+              <%= f.radio_button :product_id, product.id %>
+              <%= f.label "#{:product_id}_#{product.id}", product.name, class: "ls-label-text inline" %>
               </strong></h3>
               <p><strong>Preço:</strong> R$ <%= sprintf('%.2f', product.price) %></p>
             </div>
