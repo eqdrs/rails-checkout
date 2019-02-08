@@ -7,7 +7,6 @@ feature 'Seller views products details on order register screen' do
     product = create(:product)
     create(:product)
     login_as user
-    
     visit root_path
     click_on 'Cadastrar Pedido'
     fill_in 'CPF', with: customer.cpf
