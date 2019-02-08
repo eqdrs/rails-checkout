@@ -6,18 +6,18 @@
 <% end %>
 <%= form_with model: @order, class: "ls-form row", local: true do |f|%>
   <fieldset>
-  <div class="ls-label col-md-2">
-  <%= f.label :cpf, 'CPF', class: "ls-label-text" %>
-  <%= f.text_field :cpf, class: 'form-control col-md-2' %>
-  </div>
-  <div class="ls-label col-md-2 col-sm-4">
-  <%= f.label :product_id, 'Produto', class: "ls-label-text"%>
-  <div class="ls-custom-select">
-  <%= f.collection_select :product_id, Product.all, :id, :name, class: "ls-select"%>
-  </div>
+    <div class="ls-label col-md-2">
+      <%= f.label :cpf, 'CPF', class: "ls-label-text" %>
+      <%= f.text_field :cpf, class: 'form-control col-md-2' %>
+    </div>
+    <div class="ls-label col-md-2 col-sm-4">
+    <%= f.label :product_id, 'Produto', class: "ls-label-text"%>
+    <% Product.all.each do |product| %>
+      <%= f.radio_button :product_id, product.id %> <%= "#{product.name}" %><br />
+    <% end %>
   </div>
   </fieldset>
   <div class="ls-actions-btn">
-  <%= f.submit 'Cadastrar', class: "ls-btn" %>
+    <%= f.submit 'Cadastrar', class: "ls-btn" %>
   </div>
 <% end %>
