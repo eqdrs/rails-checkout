@@ -10,12 +10,27 @@
       <%= f.label :cpf, 'CPF', class: "ls-label-text" %>
       <%= f.text_field :cpf, class: 'form-control col-md-2' %>
     </div>
-    <div class="ls-label col-md-2 col-sm-4">
-    <%= f.label :product_id, 'Produto', class: "ls-label-text"%>
-    <% Product.all.each do |product| %>
-      <%= f.radio_button :product_id, product.id %> <%= "#{product.name}" %><br />
-    <% end %>
-  </div>
+    <div class="ls-label col-md-12 col-sm-4">
+      <div class="ls-box-group">
+        <%= f.label :product_id, 'Produto', class: "ls-label-text" %>
+        <% Product.all.each do |product| %>
+          <div class="ls-box ls-md-space">
+          <div class="row">
+            <div class="col-md-2 ls-txt-center">
+            <span class="ls-ico-alone ls-ico-screen"></span>
+            </div>
+            <div class="col-md-10">
+              <h3 class="ls-title-5"><strong>
+              <%= f.radio_button :product_id, product.id %>
+              <%= product.name %>
+              </strong></h3>
+              <p>Fortaleça ainda mais a sua revenda personalizando o painel de acesso dos seus clientes. Mude as cores, o nome ou insira a sua marca.</p>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
   </fieldset>
   <div class="ls-actions-btn">
     <%= f.submit 'Cadastrar', class: "ls-btn" %>
