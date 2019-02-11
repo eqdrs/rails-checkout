@@ -5,24 +5,7 @@
   <% end %>
 <% end %>
 
-<div>
- <h1><%= @customer.name %></h1>
-<% if @customer.type == 'Individual'%>
-  <ul>
-    <li>E-mail: <%= @customer.email %></li>
-    <li>Endereço: <%= @customer.address %></li>
-    <li>CPF: <%= @customer.formatted_cpf %></li>
-    <li>Telefone: <%= @customer.phone %></li>
-  </ul>
-<% else %>
-  <ul>
-    <li>E-mail: <%= @customer.email %></li>
-    <li>Endereço: <%= @customer.address %></li>
-    <li>CNPJ: <%= @customer.formatted_cnpj %></li>
-    <li>Telefone: <%= @customer.phone %></li>
-    <li>Contato: <%= @customer.contact %></li>
-  </ul>
-<% end %>
+<%= render @customer %>
   
 <%= form_with model: @order, url: customer_orders_path(@customer), class: "ls-form row", local: true do |f|%>
   <fieldset>
