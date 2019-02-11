@@ -7,11 +7,14 @@ feature 'Admin approves order' do
     product = create(:product)
     order = Order.create!(status: :open, customer: customer, product: product,
                           user: user)
+    http = double('For - Net::HTTP')
+    http_response = double('For - Net::HTTPResponse')
 
-    expect(Net::HTTP).to receive(:post).with(
-      Rails.configuration.customer_app['approve_url'],
-      any_args
-    )
+    allow(Net::HTTP).to receive(:new).and_return(http)
+    allow(http).to receive(:post)
+      .with(Rails.configuration.customer_app['send_order_endpoint'], any_args)
+      .and_return(http_response)
+    allow(http_response).to receive(:code).and_return(201)
 
     login_as user
     visit root_path

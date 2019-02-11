@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     get 'cancel_form', on: :member
     post 'cancel', on: :member
     post 'approve', on: :member
+    post 'send_approval', on: :member
   end
 
   resources :individuals, only: %i[show new create] do

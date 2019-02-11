@@ -1,6 +1,10 @@
 development:
-  approve_url: 'Após aprovação será enviado um POST para essa URL'
+  url_address: 'http://localhost'
+  url_port: 4000
+  send_order_endpoint: '/approve'
   token: ''
 test:
-  approve_url: 'Após aprovação será enviado um POST para essa URL'
+  url_address: 'http://localhost'
+  url_port: 4000
+  send_order_endpoint: '/approve'
   token: ''

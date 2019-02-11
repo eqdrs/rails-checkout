@@ -6,6 +6,7 @@ class Order < ApplicationRecord
   has_one :cancelled_order, dependent: :destroy
 
   enum status: { open: 0, approved: 10, cancelled: 20 }
+  enum sent_to_client_app: { not_sent: 0, sent: 10 }
 
   def cancel_order(internal:, client:)
     @cancelled = CancelledOrder.new(internal_reason: internal,

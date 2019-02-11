@@ -2,18 +2,41 @@ require 'rails_helper'
 
 describe 'Api post orders to clients' do
   it 'successfully' do
-    allow(Net::HTTP).to receive(:post)
-      .with(Rails.configuration.customer_app['approve_url'], any_args)
-      .and_return(:ok)
+    http = double('Instance of Net::HTTP')
+    http_response = double('Instance of Net::HTTPResponse')
+    admin = create(:user)
+    login_as admin
+    create(:order)
+
+    allow(Net::HTTP).to receive(:new).and_return(http)
+    allow(http).to receive(:post)
+      .with(Rails.configuration.customer_app['send_order_endpoint'], any_args)
+      .and_return(http_response)
+    allow(http_response).to receive(:code).and_return(201)
+
+    post '/orders/1/approve'
+    follow_redirect!
+
+    expect(response.body).to include(I18n.t('orders.approve.success'))
   end
 
-  it 'and it needs a token' do
-    order = create(:order)
-    data = { customer: order.customer, product: order.product }
-    header = { 'Content-Type': 'application/json' }
+  it 'and it shows an error if it wasnt able to post successfully' do
+    http = double('Instance of Net::HTTP')
+    http_response = double('Instance of Net::HTTPResponse')
+    admin = create(:user)
+    login_as admin
+    create(:order)
 
-    allow(Net::HTTP).to receive(:post)
-      .with(Rails.configuration.customer_app['approve_url'], data, header)
-      .and_return(403)
+    allow(Net::HTTP).to receive(:new).and_return(http)
+    allow(http).to receive(:post)
+      .with(Rails.configuration.customer_app['send_order_endpoint'], any_args)
+      .and_return(http_response)
+    allow(http_response).to receive(:code).and_return(500)
+
+    post '/orders/1/approve'
+    follow_redirect!
+
+    expect(response.body).to include(I18n.t('orders.approve.warning'))
+    expect(response.body).to include(I18n.t('orders.show.approval_resend'))
   end
 end

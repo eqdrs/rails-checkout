@@ -70,5 +70,19 @@
       </div>
     </div>
   </div>
+
+  <% if @order.not_sent? %>
+  <div class="ls-list">
+    <header class="ls-list-header">
+      <div class="ls-list-title col-md-9"> 
+       <h3><%= t('.approval_send_error') %></h3>
+      </div>
+
+      <div class="col-md-3 ls-txt-right">
+        <%= link_to t('.approval_resend'), send_approval_order_path(@order), class: 'ls-btn-danger' %>
+      </div>
+    </header>
+  </div>
+  <% end %>
 <% end %>
 
