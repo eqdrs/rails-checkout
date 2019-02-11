@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :order_approval do
-    user { nil }
+    user
   end
 end
