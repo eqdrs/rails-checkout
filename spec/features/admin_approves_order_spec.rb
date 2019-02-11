@@ -5,8 +5,16 @@ feature 'Admin approves order' do
     user = create(:user, role: :admin)
     customer = create(:customer)
     product = create(:product)
-    order = Order.create!(status: :open, customer: customer,
-                          product: product, user: user)
+    order = Order.create!(status: :open, customer: customer, product: product,
+                          user: user)
+    http = double('For - Net::HTTP')
+    http_response = double('For - Net::HTTPResponse')
+
+    allow(Net::HTTP).to receive(:new).and_return(http)
+    allow(http).to receive(:post)
+      .with(Rails.configuration.customer_app['send_order_endpoint'], any_args)
+      .and_return(http_response)
+    allow(http_response).to receive(:code).and_return(201)
 
     login_as user
     visit root_path
@@ -58,6 +66,6 @@ feature 'Admin approves order' do
     page.driver.submit :post, '/orders/1/approve', {}
 
     expect(current_path).to eq order_path(order)
-    expect(page).to have_content('Não é possível aprovar este pedido')
+    expect(page).to have_content('não pôde ser aprovado')
   end
 end
