@@ -19,10 +19,10 @@ class CompaniesController < ApplicationController
   end
 
   def search
-    @company = Company.find_by(cnpj: params[:cnpj])
+    @company = Company.find_by(cnpj: CNPJ.new(params[:cnpj]).stripped)
     if @company.nil?
       redirect_to(search_customer_path,
-                  alert: I18n.t('individuals.search.not_found'))
+                  alert: I18n.t('companies.search.not_found'))
     else
       redirect_to @company
     end
