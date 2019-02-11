@@ -6,5 +6,5 @@
   <li>CPF: <%= @individual.formatted_cpf %></li>
   <li>Telefone: <%= @individual.phone %></li>
 </ul>
-<%= link_to 'Cadastrar pedido' %>
+<%= link_to 'Cadastrar pedido', new_customer_order_path(@individual) %>
 </div>

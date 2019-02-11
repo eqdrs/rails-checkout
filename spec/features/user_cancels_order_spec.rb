@@ -117,4 +117,19 @@ feature 'User cancels order' do
 
     expect(page).not_to have_link('Cancelar pedido')
   end
+
+  scenario 'and cant cancel cancelled orders - force' do
+    user = create(:vendor)
+    order = create(:order)
+    order.cancel_order(internal: 'Motivo interno',
+                       client: 'Motivo para o cliente')
+
+    login_as user
+    page.driver.submit :post, '/orders/1/cancel',
+                       internal: 'Motivo interno',
+                       client: 'Motivo para o cliente'
+
+    expect(current_path).to eq order_path(order)
+    expect(page).to have_content 'Este pedido não pode ser cancelado'
+  end
 end

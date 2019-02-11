@@ -25,7 +25,7 @@ class Order < ApplicationRecord
     approved!
   end
 
-  def approved?
+  def approved_order?
     order_approval
   end
 end
