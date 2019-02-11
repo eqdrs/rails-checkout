@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
+
   def manage
     if current_user.admin?
       @users = User.vendor
