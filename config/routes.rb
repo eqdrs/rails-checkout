@@ -26,17 +26,16 @@ Rails.application.routes.draw do
 
   resources :individuals, only: %i[show new create] do
     get 'search', on: :collection
-   
   end
 
   resources :companies, only: %i[show new create] do
     get 'search', on: :collection
   end
-  
+
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :orders, only: %i(index)
-      resources :customers, only: %i(index) do 
+      resources :customers, only: %i(index) do
         member do
           get 'orders', to: 'customers#orders'
         end
