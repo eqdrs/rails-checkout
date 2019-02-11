@@ -35,6 +35,6 @@ feature 'Admin manages vendors' do
     visit manage_users_path
 
     expect(current_path).to eq root_path
-    expect(page).to have_content(I18n.t('user.messages.unauthorized'))
+    expect(page).to have_content(I18n.t('users.messages.unauthorized'))
   end
 end

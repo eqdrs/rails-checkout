@@ -11,7 +11,7 @@ pt-BR:
         password: 'Senha'
         password_confirmation: 'Confirmar senha'
         current_password: 'Senha atual'
-      customer: 
+      customer:
         name: 'Nome'
         address: 'Endereço'
         phone: 'Telefone'
@@ -39,9 +39,9 @@ pt-BR:
       success: 'Cliente cadastrado com sucesso'
   individuals:
     search:
-      not_found: 'CPF não encontrado'    
+      not_found: 'CPF não encontrado'
   users:
-    messages: 
+    messages:
       inactive_user: "Usuário %{email} desativado"
       unauthorized: 'Você não está autorizado para essa ação'
     manage:
