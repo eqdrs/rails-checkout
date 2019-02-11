@@ -9,7 +9,7 @@ describe CustomerMailer do
 
       expect(mail.to).to include(order.customer.email)
       expect(mail.subject).to eq 'Resumo do pedido'
-      expect(mail.body).to include(CGI::escape_html(order.customer.name))
+      expect(mail.body).to include(CGI.escape_html(order.customer.name))
       expect(mail.body).to include(order.product.name)
       expect(mail.body).to include(order.product.price)
     end
