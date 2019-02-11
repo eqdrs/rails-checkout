@@ -9,6 +9,7 @@
 
 product = Product.create(name: 'Host', price: 24.0)
 other_product = Product.create(name: 'Host2', price: 30.0)
+Product.create(name: 'Host3', price: 45.0)
 customer = Individual.create(name: 'Kamyla Aragão', address: 'rua X', cpf: '28813510420', phone: '1234534', email: 'email@email.com.br')
 
 vendor = User.create(email: 'vendor@vendas.com', password: '12345678', role: :vendor)

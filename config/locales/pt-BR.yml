@@ -1,4 +1,9 @@
 pt-BR:
+  number:
+    currency:
+      format:
+        format: "%n"
+        unit: "BRL"
   activerecord:
     models:
       cancelled_order: 'Pedido cancelado'

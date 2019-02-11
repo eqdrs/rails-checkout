@@ -16,8 +16,8 @@ feature 'Seller register order' do
       click_on 'Buscar'
     end
     click_on 'Cadastrar pedido'
-    select product.name, from: 'Produto'
-    click_on 'Cadastrar'
+    choose product.name
+    click_on 'Cadastrar Pedido'
 
     expect(current_path).to eq order_path(1)
     expect(page).to have_content(product.name)
@@ -43,8 +43,8 @@ feature 'Seller register order' do
       click_on 'Buscar'
     end
     click_on 'Cadastrar pedido'
-    select product.name, from: 'Produto'
-    click_on 'Cadastrar'
+    choose product.name
+    click_on 'Cadastrar Pedido'
 
     expect(current_path).to eq order_path(1)
     expect(page).to have_content(product.name)
