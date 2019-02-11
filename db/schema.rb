@@ -33,8 +33,6 @@ ActiveRecord::Schema.define(version: 2019_02_11_180232) do
     t.string "company_name"
     t.string "cnpj"
     t.string "contact"
-    t.integer "user_id"
-    t.index ["user_id"], name: "index_customers_on_user_id"
   end
 
   create_table "order_approvals", force: :cascade do |t|
@@ -51,8 +49,8 @@ ActiveRecord::Schema.define(version: 2019_02_11_180232) do
     t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "customer_id"
     t.integer "user_id"
+    t.integer "customer_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["product_id"], name: "index_orders_on_product_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -85,5 +83,4 @@ ActiveRecord::Schema.define(version: 2019_02_11_180232) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
 end

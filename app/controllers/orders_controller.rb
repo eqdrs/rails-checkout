@@ -12,6 +12,7 @@ class OrdersController < ApplicationController
   end
 
   def new
+    @customer = Customer.find(params[:customer_id])
     @order = Order.new
     @products = all_products
   end
@@ -19,7 +20,7 @@ class OrdersController < ApplicationController
   def create
     @product = get_product(params[:order][:product_id])
     @product.save
-    @order = order_build(params[:order][:cpf], @product.id)
+    @order = order_build(@product.id)
     order_validation(@order)
   end
 
@@ -28,8 +29,10 @@ class OrdersController < ApplicationController
   def cancel_form; end
 
   def cancel
-    if @order.cancel_order(internal: params[:internal_reason],
-                           client: params[:client_reason])
+    if @order.cancelled? || @order.approved?
+      redirect_to @order, notice: 'Este pedido não pode ser cancelado'
+    elsif @order.cancel_order(internal: params[:internal_reason],
+                              client: params[:client_reason])
       redirect_to @order, notice: t('.cancel_message')
     else
       render :cancel_form
@@ -38,9 +41,13 @@ class OrdersController < ApplicationController
 
   def approve
     @order = Order.find(params[:id])
-    @order.create_order_approval(user: current_user)
-    @order.approved!
-    redirect_to @order, notice: 'Pedido aprovado com sucesso!'
+    if @order.open?
+      @order.create_order_approval(user: current_user)
+      @order.approved!
+      redirect_to @order, notice: 'Pedido aprovado com sucesso!'
+    else
+      redirect_to @order, notice: 'Não é possível aprovar este pedido'
+    end
   end
 
   private
@@ -53,9 +60,9 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
-  def order_build(cpf, product_id)
-    customer = Customer.find_by(cpf: cpf)
-    product = Product.find_by('id = ?', product_id)
+  def order_build(product_id)
+    customer = Customer.find(params[:customer_id])
+    product = Product.find(product_id)
     current_user.orders.new(customer: customer, product: product,
                             status: 0)
   end

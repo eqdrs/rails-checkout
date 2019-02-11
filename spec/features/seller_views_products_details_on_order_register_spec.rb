@@ -7,10 +7,17 @@ feature 'Seller views products details on order register screen' do
                  status: 200)
 
     user = create(:user)
-    create(:product)
+    customer = create(:individual)
+
     login_as user
     visit root_path
-    click_on 'Cadastrar Pedido'
+    click_on 'Pesquisar cliente'
+    fill_in 'Por CPF', with: customer.cpf
+    within('form#individual') do
+      click_on 'Buscar'
+    end
+    click_on 'Cadastrar pedido'
+    choose 'Email Marketing'
 
     expect(page).to have_content('Email Marketing')
     expect(page).to have_content('Descrição: Email marketing para criação '\

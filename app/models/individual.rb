@@ -1,5 +1,5 @@
 class Individual < Customer
-  validates :name, :cpf, presence: true
+  validates :cpf, presence: true
   validates :cpf, uniqueness: true
   validate :cpf_validation
 

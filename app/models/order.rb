@@ -19,7 +19,7 @@ class Order < ApplicationRecord
     cancelled!
   end
 
-  def approved?
+  def approved_order?
     order_approval
   end
 end

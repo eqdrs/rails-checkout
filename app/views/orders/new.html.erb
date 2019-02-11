@@ -4,14 +4,12 @@
   <p><%= msg %></p>
   <% end %>
 <% end %>
-<%= form_with model: @order, class: "ls-form row", local: true do |f|%>
+
+<%= render @customer %>
+  
+<%= form_with model: @order, url: customer_orders_path(@customer), class: "ls-form row", local: true do |f|%>
   <fieldset>
-    <div class="ls-label col-md-3">
-      <h4><%= f.label :cpf, 'CPF', class: "ls-label-text" %></h4>
-      </br>
-      <%= f.text_field :cpf, class: 'form-control col-md-2', placeholder: '_____._____._____-____' %>
-    </div>
-    <div class="ls-label col-md-12 col-sm-4">
+  <div class="ls-label col-md-12 col-sm-4">
       <h5>PRODUTOS</h5>
       </br>
       <div class="ls-box" style="height: 276px; overflow-y: scroll;">
@@ -33,9 +31,8 @@
         </div>
         <% end %>
       </div>
-    </div>
   </fieldset>
   <div class="ls-actions-btn">
-    <%= f.submit 'Cadastrar', class: "ls-btn" %>
+    <%= f.submit 'Cadastrar Pedido', class: "ls-btn" %>
   </div>
 <% end %>

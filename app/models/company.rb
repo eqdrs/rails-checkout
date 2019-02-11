@@ -1,5 +1,5 @@
 class Company < Customer
-  validates :company_name, :cnpj, :contact, presence: true
+  validates :cnpj, :contact, presence: true
   validates :cnpj, uniqueness: true
   validate :cnpj_validation
 

@@ -20,7 +20,6 @@ pt-BR:
         name: 'Nome'
         address: 'Endereço'
         phone: 'Telefone'
-        company_name: 'Razão social'
         contact: 'Contato'
         cnpj: 'CNPJ'
         cpf: 'CPF'
