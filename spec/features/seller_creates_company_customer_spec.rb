@@ -7,7 +7,7 @@ feature 'Seller creates company customer' do
     login_as user
     visit root_path
     click_on 'Pessoa jurídica'
-    fill_in 'Razão social', with: 'Facebook'
+    fill_in 'Nome', with: 'Facebook'
     fill_in 'Endereço', with: 'Rua das palmas n 23 - Jundiá - MG'
     fill_in 'CNPJ', with: '17.298.092/0001-30'
     fill_in 'E-mail', with: 'facebook@teste.com'
@@ -30,7 +30,7 @@ feature 'Seller creates company customer' do
 
     login_as user
     visit new_company_path
-    fill_in 'Razão social', with: ''
+    fill_in 'Nome', with: ''
     fill_in 'Endereço', with: ''
     fill_in 'CNPJ', with: ''
     fill_in 'E-mail', with: ''
@@ -38,7 +38,7 @@ feature 'Seller creates company customer' do
     fill_in 'Contato', with: ''
     click_on 'Cadastrar'
 
-    expect(page).to have_content("Razão social #{I18n
+    expect(page).to have_content("Nome #{I18n
                                                  .t('errors.messages.blank')}")
     expect(page).to have_content("Endereço #{I18n.t('errors.messages.blank')}")
     expect(page).to have_content("CNPJ #{I18n.t('errors.messages.blank')}")
