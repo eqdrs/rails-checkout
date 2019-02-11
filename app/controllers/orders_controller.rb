@@ -31,8 +31,10 @@ class OrdersController < ApplicationController
   def cancel_form; end
 
   def cancel
-    if @order.cancel_order(internal: params[:internal_reason],
-                           client: params[:client_reason])
+    if @order.cancelled? || @order.approved?
+      redirect_to @order, notice: 'Este pedido não pode ser cancelado'
+    elsif @order.cancel_order(internal: params[:internal_reason],
+                              client: params[:client_reason])
       redirect_to @order, notice: t('.cancel_message')
     else
       render :cancel_form
@@ -41,9 +43,13 @@ class OrdersController < ApplicationController
 
   def approve
     @order = Order.find(params[:id])
-    @order.create_order_approval(user: current_user)
-    @order.approved!
-    redirect_to @order, notice: 'Pedido aprovado com sucesso!'
+    if @order.open?
+      @order.create_order_approval(user: current_user)
+      @order.approved!
+      redirect_to @order, notice: 'Pedido aprovado com sucesso!'
+    else
+      redirect_to @order, notice: 'Não é possível aprovar este pedido'
+    end
   end
 
   private

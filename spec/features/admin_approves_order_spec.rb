@@ -5,12 +5,11 @@ feature 'Admin approves order' do
     user = create(:user, role: :admin)
     customer = create(:customer)
     product = create(:product)
-    order = Order.create!(status: :open, customer: customer, product: product,
-                          user: user)
+    order = Order.create!(status: :open, customer: customer,
+                          product: product, user: user)
 
     login_as user
     visit root_path
-    click_on 'Visualizar Pedidos'
     click_on 'Detalhes'
     click_on 'Aprovar pedido'
 
@@ -19,5 +18,46 @@ feature 'Admin approves order' do
     expect(page).to have_content(order.product.name)
     expect(page).to have_content('Aprovado')
     expect(page).not_to have_link('Aprovar pedido')
+  end
+
+  scenario 'and an already cancelled order can not be approved again' do
+    user = create(:user, role: :admin)
+    customer = create(:customer)
+    product = create(:product)
+    Order.create!(status: :cancelled, customer: customer,
+                  product: product, user: user)
+
+    login_as user
+    visit root_path
+    click_on 'Detalhes'
+
+    expect(page).not_to have_link('Aprovar pedido')
+  end
+
+  scenario 'and an already approved order can not be approved again' do
+    user = create(:user, role: :admin)
+    customer = create(:customer)
+    product = create(:product)
+    Order.create!(status: :approved, customer: customer,
+                  product: product, user: user)
+    login_as user
+    visit root_path
+    click_on 'Detalhes'
+
+    expect(page).not_to have_content('Aprovar pedido')
+  end
+
+  scenario 'and an order can not be approved again - forced' do
+    user = create(:user, role: :admin)
+    customer = create(:customer)
+    product = create(:product)
+    login_as user
+    order = Order.create!(status: :approved, customer: customer,
+                          product: product, user: user)
+
+    page.driver.submit :post, '/orders/1/approve', {}
+
+    expect(current_path).to eq order_path(order)
+    expect(page).to have_content('Não é possível aprovar este pedido')
   end
 end
