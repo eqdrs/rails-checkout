@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable
 
   enum role: %i[admin vendor]
+  enum status: { active: 0, inactive: 10 }
 
   def admin?
     role == 'admin'

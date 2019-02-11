@@ -9,7 +9,10 @@ Rails.application.routes.draw do
 
   root to: 'orders#index'
   get '/search_customer', to: 'customers#search'
-  resources :users, only: %i(new create)
+  resources :users, only: %i(new create) do
+    get 'manage', on: :collection
+    post 'deactivate', on: :member
+  end
 
   resources :orders, only: %i(index show) do
     get 'cancel_form', on: :member

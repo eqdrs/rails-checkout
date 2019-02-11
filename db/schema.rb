@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_07_190311) do
+ActiveRecord::Schema.define(version: 2019_02_11_185356) do
 
   create_table "cancelled_orders", force: :cascade do |t|
     t.text "internal_reason"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2019_02_07_190311) do
     t.datetime "updated_at", null: false
     t.integer "customer_id"
     t.integer "user_id"
+    t.integer "sent_to_client_app", default: 0
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["product_id"], name: "index_orders_on_product_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -78,7 +79,9 @@ ActiveRecord::Schema.define(version: 2019_02_07_190311) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.integer "status", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
 end

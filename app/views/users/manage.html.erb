@@ -1,0 +1,34 @@
+<h1 class="ls-title-intro ls-ico-home" id='user_presentation'>Gerenciar usuários</h1>
+
+<div class="col-md-8">
+<div class="ls-box">
+  <% if @users.any? %>
+    <table class="ls-table">
+      <thead>
+        <tr>
+          <th>E-mail</th>
+          <th>Status</th>
+          <th class="hidden-xs">Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.email %></td>
+            <td><%= t(".#{user.status}") %></td>
+            <td>
+            <% if user.active? %>
+              <%= link_to t('.deactivate'), deactivate_user_path(user), 
+                      id: "user-deactivate-#{user.id}", 
+                      class: 'ls-btn', method: :post %>
+            <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+  <p><%= t('.no_users') %></p>
+  <% end %>
+</div>
+</div>
