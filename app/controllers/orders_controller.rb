@@ -13,16 +13,14 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
+    @products = all_products
   end
 
   def create
-    @order = order_build(params[:order][:cpf], params[:order][:product_id])
-    if @order.save
-      CustomerMailer.order_summary(@order.id).deliver
-      redirect_to @order
-    else
-      render :new
-    end
+    @product = get_product(params[:order][:product_id])
+    @product.save
+    @order = order_build(params[:order][:cpf], @product.id)
+    order_validation(@order)
   end
 
   def show; end
@@ -60,5 +58,34 @@ class OrdersController < ApplicationController
     product = Product.find_by('id = ?', product_id)
     current_user.orders.new(customer: customer, product: product,
                             status: 0)
+  end
+
+  def order_validation(order)
+    if order.save
+      CustomerMailer.order_summary(order.id).deliver
+      redirect_to order
+    else
+      @products = all_products
+      render :new
+    end
+  end
+
+  def format_products(products)
+    array = []
+    products.each { |r| array << Product.new(r) }
+    array
+  end
+
+  def get_product(id)
+    uri = URI('http://localhost:3000/api/v1/products'\
+              "/#{id}")
+    response = JSON.parse(Net::HTTP.get(uri))
+    Product.new(response)
+  end
+
+  def all_products
+    uri = URI('http://localhost:3000/api/v1/products')
+    @products = JSON.parse(Net::HTTP.get(uri))
+    format_products(@products)
   end
 end

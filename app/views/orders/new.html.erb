@@ -15,7 +15,7 @@
       <h5>PRODUTOS</h5>
       </br>
       <div class="ls-box" style="height: 276px; overflow-y: scroll;">
-        <% Product.all.each do |product| %>
+        <% @products.each do |product| %>
           <div class="ls-box ls-md-space">
           <div class="row">
             <div class="col-md-2 ls-txt-center">
@@ -26,7 +26,8 @@
               <%= f.radio_button :product_id, product.id %>
               <%= f.label "#{:product_id}_#{product.id}", product.name, class: "ls-label-text inline" %>
               </strong></h3>
-              <p><strong>Preço:</strong> R$ <%= number_to_currency(product.price) %></p>
+              <p><strong>Descrição: </strong><%= product.description %></p>
+              <p><strong>Categoria: </strong><%= product.category %></p>
             </div>
           </div>
         </div>
