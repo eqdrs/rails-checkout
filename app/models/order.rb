@@ -8,6 +8,7 @@ class Order < ApplicationRecord
   validates :product, presence: true
 
   enum status: { open: 0, approved: 10, cancelled: 20 }
+  enum sent_to_client_app: { not_sent: 0, sent: 10 }
 
   def cancel_order(internal:, client:)
     @cancelled = CancelledOrder.new(internal_reason: internal,
@@ -17,6 +18,13 @@ class Order < ApplicationRecord
 
     CustomerMailer.cancelled_order(id).deliver
     cancelled!
+  end
+
+  def approve_order(user:)
+    return if !open? || !user.admin?
+
+    create_order_approval(user: user)
+    approved!
   end
 
   def approved_order?

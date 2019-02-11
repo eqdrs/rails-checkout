@@ -16,4 +16,4 @@ vendor = User.create(email: 'vendor@vendas.com', password: '12345678', role: :ve
 User.create(email: 'admin@vendas.com', password: '12345678', role: :admin)
 
 Order.create!(product: product, status: :open, customer: customer, user: vendor)
-Order.create(product: other_product, status: :approved, customer: customer, user: vendor)
+Order.create(product: other_product, status: :approved, sent_to_client_app: :sent, customer: customer, user: vendor)
