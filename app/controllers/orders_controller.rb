@@ -43,7 +43,7 @@ class OrdersController < ApplicationController
 
   def approve
     @order = Order.find(params[:id])
-    if @order.open?
+    if @order.open? && current_user.admin?
       @order.create_order_approval(user: current_user)
       @order.approved!
       redirect_to @order, notice: 'Pedido aprovado com sucesso!'

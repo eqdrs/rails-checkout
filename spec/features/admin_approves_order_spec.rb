@@ -60,4 +60,31 @@ feature 'Admin approves order' do
     expect(current_path).to eq order_path(order)
     expect(page).to have_content('Não é possível aprovar este pedido')
   end
+
+  scenario 'and vendor can not approve an order' do
+    user = create(:vendor)
+    customer = create(:customer)
+    product = create(:product)
+    login_as user
+
+    order = Order.create!(customer: customer, product: product, user: user)
+
+    visit order_path(order)
+    expect(page).to_not have_content 'Aprovar pedido'
+  end 
+
+  scenario 'and vendor can not approve an order - forced' do
+    user = create(:vendor)
+    customer = create(:customer)
+    product = create(:product)
+    login_as user
+
+    order = Order.create!(customer: customer, product: product, user: user,
+                          status: 0)
+
+    page.driver.submit :post, '/orders/1/approve', {}
+
+    expect(current_path).to eq order_path(order)
+    expect(page).to have_content('Não é possível aprovar este pedido')
+  end 
 end

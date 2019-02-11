@@ -6,8 +6,10 @@
     </div>
     <div class="col-md-3 ls-txt-right">
       <% unless @order.approved? || @order.cancelled? %>
-        <%= link_to 'Aprovar pedido', approve_order_path(@order),
-        method: :post, class: "ls-btn-primary" %>
+        <% if current_user.admin? %>
+          <%= link_to 'Aprovar pedido', approve_order_path(@order),
+          method: :post, class: "ls-btn-primary" %>
+        <% end %>
         <%= link_to 'Cancelar pedido', cancel_form_order_path(@order), 
             class: "ls-btn-danger" %>
       <% end %>
