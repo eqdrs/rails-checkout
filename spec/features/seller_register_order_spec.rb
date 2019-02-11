@@ -21,7 +21,7 @@ feature 'Seller register order' do
 
     expect(current_path).to eq order_path(1)
     expect(page).to have_content(product.name)
-    expect(page).to have_content("R$ 50,0")
+    expect(page).to have_content('R$ 50,0')
     expect(page).to have_content(customer.name)
     expect(page).to have_content('Em Aberto')
     expect(page).to have_content(user.email)
@@ -48,7 +48,7 @@ feature 'Seller register order' do
 
     expect(current_path).to eq order_path(1)
     expect(page).to have_content(product.name)
-    expect(page).to have_content("R$ 25,00")
+    expect(page).to have_content('R$ 25,00')
     expect(page).to have_content(customer.company_name)
     expect(page).to have_content('Em Aberto')
     expect(page).to have_content(user.email)
