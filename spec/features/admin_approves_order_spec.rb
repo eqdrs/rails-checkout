@@ -71,7 +71,7 @@ feature 'Admin approves order' do
 
     visit order_path(order)
     expect(page).to_not have_content 'Aprovar pedido'
-  end 
+  end
 
   scenario 'and vendor can not approve an order - forced' do
     user = create(:vendor)
@@ -86,5 +86,5 @@ feature 'Admin approves order' do
 
     expect(current_path).to eq order_path(order)
     expect(page).to have_content('Não é possível aprovar este pedido')
-  end 
+  end
 end
