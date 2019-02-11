@@ -40,4 +40,6 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resource :passwords
 end

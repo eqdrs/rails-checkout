@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :customer do
+    name { FFaker::NameBR.name }
     address { FFaker::AddressUS.street_name }
     email { FFaker::Internet.email }
     phone { FFaker::PhoneNumber.phone_number }
-    name { FFaker::Name.name }
     factory :individual, class: 'Individual' do
       cpf { FFaker::IdentificationBR.cpf }
       type { 'Individual' }
