@@ -42,7 +42,7 @@ feature 'Seller creates individual customer' do
     expect(page).to have_content("E-mail #{I18n.t('errors.messages.blank')}")
   end
 
-  scenario 'and must be loged in' do
+  scenario 'and must be logged in' do
     skip
 
     visit root_path

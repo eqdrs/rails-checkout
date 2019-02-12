@@ -38,8 +38,7 @@ feature 'Seller creates company customer' do
     fill_in 'Contato', with: ''
     click_on 'Cadastrar'
 
-    expect(page).to have_content("Nome #{I18n
-                                                 .t('errors.messages.blank')}")
+    expect(page).to have_content("Nome #{I18n.t('errors.messages.blank')}")
     expect(page).to have_content("Endereço #{I18n.t('errors.messages.blank')}")
     expect(page).to have_content("CNPJ #{I18n.t('errors.messages.blank')}")
     expect(page).to have_content("Telefone #{I18n.t('errors.messages.blank')}")
@@ -47,7 +46,7 @@ feature 'Seller creates company customer' do
     expect(page).to have_content("Contato #{I18n.t('errors.messages.blank')}")
   end
 
-  scenario 'and must be loged in' do
+  scenario 'and must be logged in' do
     skip
 
     visit root_path
