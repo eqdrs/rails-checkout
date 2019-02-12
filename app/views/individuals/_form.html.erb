@@ -18,7 +18,7 @@
   </div>
   <div class="ls-label col-md-5">
   <%= f.label :cpf, class: "ls-label-text" %>
-  <%= f.number_field :cpf, class: 'form-control col-md-6' %>
+  <%= f.text_field :cpf, class: 'form-control col-md-6', placeholder: '_____._____._____-____', data: {mask: '999.999.999-99'} %>
   </div>
   <div class="ls-label col-md-5">
   <%= f.label :phone, class: "ls-label-text" %>

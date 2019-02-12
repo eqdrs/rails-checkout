@@ -1,11 +1,4 @@
 <div>
-<h1><%= @company.name %></h1>
-<ul>
-  <li>E-mail: <%= @company.email %></li>
-  <li>Endereço: <%= @company.address %></li>
-  <li>CNPJ: <%= @company.formatted_cnpj %></li>
-  <li>Telefone: <%= @company.phone %></li>
-  <li>Contato: <%= @company.contact %></li>
-</ul>
-<%= link_to 'Cadastrar pedido', new_customer_order_path(@company) %>
+<%= render @customer %>
+<%= link_to 'Cadastrar pedido', new_customer_order_path(@customer), class: 'ls-btn-primary' %>
 </div>
