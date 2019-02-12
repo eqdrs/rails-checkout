@@ -1,6 +1,5 @@
 <h1 class="ls-title-intro ls-ico-home" id='user_presentation'>Página inicial</h1>
 
-<div class="col-md-8">
 <div class="ls-box">
   <header class="ls-info-header">
     <h2 class="ls-title-3">Pedidos cadastrados</h2>
@@ -22,7 +21,10 @@
             <td><%= link_to order.id, order %></td>
             <td class="hidden-xs"><%= order.customer.email %></td>
             <td><%= order.product.name %></td>
-            <td><%= t("orders.show.#{order.status}") %></td>
+            <td>
+              <%= t("orders.show.#{order.status}") %>
+              <%= "(#{t('.not_sent')})" if order.approved? && order.not_sent? %>
+            </td>
             <td><%= link_to 'Detalhes', order, class: 'ls-btn' %></td>
           </tr>
         <% end %>
@@ -31,5 +33,4 @@
   <% else %>
   <p><%= t('.no_orders') %></p>
   <% end %>
-</div>
 </div>

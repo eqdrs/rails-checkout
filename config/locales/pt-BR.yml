@@ -35,6 +35,7 @@ pt-BR:
       unauthorized: 'Você não pode realizar o reenvio desse pedido'
     index:
       no_orders: 'Não há pedidos cadastrados'
+      not_sent: 'Não enviado'
     show:
       open: 'Em Aberto'
       approved: 'Aprovado'

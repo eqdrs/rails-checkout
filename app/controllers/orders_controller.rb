@@ -86,7 +86,15 @@ class OrdersController < ApplicationController
     return already_sent(order: order) if order.sent?
 
     data = { customer: order.customer, product: order.product }
-    response = post_to(endpoint: '/approve', data: data)
+    response = post_to(
+      endpoint: Rails.configuration.customer_app['send_order_endpoint'],
+      data: data
+    )
+
+    post_request_redirection(response: response, order: order)
+  end
+
+  def post_request_redirection(response:, order:)
     if response.code.to_s.match?(/2\d\d/)
       order.sent!
       redirect_to order, notice: t('orders.approve.success')
