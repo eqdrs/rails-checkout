@@ -1,4 +1,9 @@
 pt-BR:
+  number:
+    currency:
+      format:
+        format: "%n"
+        unit: "BRL"
   activerecord:
     models:
       cancelled_order: 'Pedido cancelado'
@@ -15,12 +20,15 @@ pt-BR:
         name: 'Nome'
         address: 'Endereço'
         phone: 'Telefone'
-        company_name: 'Razão social'
         contact: 'Contato'
         cnpj: 'CNPJ'
         cpf: 'CPF'
         email: 'E-mail'
   orders:
+    approve:
+      success: 'Pedido aprovado com sucesso!'
+      failure: 'O pedido #%{order_id} não pôde ser aprovado'
+      warning: 'Não foi possível enviar as informações para o sistema de Clientes'
     index:
       no_orders: 'Não há pedidos cadastrados'
     show:
@@ -33,6 +41,8 @@ pt-BR:
       client_reason: 'Motivo para o cliente'
       approved_at: 'Aprovada em'
       approved_by: 'Aprovada por'
+      approval_send_error: 'O pedido não foi enviado para API de Clientes'
+      approval_resend: 'Reenviar para API de Clientes'
     cancel:
       cancel_message: 'Pedido cancelado com sucesso'
   companies:

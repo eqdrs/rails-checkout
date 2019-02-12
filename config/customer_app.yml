@@ -1,0 +1,10 @@
+development:
+  url_address: 'http://localhost'
+  url_port: 4000
+  send_order_endpoint: '/approve'
+  token: ''
+test:
+  url_address: 'http://localhost'
+  url_port: 4000
+  send_order_endpoint: '/approve'
+  token: ''

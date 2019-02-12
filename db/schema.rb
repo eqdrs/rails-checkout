@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_07_184315) do
+ActiveRecord::Schema.define(version: 2019_02_11_162400) do
 
   create_table "cancelled_orders", force: :cascade do |t|
     t.text "internal_reason"
@@ -51,8 +51,9 @@ ActiveRecord::Schema.define(version: 2019_02_07_184315) do
     t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "customer_id"
     t.integer "user_id"
+    t.integer "customer_id"
+    t.integer "sent_to_client_app", default: 0
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["product_id"], name: "index_orders_on_product_id"
     t.index ["user_id"], name: "index_orders_on_user_id"

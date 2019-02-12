@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order, only: %i[show cancel_form cancel]
+  before_action :set_order, only: %i[show cancel_form cancel approve]
   before_action :verify_user, only: %i[approve]
 
   def index
@@ -12,11 +12,12 @@ class OrdersController < ApplicationController
   end
 
   def new
+    @customer = Customer.find(params[:customer_id])
     @order = Order.new
   end
 
   def create
-    @order = order_build(params[:order][:cpf], params[:order][:product_id])
+    @order = order_build(params[:order][:product_id])
     if @order.save
       CustomerMailer.order_summary(@order.id).deliver
       redirect_to @order
@@ -30,8 +31,10 @@ class OrdersController < ApplicationController
   def cancel_form; end
 
   def cancel
-    if @order.cancel_order(internal: params[:internal_reason],
-                           client: params[:client_reason])
+    if @order.cancelled? || @order.approved?
+      redirect_to @order, notice: 'Este pedido não pode ser cancelado'
+    elsif @order.cancel_order(internal: params[:internal_reason],
+                              client: params[:client_reason])
       redirect_to @order, notice: t('.cancel_message')
     else
       render :cancel_form
@@ -39,10 +42,15 @@ class OrdersController < ApplicationController
   end
 
   def approve
-    @order = Order.find(params[:id])
-    @order.create_order_approval(user: current_user)
-    @order.approved!
-    redirect_to @order, notice: 'Pedido aprovado com sucesso!'
+    if @order.approve_order(user: current_user)
+      post_request_approve(order: @order)
+    else
+      redirect_to @order, alert: t('orders.approve.failure')
+    end
+  end
+
+  def send_approval
+    post_request_approve(order: Order.find(params[:id]))
   end
 
   private
@@ -55,10 +63,23 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
-  def order_build(cpf, product_id)
-    customer = Customer.find_by(cpf: cpf)
+  def order_build(product_id)
+    customer = Customer.find(params[:customer_id])
     product = Product.find(product_id)
     current_user.orders.new(customer: customer, product: product,
                             status: 0)
+  end
+
+  def post_request_approve(order:)
+    data = { customer: order.customer, product: order.product }
+    response = post_to(endpoint: '/approve',
+                       data: data)
+
+    if response.code.to_s.match?(/2\d\d/)
+      order.sent!
+      redirect_to @order, notice: t('orders.approve.success')
+    else
+      redirect_to @order, notice: t('orders.approve.warning')
+    end
   end
 end

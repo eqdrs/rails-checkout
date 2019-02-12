@@ -24,7 +24,8 @@ feature 'Seller view orders' do
 
   scenario 'click on id and see all details' do
     user = create(:user)
-    order = create(:order, user: user)
+    product = create(:product, price: 50.0)
+    order = create(:order, user: user, product: product)
     login_as user
 
     visit root_path
@@ -32,7 +33,7 @@ feature 'Seller view orders' do
 
     expect(current_path).to eq(order_path(order))
     expect(page).to have_content(order.product.name)
-    expect(page).to have_content(order.product.price)
+    expect(page).to have_content('R$ 50,00')
     expect(page).to have_content(order.customer.email)
     expect(page).to have_content('Em Aberto')
   end
