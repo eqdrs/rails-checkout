@@ -30,4 +30,8 @@ class Order < ApplicationRecord
   def approved_order?
     order_approval
   end
+
+  def creator?(user:)
+    self.user == user
+  end
 end

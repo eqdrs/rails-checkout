@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_order, only: %i[show cancel_form cancel approve]
+  before_action :set_order_safe, only: %i[send_approval]
   before_action :verify_user, only: %i[approve]
 
   def index
@@ -50,7 +51,11 @@ class OrdersController < ApplicationController
   end
 
   def send_approval
-    post_request_approve(order: Order.find(params[:id]))
+    if !@order.creator?(user: current_user) && !current_user.admin?
+      redirect_to orders_path, notice: t('orders.approve.unauthorized')
+      return
+    end
+    post_request_approve(order: @order)
   end
 
   private
@@ -61,6 +66,13 @@ class OrdersController < ApplicationController
 
   def set_order
     @order = Order.find(params[:id])
+  end
+
+  def set_order_safe
+    @order = Order.find(params[:id])
+  rescue StandardError
+    flash[:notice] = t('orders.messages.no_order', id: params[:id])
+    redirect_to orders_path
   end
 
   def order_build(product_id)
