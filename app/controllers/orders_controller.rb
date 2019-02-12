@@ -14,11 +14,19 @@ class OrdersController < ApplicationController
   def new
     @customer = Customer.find(params[:customer_id])
     @order = Order.new
-    @products = all_products
+    begin
+      @products = Services::Product.all_products
+    rescue StandardError
+      redirect_to root_path, notice: 'Não foi possível conectar ao servidor'
+    end
   end
 
   def create
-    @product = get_product(params[:order][:product_id])
+    begin
+      @product = Services::Product.get_product(params[:order][:product_id])
+    rescue StandardError
+      redirect_to root_path, notice: 'Não foi possível conectar ao servidor'
+    end
     @product.save
     @order = order_build(@product.id)
     order_validation(@order)
@@ -75,24 +83,5 @@ class OrdersController < ApplicationController
       @products = all_products
       render :new
     end
-  end
-
-  def format_products(products)
-    array = []
-    products.each { |r| array << Product.new(r) }
-    array
-  end
-
-  def get_product(id)
-    uri = URI('http://localhost:3000/api/v1/products'\
-              "/#{id}")
-    response = JSON.parse(Net::HTTP.get(uri))
-    Product.new(response)
-  end
-
-  def all_products
-    uri = URI('http://localhost:3000/api/v1/products')
-    @products = JSON.parse(Net::HTTP.get(uri))
-    format_products(@products)
   end
 end

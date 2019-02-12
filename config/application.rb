@@ -38,6 +38,6 @@ module Vendas
 
     # Set default locale
     I18n.default_locale = :'pt-BR'
-    
+    config.products_app = config_for(:products_app)
   end
 end
