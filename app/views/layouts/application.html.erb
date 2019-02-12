@@ -61,7 +61,7 @@
                 <li><%= link_to 'Pessoa jurídica', new_company_path, class: 'ls-submenu-item', role:"menuitem" %></li>
             </ul>
           </li>
-            <li><%= link_to 'Pesquisar cliente', search_customer_path, class: 'ls-submenu-item' %></li>
+            <li><%= link_to 'Pesquisar cliente', search_customer_path, class: 'ls-submenu-item ls-ico-search' %></li>
             <li><%= link_to 'Visualizar Pedidos', orders_path, class: 'ls-ico-plus', role: 'menuitem'%></li>
             <% if user_signed_in? && current_user.admin? %>
               <li><%= link_to 'Cadastrar usuário', register_path, class: 'ls-ico-user-add', role: 'menuitem' %></li>
