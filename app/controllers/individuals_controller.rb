@@ -7,6 +7,7 @@ class IndividualsController < ApplicationController
 
   def create
     @individual = Individual.new individual_params
+    @individual.user = current_user
     if @individual.save
       redirect_to @individual, notice: 'Cliente cadastrado com sucesso'
     else
@@ -15,7 +16,7 @@ class IndividualsController < ApplicationController
   end
 
   def show
-    @individual = Individual.find(params[:id])
+    @customer = Individual.find(params[:id])
   end
 
   def search

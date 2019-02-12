@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Vendor searches for a customer by cnpj' do
   scenario 'successfully' do
     vendor = create(:user)
-    customer = create(:company, cnpj: '17.298.092/0001-30')
+    customer = create(:company, cnpj: '17298092000130')
     login_as(vendor, scope: :user)
 
     visit root_path
@@ -16,7 +16,7 @@ feature 'Vendor searches for a customer by cnpj' do
     expect(current_path).to eq company_path(customer)
     expect(page).to have_content customer.company_name
     expect(page).to have_content customer.email
-    expect(page).to have_content customer.cnpj
+    expect(page).to have_content customer.formatted_cnpj
     expect(page).to have_content customer.phone
     expect(page).to have_content customer.contact
     expect(page).to have_content customer.address
@@ -33,6 +33,6 @@ feature 'Vendor searches for a customer by cnpj' do
       click_on 'Buscar'
     end
 
-    expect(page).to have_content I18n.t('individuals.search.not_found')
+    expect(page).to have_content I18n.t('companies.search.not_found')
   end
 end

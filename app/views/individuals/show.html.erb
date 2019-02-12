@@ -1,10 +1,4 @@
 <div>
-<h1><%= @individual.name %></h1>
-<ul>
-  <li>E-mail: <%= @individual.email %></li>
-  <li>Endereço: <%= @individual.address %></li>
-  <li>CPF: <%= @individual.formatted_cpf %></li>
-  <li>Telefone: <%= @individual.phone %></li>
-</ul>
-<%= link_to 'Cadastrar pedido', new_customer_order_path(@individual) %>
+<%= render @customer %>
+<%= link_to 'Cadastrar pedido', new_customer_order_path(@customer), class: 'ls-btn-primary' %>
 </div>

@@ -33,6 +33,8 @@ module Vendas
 
     config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
 
+    config.customer_app = config_for(:customer_app)
+
     # Whitelist locales available for the application
     I18n.available_locales = [:'pt-BR']
 

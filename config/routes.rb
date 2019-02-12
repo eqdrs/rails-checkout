@@ -18,11 +18,14 @@ Rails.application.routes.draw do
     get 'cancel_form', on: :member
     post 'cancel', on: :member
     post 'approve', on: :member
+    post 'send_approval', on: :member
   end
 
   resources :customers, only: [] do
     resources :orders, only: %i[new create]
   end
+
+  resources :customers, only: %i[index show]
 
   resources :individuals, only: %i[show new create] do
     get 'search', on: :collection

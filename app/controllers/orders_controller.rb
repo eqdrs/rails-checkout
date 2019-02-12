@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order, only: %i[show cancel_form cancel]
+  before_action :set_order, only: %i[show cancel_form cancel approve]
+  before_action :set_order_safe, only: %i[send_approval]
   before_action :verify_user, only: %i[approve]
 
   def index
@@ -42,14 +43,19 @@ class OrdersController < ApplicationController
   end
 
   def approve
-    @order = Order.find(params[:id])
-    if @order.open?
-      @order.create_order_approval(user: current_user)
-      @order.approved!
-      redirect_to @order, notice: 'Pedido aprovado com sucesso!'
+    if @order.approve_order(user: current_user)
+      post_request_approve(order: @order)
     else
-      redirect_to @order, notice: 'Não é possível aprovar este pedido'
+      redirect_to @order, alert: t('orders.approve.failure')
     end
+  end
+
+  def send_approval
+    if !@order.creator?(user: current_user) && !current_user.admin?
+      redirect_to orders_path, notice: t('orders.approve.unauthorized')
+      return
+    end
+    post_request_approve(order: @order)
   end
 
   private
@@ -62,10 +68,42 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
+  def set_order_safe
+    @order = Order.find(params[:id])
+  rescue StandardError
+    flash[:notice] = t('orders.messages.no_order', id: params[:id])
+    redirect_to orders_path
+  end
+
   def order_build(product_id)
     customer = Customer.find(params[:customer_id])
     product = Product.find(product_id)
     current_user.orders.new(customer: customer, product: product,
                             status: 0)
+  end
+
+  def post_request_approve(order:)
+    return already_sent(order: order) if order.sent?
+
+    data = { customer: order.customer, product: order.product }
+    response = post_to(
+      endpoint: Rails.configuration.customer_app['send_order_endpoint'],
+      data: data
+    )
+
+    post_request_redirection(response: response, order: order)
+  end
+
+  def post_request_redirection(response:, order:)
+    if response.code.to_s.match?(/2\d\d/)
+      order.sent!
+      redirect_to order, notice: t('orders.approve.success')
+    else
+      redirect_to order, notice: t('orders.approve.warning')
+    end
+  end
+
+  def already_sent(order:)
+    redirect_to order, notice: t('orders.approve.already_sent')
   end
 end

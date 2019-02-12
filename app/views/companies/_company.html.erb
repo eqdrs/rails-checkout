@@ -1,8 +1,27 @@
-<h1><%= @customer.name %></h1>
-  <ul>
-    <li>E-mail: <%= @customer.email %></li>
-    <li>Endereço: <%= @customer.address %></li>
-    <li>CNPJ: <%= @customer.formatted_cnpj %></li>
-    <li>Telefone: <%= @customer.phone %></li>
-    <li>Contato: <%= @customer.contact %></li>
-  </ul>
+<br>
+<div class="ls-list">
+  <header class="ls-list-header">
+    <div class="ls-list-title col-md-9">
+      <a href="#" ><%= @customer.name %></a>
+      <small><%= @customer.email %></small>
+    </div>
+  </header>
+  <div class="ls-list-content ">
+    <div class="col-xs-12 col-md-3">
+      <span class="ls-list-label">Endereço</span>
+      <strong><%= @customer.address %></strong>
+    </div>
+    <div class="col-xs-12 col-md-3">
+      <span class="ls-list-label">CNPJ</span>
+      <strong><%= @customer.formatted_cnpj %></strong>
+    </div>
+    <div class="col-xs-12 col-md-3">
+      <span class="ls-list-label">Telefone</span>
+      <strong><%=@customer.phone %></strong>
+    </div>
+    <div class="col-xs-12 col-md-3">
+      <span class="ls-list-label">Contato</span>
+      <strong><%=@customer.contact %></strong>
+    </div>
+  </div>
+</div>
