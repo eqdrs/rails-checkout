@@ -1,0 +1,14 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    links:
+      - db
+    volumes:
+      - .:/vendas
+  db:
+    image: 'postgres:11.1'
+    ports:
+      - "5432:5432"
