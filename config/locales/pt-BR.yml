@@ -29,6 +29,7 @@ pt-BR:
       success: 'Pedido aprovado com sucesso!'
       failure: 'O pedido #%{order_id} não pôde ser aprovado'
       warning: 'Não foi possível enviar as informações para o sistema de Clientes'
+      already_sent: 'Esse pedido já foi enviado para o sistema de Clientes'
     index:
       no_orders: 'Não há pedidos cadastrados'
     show:
