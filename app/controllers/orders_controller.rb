@@ -20,10 +20,15 @@ class OrdersController < ApplicationController
     @order = order_build(params[:order][:product_id])
     if @order.save
       CustomerMailer.order_summary(@order.id).deliver
-      redirect_to @order
+      redirect_to plans_order_path(id: @order)
     else
       render :new
     end
+  end
+
+  def plans
+    @order = Order.find(params[:id])
+    @customer = @order.customer
   end
 
   def show; end

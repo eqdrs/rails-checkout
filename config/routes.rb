@@ -16,12 +16,11 @@ Rails.application.routes.draw do
     post 'cancel', on: :member
     post 'approve', on: :member
     post 'send_approval', on: :member
+    get 'plans', on: :member
   end
 
   resources :customers, only: [] do
-    resources :orders, only: %i[new create] do
-      get 'plans', on: :member
-    end
+    resources :orders, only: %i[new create]
   end
 
   resources :individuals, only: %i[show new create] do
