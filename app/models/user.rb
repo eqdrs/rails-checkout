@@ -11,4 +11,14 @@ class User < ApplicationRecord
   def admin?
     role == 'admin'
   end
+
+  def individuals
+    admin? && Individual.all ||
+      Individual.where(user: self)
+  end
+
+  def companies
+    admin? && Company.all ||
+      Company.where(user: self)
+  end
 end

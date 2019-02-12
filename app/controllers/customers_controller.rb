@@ -3,13 +3,5 @@ class CustomersController < ApplicationController
 
   def search; end
 
-  def index
-    if current_user.admin?
-      @individuals = Individual.all
-      @companies = Company.all
-    else
-      @individuals = Individual.where(user: current_user)
-      @companies = Company.where(user: current_user)
-    end
-  end
+  def index; end
 end

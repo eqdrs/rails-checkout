@@ -5,7 +5,7 @@
   <header class="ls-info-header">
     <h2 class="ls-title-3">Pessoa física</h2>
   </header>
-  <% if @individuals.any? %>
+  <% if current_user.individuals.any? %>
     <table class="ls-table">
       <thead>
         <tr>
@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @individuals.each do |individual| %>
+        <% current_user.individuals.each do |individual| %>
           <tr>
             <td><%= link_to individual.name, individual %></td>
             <td class="hidden-xs"><%= individual.email %></td>
@@ -39,7 +39,7 @@
   <header class="ls-info-header">
     <h2 class="ls-title-3">Pessoa jurídica</h2>
   </header>
-  <% if @companies.any? %>
+  <% if current_user.companies.any? %>
     <table class="ls-table">
       <thead>
         <tr>
@@ -51,7 +51,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @companies.each do |company| %>
+        <% current_user.companies.each do |company| %>
           <tr>
             <td><%= link_to company.company_name, company %></td>
             <td class="hidden-xs"><%= company.email %></td>
