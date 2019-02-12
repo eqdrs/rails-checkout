@@ -19,7 +19,9 @@ Rails.application.routes.draw do
   end
 
   resources :customers, only: [] do
-    resources :orders, only: %i[new create]
+    resources :orders, only: %i[new create] do
+      get 'plans', on: :member
+    end
   end
 
   resources :individuals, only: %i[show new create] do
