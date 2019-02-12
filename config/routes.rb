@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     resources :orders, only: %i[new create]
   end
 
+  resources :customers, only: %i[index show]
+
   resources :individuals, only: %i[show new create] do
     get 'search', on: :collection
    
