@@ -60,3 +60,7 @@ pt-BR:
       not_found: 'CPF não encontrado'
     create:
       success: 'Cliente cadastrado com sucesso'
+      not_found: 'CPF não encontrado'    
+  users:
+    messages:
+      inactive_user: 'O usuário %{email} foi desativado'
