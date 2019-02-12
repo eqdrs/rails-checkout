@@ -16,7 +16,7 @@ pt-BR:
         password: 'Senha'
         password_confirmation: 'Confirmar senha'
         current_password: 'Senha atual'
-      customer: 
+      customer:
         name: 'Nome'
         address: 'Endereço'
         phone: 'Telefone'
@@ -47,8 +47,12 @@ pt-BR:
     cancel:
       cancel_message: 'Pedido cancelado com sucesso'
   companies:
+    search:
+      not_found: 'CNPJ não encontrado'
     create:
       success: 'Cliente cadastrado com sucesso'
   individuals:
     search:
-      not_found: 'CPF não encontrado'    
+      not_found: 'CPF não encontrado'
+    create:
+      success: 'Cliente cadastrado com sucesso'

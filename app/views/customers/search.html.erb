@@ -1,23 +1,30 @@
-<h3>Pesquisar pessoa física</h3>
-<%= form_with url: search_individuals_path, id: 'individual', 
+<br>
+<h1 class="ls-ico-user">Pessoa Física</h1><br>
+<%= form_with url: search_individuals_path, id: 'individual',
               method: :get, local: true do |f| %>
 <fieldset>
-  <label class="ls-label">
-    <b class="ls-label-text">Por CPF</b>
-    <%= f.text_field :cpf %>
-  </label>
+  <div class="ls-label col-md-5">
+    <%= f.label :cpf, 'Por CPF', class: "ls-label-text" %>
+  <%= f.text_field :cpf, class: 'form-control col-md-6',
+  placeholder: '_____._____._____-____', data: {mask: '999.999.999-99'} %>
+  </div>
 </fieldset>
-<%= f.submit 'Buscar' %>
+<div class="ls-actions-btn">
+<%= f.submit 'Buscar', class: 'ls-btn-primary' %>
+</div>
 <% end %>
 
-<h3>Pesquisar pessoa jurídica</h3>
-<%= form_with url: search_companies_path, id: 'company', 
+<h1 class="ls-ico-user">Pessoa Jurídica</h1><br>
+<%= form_with url: search_companies_path, id: 'company',
               method: :get, local: true do |f| %>
 <fieldset>
-  <label class="ls-label">
-    <b class="ls-label-text">Por CNPJ</b>
-    <%= f.text_field :cnpj %>
-  </label>
+  <div class="ls-label col-md-5">
+  <%= f.label :cnpj, 'Por CNPJ', class: "ls-label-text" %>
+  <%= f.text_field :cnpj, class: 'form-control col-md-2',
+  placeholder: '__.___.___/____-__', data: {mask: '99.999.999/9999-99'} %>
+  </div>
 </fieldset>
-<%= f.submit 'Buscar' %>
+<div class="ls-actions-btn">
+<%= f.submit 'Buscar', class: 'ls-btn-primary' %>
+</div>
 <% end %>

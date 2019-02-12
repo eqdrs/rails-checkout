@@ -1,12 +1,22 @@
-# README
+# Configuração
 
-* API Documentation
-  *GET all orders
-    
-    The api expect to receive a GET in the url
-    `\api\v1\orders`
-    The response will be an array of orders like:
-```
+Esse projeto interage com `Clientes` e `Produtos`, portanto é necessário algumas configurações:
+
+## Configuração necessária para se comunicar com Clientes
+
+O arquivo de configuração está localizado em `config/customer_app.yml`
+
+`url_address`: O endereço onde o sistema de clientes está hospedado     
+`url_port`: A porta utilizada pelo servidor     
+`send_order_endpoint`: O endpoint onde será realizado uma requisição POST com informações de um pedido aprovado     
+
+# Documentação da API
+
+## Consultar todos os pedidos
+
+A API espera receber uma requisição GET no endpoint `/api/v1/orders`. A resposta será um JSON contendo um Array onde cada elemento possui as informações de um pedido como no exemplo:
+
+```json
 [
   {
     "id":1,
@@ -45,12 +55,12 @@
   }
 ]
 ```
-    *GET all orders from a especific customer
-    The api expect to receive a GET in the url
-    `\api\v1\customers\#{customer.id}\orders`
-    The response will be an array of orders like:
 
-```
+## Consultar todos os pedidos de um cliente específico
+
+A API espera receber uma requisição GET no endpoint `/api/v1/customers/(:id)/orders`, onde `(:id)` é o ID de algum cliente (seja pessoa física ou pessoa jurídica). A resposta será um JSON contendo um Array onde cada elemento possui as informações de um pedido realizado por esse cliente como no exemplo:
+
+```json
 [
   {
   "id":1,
@@ -114,28 +124,3 @@ token: 'TOKEN DA APLICAÇÃO (A DEFINIR)'
 
 ### Notas sobre os dados da requisição
 O cliente está dividido entre pessoa física e pessoa jurídica. O valor de `customer` no JSON vai refletir o tipo de cliente. Clientes que são pessoas físicas vão ter os campos `cnpj`, `company_name`, `contact` como `NULL`. Clientes que são pessoas jurídicas terão os campos `name` e `cpf` como `NULL`. Todos os outros campos possuirão valores (diferentes de nulo) presentes em ambos. O valor de `type` poderá ser `Individual` (para pessoa física) ou `Company` (pessoa jurídica).  
-
-
-------------------------------------------------
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-
