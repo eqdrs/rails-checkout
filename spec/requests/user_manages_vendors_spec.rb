@@ -11,7 +11,7 @@ RSpec.describe 'Direct requests to deactivate vendors' do
     follow_redirect!
 
     expect(response.body).to include(I18n.t('users.messages.inactive_user',
-                                       email: vendor.email))
+                                            email: vendor.email))
     expect(vendor).not_to be_active
   end
 

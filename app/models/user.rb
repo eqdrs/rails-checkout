@@ -11,4 +11,12 @@ class User < ApplicationRecord
   def admin?
     role == 'admin'
   end
+
+  def active_for_authentication?
+    super && active?
+  end
+
+  def inactive_message
+    active? ? super : I18n.t('users.messages.inactive_user', email: email)
+  end
 end

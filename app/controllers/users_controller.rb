@@ -10,9 +10,14 @@ class UsersController < ApplicationController
   end
 
   def deactivate
-    @user = User.find(params[:id])
-    @user.inactive!
-    flash[:notice] = I18n.t('users.messages.inactive_user', email: @user.email)
-    redirect_to manage_users_path
+    if current_user.admin?
+      @user = User.find(params[:id])
+      @user.inactive!
+      flash[:notice] = I18n.t('users.messages.inactive_user',
+                              email: @user.email)
+      redirect_to manage_users_path
+    else
+      redirect_to root_path, notice: I18n.t('users.messages.unauthorized')
+    end
   end
 end
