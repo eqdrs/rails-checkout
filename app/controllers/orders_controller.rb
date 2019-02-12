@@ -74,7 +74,6 @@ class OrdersController < ApplicationController
     data = { customer: order.customer, product: order.product }
     response = post_to(endpoint: '/approve',
                        data: data)
-
     if response.code.to_s.match?(/2\d\d/)
       order.sent!
       redirect_to @order, notice: t('orders.approve.success')

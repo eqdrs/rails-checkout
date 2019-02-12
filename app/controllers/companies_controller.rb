@@ -16,7 +16,7 @@ class CompaniesController < ApplicationController
   end
 
   def show
-    @company = Company.find(params[:id])
+    @customer = Company.find(params[:id])
   end
 
   def search
