@@ -3,6 +3,5 @@ class Product < ApplicationRecord
     self.plan_id = plan_id
     self.plan_name = plan_name
     self.plan_description = plan_description
-    save
   end
 end
