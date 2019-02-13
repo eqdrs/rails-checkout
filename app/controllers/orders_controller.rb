@@ -7,11 +7,7 @@ class OrdersController < ApplicationController
   before_action :verify_user, only: %i[approve]
 
   def index
-    @orders = if current_user.admin?
-                Order.all
-              else
-                Order.where(user: current_user)
-              end
+    @orders = current_user.admin? ? Order.all : Order.where(user: current_user)
   end
 
   def new
@@ -84,7 +80,8 @@ class OrdersController < ApplicationController
 
   def send_approval
     if !@order.creator?(user: current_user) && !current_user.admin?
-      return redirect_to orders_path, notice: t('orders.approve.unauthorized')
+      redirect_to orders_path, notice: t('orders.approve.unauthorized')
+      return
     end
 
     post_request_approve(order: @order)
@@ -123,7 +120,7 @@ class OrdersController < ApplicationController
   def post_request_approve(order:)
     return already_sent(order: order) if order.sent?
 
-    data = { customer: order.customer, product: order.product }
+    data = { client: order.customer, product: order.product }
     response = post_to(
       endpoint: Rails.configuration.customer_app['send_order_endpoint'],
       data: data
