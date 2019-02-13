@@ -92,7 +92,7 @@ class OrdersController < ApplicationController
   def order_validation(order)
     if order.save
       CustomerMailer.order_summary(order.id).deliver
-      redirect_to order
+      redirect_to plans_order_path(id: @order)
     else
       @products = Services::Product.all_products
       render :new
