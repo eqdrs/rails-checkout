@@ -64,7 +64,7 @@ feature 'Seller register order' do
     end
   end
 
-  scenario 'User select product, plan, and see details of order' do
+  scenario 'User select product, plan, period and see details of order' do
     stub_request(:get, 'http://localhost:3000/api/v1/products/1')
       .to_return(body: File.read('spec/support/show_product.json').to_s,
                  status: 200)
@@ -80,6 +80,12 @@ feature 'Seller register order' do
       .to_return(body: File.read('spec/support/show_plan.json').to_s,
                  status: 200)
 
+    stub_request(
+      :get,
+      "#{Rails.configuration.products_app['get_products']}/1/plans/1/prices"
+    ).to_return(body: File.read('spec/support/prices.json').to_s,
+                status: 200)
+
     user = create(:user)
     customer = create(:individual)
 
@@ -90,6 +96,8 @@ feature 'Seller register order' do
     click_on 'Avançar'
     choose 'Basico'
     click_on 'Avançar'
+    select 'Semestral', from: 'period'
+    click_on 'commit'
 
     expect(current_path).to eq order_path(1)
     expect(page).to have_content('Email Marketing')
@@ -98,5 +106,6 @@ feature 'Seller register order' do
     expect(page).to have_content(user.email)
     expect(page).to have_content('Basico')
     expect(page).to have_content('Plano Basico Basico mesmo')
+    expect(page).to have_content('R$ 30,00')
   end
 end

@@ -3,7 +3,7 @@ class Services::Price
 
   def self.all(order)
     response = request(plan_id: order.product.plan_id,
-                       product_id: order.product_id)
+                       product_id: order.product.product_id)
 
     Array.new(response.length) do |i|
       new(name: response[i]['period'],
