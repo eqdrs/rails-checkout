@@ -58,7 +58,8 @@ class OrdersController < ApplicationController
 
   def send_approval
     if !@order.creator?(user: current_user) && !current_user.admin?
-      return redirect_to orders_path, notice: t('orders.approve.unauthorized')
+      redirect_to orders_path, notice: t('orders.approve.unauthorized')
+      return
     end
     post_request_approve(order: @order)
   end
