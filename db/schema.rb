@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2019_02_13_173603) do
     t.string "category"
     t.integer "product_id"
     t.string "period"
-    t.integer "plan_id"
+    t.string "plan_id"
     t.string "plan_name"
     t.string "plan_description"
   end

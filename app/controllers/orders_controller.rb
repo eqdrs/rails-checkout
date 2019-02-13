@@ -1,8 +1,8 @@
-# rubocop:disable Metrics/ClassLength
+# rubocop: disable Metrics/ClassLength
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order, only: %i[show cancel_form cancel approve
-                                     finish complete]
+  before_action :set_order, only: %i[show cancel_form cancel approve plans
+                                     choosed_plan finish complete]
   before_action :set_order_safe, only: %i[send_approval]
   before_action :verify_user, only: %i[approve]
 
@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
     @customer = Customer.find(params[:customer_id])
     @order = Order.new
     begin
-      @products = Services::Product.all_products
+      @products = ProductsApi.all_products
     rescue StandardError
       redirect_to root_path, notice: 'Não foi possível conectar ao servidor'
     end
@@ -26,13 +26,35 @@ class OrdersController < ApplicationController
 
   def create
     begin
-      @product = Services::Product.get_product(params[:order][:product_id])
+      @product = ProductsApi.get_product(params[:order][:product_id])
     rescue StandardError
       redirect_to root_path, notice: 'Não foi possível conectar ao servidor'
     end
     @product.save
-    @order = order_build(@product.id)
-    order_validation(@order)
+    @order = Order.create(user: current_user, customer_id: params[:customer_id],
+                          product: @product)
+    redirect_to plans_order_path(@order)
+  end
+
+  def plans
+    @customer = @order.customer
+    @product = @order.product
+    begin
+      @plans = ProductsApi.all_plans(@order.id)
+    rescue StandardError
+      redirect_to root_path, notice: 'Não foi possível conectar ao servidor'
+    end
+  end
+
+  def choosed_plan
+    @product = @order.product
+    begin
+      @plan = ProductsApi.get_plan(@order.product_id, params[:order][:plan_id])
+    rescue StandardError
+      redirect_to root_path, notice: 'Não foi possível conectar ao servidor'
+    end
+    @product.set_infos(@plan['id'], @plan['name'], @plan['description'])
+    redirect_to @order
   end
 
   def show; end
@@ -107,9 +129,9 @@ class OrdersController < ApplicationController
   def order_validation(order)
     if order.save
       CustomerMailer.order_summary(order.id).deliver
-      redirect_to order
+      redirect_to plans_order_path(id: @order)
     else
-      @products = Services::Product.all_products
+      @products = ProductsApi.all_products
       render :new
     end
   end

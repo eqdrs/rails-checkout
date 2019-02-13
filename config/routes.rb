@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     post 'send_approval', on: :member
     get 'finish', on: :member
     post 'finish', on: :member, to: 'orders#complete'
+    get 'plans', on: :member
+    post 'choosed_plan', on: :member
   end
 
   resources :customers, only: [] do
