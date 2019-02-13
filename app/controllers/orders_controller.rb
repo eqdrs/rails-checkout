@@ -29,8 +29,9 @@ class OrdersController < ApplicationController
       redirect_to root_path, notice: 'Não foi possível conectar ao servidor'
     end
     @product.save
-    @order = order_build(@product.id)
-    order_validation(@order)
+    @order = Order.create(user: current_user, customer_id: params[:customer_id],
+                          product: @product)
+    redirect_to @order # TODO: Redirecionar para o "passo 2" (com  ID da order)
   end
 
   def show; end
