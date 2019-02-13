@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
     @customer = @order.customer
     @product = @order.product
     begin
-      @plans = ProductsApi.all_plans(@order.id)
+      @plans = ProductsApi.all_plans(@product.product_id)
     rescue StandardError
       redirect_to root_path, notice: 'Não foi possível conectar ao servidor'
     end
@@ -49,11 +49,13 @@ class OrdersController < ApplicationController
   def choosed_plan
     @product = @order.product
     begin
-      @plan = ProductsApi.get_plan(@order.product_id, params[:order][:plan_id])
+      @plan = ProductsApi.get_plan(@product.product_id,
+                                   params[:order][:plan_id])
     rescue StandardError
       redirect_to root_path, notice: 'Não foi possível conectar ao servidor'
     end
     @product.set_infos(@plan['id'], @plan['name'], @plan['description'])
+    @product.save
     redirect_to @order
   end
 
