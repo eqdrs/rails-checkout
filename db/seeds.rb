@@ -7,13 +7,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-product = Product.create(name: 'Host', price: 24.0)
-other_product = Product.create(name: 'Host2', price: 30.0)
-Product.create(name: 'Host3', price: 45.0)
+product = Product.create(name: 'Host', description: 'Produto host', category: 'Hosts',
+                         product_id: 2, plan_name: 'Básico', plan_description: 'Plano básico',
+                         price: 24.0)
 
 vendor = User.create!(email: 'vendor@vendas.com', password: '12345678', role: :vendor)
 user = User.create!(email: 'admin@vendas.com', password: '12345678', role: :admin)
 
-customer = Individual.create!(name: 'Kamyla Aragão', address: 'rua X', cpf: '28813510420', phone: '(11) 9345-2345', email: 'kamyla@email.com.br', user: vendor)
+customer = Individual.create!(name: 'Kamyla Aragão', address: 'Rua Wallace Almeida', cpf: '28813510420', phone: '(11) 9345-2345', email: 'kamyla@email.com.br', user: vendor)
+Individual.create!(name: 'Everton Quadros', address: 'Alameda Jaú', cpf: '39565551041', phone: '(11) 9085-1123', email: 'everton@email.com.br', user: vendor)
 
 Order.create!(product: product, status: :open, customer: customer, user: vendor)

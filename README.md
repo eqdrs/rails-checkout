@@ -10,6 +10,40 @@ O arquivo de configuração está localizado em `config/customer_app.yml`
 `url_port`: A porta utilizada pelo servidor     
 `send_order_endpoint`: O endpoint onde será realizado uma requisição POST com informações de um pedido aprovado     
 
+# Como funciona
+
+A aplicação em Rails 5.2 e Ruby 2.6.1 pode ser inicializada como outras aplicações
+do tipo.
+
+Para isso, com o ruby instalado, no diretório da aplicação:
+
+```sh
+  bin/setup
+  rails s
+```
+
+## Login
+
+O login é obrigatório para uso da aplicação. O login de administrador padrão é:
+
+> usuário: admin@vendas.com  
+> senha: 12345678
+
+Login como vendedor:
+
+> usuário: vendor@vendas.com  
+> senha: 12345678
+
+## Clientes
+
+O sistema já possui alguns clientes previamente cadastrados, com os seguintes dados:
+
+>email: kamyla@email.com.br
+>cpf: 28813510420
+
+>email: everton@vendas.com.br
+>cpf: 39565551041
+
 # Documentação da API
 
 ## Consultar todos os pedidos
