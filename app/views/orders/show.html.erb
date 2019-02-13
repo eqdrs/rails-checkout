@@ -25,6 +25,10 @@
       <strong><%= @order.product.name %></strong>
     </div>
     <div class="col-xs-12 col-md-4">
+      <span class="ls-list-label">Plano <%= @order.product.plan_name %></span>
+      <strong> <%= @order.product.plan_description %></strong>
+    </div>
+    <div class="col-xs-12 col-md-4">
       <span class="ls-list-label">Preço</span>
       <strong>
      R$ <%= number_to_currency(@order.product.price) %></strong>

@@ -1,4 +1,4 @@
-class Services::Product
+class ProductsApi
   def self.format_products(products)
     Array.new(products.size) { |i| Product.new(products[i]) }
   end
@@ -14,5 +14,23 @@ class Services::Product
     uri = URI(Rails.configuration.products_app['get_products'])
     products = JSON.parse(Net::HTTP.get(uri))
     format_products(products)
+  end
+
+  def self.format_plans(plans)
+    array = []
+    plans.each { |p| array << Product.new(p) }
+    array
+  end
+
+  def self.get_plan(product_id, plan_id)
+    uri = URI("#{Rails.configuration.products_app['get_products']}"\
+              "/#{product_id}/plans/#{plan_id}")
+    JSON.parse(Net::HTTP.get(uri))
+  end
+
+  def self.all_plans(id)
+    uri = URI("#{Rails.configuration.products_app['get_products']}/#{id}/plans")
+    plans = JSON.parse(Net::HTTP.get(uri))
+    format_plans(plans)
   end
 end

@@ -1,0 +1,12 @@
+[
+  {
+   "id":1,
+   "name":"Basico",
+   "description":"Plano básico do produto"
+  },
+  {
+   "id":2,
+   "name":"Avançado",
+   "description":"Plano avançado do produto"
+  }
+]

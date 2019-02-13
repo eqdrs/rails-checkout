@@ -17,4 +17,3 @@ user = User.create!(email: 'admin@vendas.com', password: '12345678', role: :admi
 customer = Individual.create!(name: 'Kamyla Aragão', address: 'rua X', cpf: '28813510420', phone: '(11) 9345-2345', email: 'kamyla@email.com.br', user: vendor)
 
 Order.create!(product: product, status: :open, customer: customer, user: vendor)
-Order.create!(product: other_product, status: :approved, sent_to_client_app: :sent, customer: customer, user: vendor)
