@@ -12,8 +12,6 @@ feature 'Seller register order' do
 
     user = create(:user)
     customer = create(:individual)
-    mail_spy = spy(CustomerMailer)
-    stub_const('CustomerMailer', mail_spy)
     login_as user
 
     visit root_path
@@ -31,7 +29,6 @@ feature 'Seller register order' do
     expect(page).to have_content(customer.name)
     expect(page).to have_content('Em Aberto')
     expect(page).to have_content(user.email)
-    expect(mail_spy).to have_received(:order_summary)
   end
 
   scenario 'Successfully (for company)' do
@@ -44,8 +41,6 @@ feature 'Seller register order' do
                  status: 200)
     user = create(:user)
     customer = create(:company)
-    mail_spy = spy(CustomerMailer)
-    stub_const('CustomerMailer', mail_spy)
     login_as user
 
     visit root_path
@@ -63,6 +58,5 @@ feature 'Seller register order' do
     expect(page).to have_content(customer.company_name)
     expect(page).to have_content('Em Aberto')
     expect(page).to have_content(user.email)
-    expect(mail_spy).to have_received(:order_summary)
   end
 end
