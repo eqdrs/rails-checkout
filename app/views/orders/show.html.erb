@@ -81,7 +81,8 @@
       </div>
 
       <div class="col-md-3 ls-txt-right">
-        <%= link_to t('.approval_resend'), send_approval_order_path(@order), class: 'ls-btn-danger' %>
+        <%= link_to t('.approval_resend'), send_approval_order_path(@order),
+                    method: :post, class: 'ls-btn-danger' %>
       </div>
     </header>
   </div>

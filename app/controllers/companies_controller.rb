@@ -7,6 +7,7 @@ class CompaniesController < ApplicationController
 
   def create
     @company = Company.new company_params
+    @company.user = current_user
     if @company.save
       redirect_to @company, notice: I18n.t('.success')
     else

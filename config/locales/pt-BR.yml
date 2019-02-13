@@ -25,12 +25,17 @@ pt-BR:
         cpf: 'CPF'
         email: 'E-mail'
   orders:
+    messages:
+      no_order: 'O pedido %{id} não existe'
     approve:
       success: 'Pedido aprovado com sucesso!'
       failure: 'O pedido #%{order_id} não pôde ser aprovado'
       warning: 'Não foi possível enviar as informações para o sistema de Clientes'
+      already_sent: 'Esse pedido já foi enviado para o sistema de Clientes'
+      unauthorized: 'Você não pode realizar o reenvio desse pedido'
     index:
       no_orders: 'Não há pedidos cadastrados'
+      not_sent: 'Não enviado'
     show:
       open: 'Em Aberto'
       approved: 'Aprovado'
@@ -53,5 +58,16 @@ pt-BR:
   individuals:
     search:
       not_found: 'CPF não encontrado'
+  users:
+    messages:
+      inactive_user: "Usuário %{email} desativado"
+      unauthorized: 'Você não está autorizado para essa ação'
+    manage:
+      active: 'Ativo'
+      inactive: 'Inativo'
+      deactivate: 'Desativar'
+      no_users: 'Sem vendedores'
+    messages:
+      inactive_user: 'O usuário %{email} foi desativado'
     create:
       success: 'Cliente cadastrado com sucesso'

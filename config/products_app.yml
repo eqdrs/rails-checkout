@@ -1,0 +1,4 @@
+development:
+  get_products: 'http://localhost:3000/api/v1/products'
+test:
+  get_products: 'http://localhost:3000/api/v1/products'
