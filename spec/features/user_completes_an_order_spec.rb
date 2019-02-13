@@ -3,21 +3,38 @@ require 'rails_helper'
 feature 'User completes an order' do
   scenario 'successfully' do
     vendor = create(:vendor)
-    order = create(:order, user: vendor)
+    product = create(:product, plan_id: 1)
+    order = create(:order, user: vendor, product: product)
     login_as vendor
 
-    http = double('For - Net::HTTP')
-    response = double('For - Net::HTTPResponse')
-    allow(Net::HTTP).to receive(:new).and_return(http)
-    allow(http).to receive(:get)
-      .with(any_args).and_return(response)
-    allow(response).to receive(:body).and_return('[{"period":"Mensal",
-      "value":"25"},{"period":"Semestral","value":"50"}]')
+    stub_request(
+      :get,
+      "#{Rails.configuration.products_app['get_products']}/1/plans/1/prices"
+    ).to_return(body: '[{"period":"Mensal","value":"25"},{"period":"Semestral"'\
+                      ',"value":"50"}]', status: :ok)
 
     visit finish_order_path(order)
     select 'Mensal', from: 'period'
+    click_on 'commit'
 
-    expect(current_path).to order_path(order)
+    expect(current_path).to eq order_path(order)
     expect(page).to have_content('R$ 25,00')
+  end
+
+  scenario 'fails when order has no plan id' do
+    vendor = create(:vendor)
+    order = create(:order, user: vendor)
+    login_as vendor
+
+    stub_request(
+      :get,
+      "#{Rails.configuration.products_app['get_products']}/1/plans/1/prices"
+    ).to_return(body: '[{"period":"Mensal","value":"25"},{"period":"Semestral"'\
+                      ',"value":"50"}]', status: :ok)
+
+    visit finish_order_path(order)
+
+    expect(page).to have_content(I18n.t('orders.messages.no_plan'))
+    expect(current_path).to_not eq finish_order_path(order)
   end
 end

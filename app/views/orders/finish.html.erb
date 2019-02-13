@@ -1,0 +1,43 @@
+<h1 class="ls-title-intro" id='user_presentation'>Selecionar periodicidade</h1>
+
+<div class='row'>
+  <div class='col-md-9'>
+    <div class="ls-box">
+      <h2 class="ls-title"><%= @order.product.name %></h2>
+      <p><%= @order.product.description %></p>
+      <p><small><%= t('.plan') %>: <%= @order.product.plan_name %></small></p>
+      <p><small><%= @order.product.plan_description %></small></p>
+
+      <table class="ls-table">
+        <thead>
+          <tr>
+            <th><%= t('.period') %></th>
+            <th><%= t('.price') %></th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @prices.each do |price| %>
+          <tr>
+            <td><%= price.name %></td>
+            <td><%= price.value %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class='col-md-4 ls-lg-margin-top'>
+    <div class='ls-box'>
+      <%= form_with url: finish_order_path(@order), method: :post, 
+                    local: true do |f| %>
+        <%= f.label :period, t('.select_payment_period'), class:'ls-label' %>
+        <div class='ls-custom-select'>
+          <%= f.select :period, options_for_select(@periods), class: "ls-select" %>
+        </div>
+        <br/><br/>
+        <%= f.submit id:'commit', class: 'ls-btn' %>
+        <br/><br/>
+      <% end %>
+    </div>
+  </div>
+</div>

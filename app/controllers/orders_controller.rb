@@ -1,6 +1,8 @@
+# rubocop:disable Metrics/ClassLength
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order, only: %i[show cancel_form cancel approve]
+  before_action :set_order, only: %i[show cancel_form cancel approve
+                                     finish complete]
   before_action :set_order_safe, only: %i[send_approval]
   before_action :verify_user, only: %i[approve]
 
@@ -64,6 +66,24 @@ class OrdersController < ApplicationController
     post_request_approve(order: @order)
   end
 
+  def finish
+    unless @order.product.plan_id
+      redirect_to orders_path, notice: I18n.t('orders.messages.no_plan')
+      return
+    end
+    @prices = Services::Price.all(@order)
+    @periods = @prices.map.with_index { |price, i| [price.name, i] }
+  end
+
+  def complete
+    period_index = params[:period].to_i
+    @price = Services::Price.all(@order)[period_index]
+    @order.product.period = @price.name
+    @order.product.price = @price.value
+    @order.product.save
+    redirect_to @order
+  end
+
   private
 
   def set_order
@@ -119,3 +139,4 @@ class OrdersController < ApplicationController
     redirect_to order, notice: t('orders.approve.already_sent')
   end
 end
+# rubocop:enable Metrics/ClassLength

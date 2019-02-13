@@ -15,7 +15,7 @@
         <% @users.each do |user| %>
           <tr>
             <td><%= user.email %></td>
-            <td><%= t(".#{user.status}") %></td>
+            <td><%= t("users.manage.#{user.status}") %></td>
             <td>
             <% if user.active? %>
               <%= link_to t('.deactivate'), deactivate_user_path(user), 
