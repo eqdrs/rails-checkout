@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_11_185356) do
+ActiveRecord::Schema.define(version: 2019_02_13_095659) do
 
   create_table "cancelled_orders", force: :cascade do |t|
     t.text "internal_reason"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2019_02_11_185356) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "status"
+    t.integer "status", default: 0
     t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2019_02_11_185356) do
     t.datetime "updated_at", null: false
     t.string "description"
     t.string "category"
+    t.integer "product_id"
   end
 
   create_table "users", force: :cascade do |t|

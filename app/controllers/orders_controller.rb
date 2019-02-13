@@ -5,11 +5,7 @@ class OrdersController < ApplicationController
   before_action :verify_user, only: %i[approve]
 
   def index
-    @orders = if current_user.admin?
-                Order.all
-              else
-                Order.where(user: current_user)
-              end
+    @orders = current_user.admin? ? Order.all : Order.where(user: current_user)
   end
 
   def new
@@ -29,8 +25,9 @@ class OrdersController < ApplicationController
       redirect_to root_path, notice: 'Não foi possível conectar ao servidor'
     end
     @product.save
-    @order = order_build(@product.id)
-    order_validation(@order)
+    @order = Order.create(user: current_user, customer_id: params[:customer_id],
+                          product: @product)
+    redirect_to @order # TODO: Redirecionar para o "passo 2" (com  ID da order)
   end
 
   def show; end
