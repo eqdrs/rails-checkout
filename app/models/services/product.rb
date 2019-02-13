@@ -8,7 +8,8 @@ class Services::Product
   def self.get_product(id)
     uri = URI("#{Rails.configuration.products_app['get_products']}/#{id}")
     response = JSON.parse(Net::HTTP.get(uri))
-    Product.new(response)
+    Product.new(name: response['name'], description: response['description'],
+                category: response['category'])
   end
 
   def self.all_products

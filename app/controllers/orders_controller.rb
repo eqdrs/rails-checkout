@@ -98,7 +98,7 @@ class OrdersController < ApplicationController
   def post_request_approve(order:)
     return already_sent(order: order) if order.sent?
 
-    data = { customer: order.customer, product: order.product }
+    data = { client: order.customer, product: order.product }
     response = post_to(
       endpoint: Rails.configuration.customer_app['send_order_endpoint'],
       data: data

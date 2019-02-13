@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_11_180232) do
+ActiveRecord::Schema.define(version: 2019_02_11_185356) do
 
   create_table "cancelled_orders", force: :cascade do |t|
     t.text "internal_reason"
