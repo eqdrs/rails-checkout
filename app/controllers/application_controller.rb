@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def verify_user
+    current_user.admin?
+  end
+
   protected
 
   def configure_permitted_parameters

@@ -1,10 +1,17 @@
 require 'rails_helper'
 
 feature 'Seller register order' do
-  scenario 'Successfully (for individuals)' do
+  scenario 'Successfully' do
+    stub_request(:get, 'http://localhost:3000/api/v1/products/1')
+      .to_return(body: File.read('spec/support/show_product.json').to_s,
+                 status: 200)
+
+    stub_request(:get, 'http://localhost:3000/api/v1/products')
+      .to_return(body: File.read('spec/support/all_products.json').to_s,
+                 status: 200)
+
     user = create(:user)
     customer = create(:individual)
-    product = create(:product, price: 50.0)
     mail_spy = spy(CustomerMailer)
     stub_const('CustomerMailer', mail_spy)
     login_as user
@@ -16,12 +23,11 @@ feature 'Seller register order' do
       click_on 'Buscar'
     end
     click_on 'Cadastrar pedido'
-    choose product.name
+    choose 'Email Marketing'
     click_on 'Cadastrar Pedido'
 
     expect(current_path).to eq order_path(1)
-    expect(page).to have_content(product.name)
-    expect(page).to have_content('R$ 50,0')
+    expect(page).to have_content('Email Marketing')
     expect(page).to have_content(customer.name)
     expect(page).to have_content('Em Aberto')
     expect(page).to have_content(user.email)
@@ -29,9 +35,15 @@ feature 'Seller register order' do
   end
 
   scenario 'Successfully (for company)' do
+    stub_request(:get, 'http://localhost:3000/api/v1/products/1')
+      .to_return(body: File.read('spec/support/show_product.json').to_s,
+                 status: 200)
+
+    stub_request(:get, 'http://localhost:3000/api/v1/products')
+      .to_return(body: File.read('spec/support/all_products.json').to_s,
+                 status: 200)
     user = create(:user)
     customer = create(:company)
-    product = create(:product, price: 25.0)
     mail_spy = spy(CustomerMailer)
     stub_const('CustomerMailer', mail_spy)
     login_as user
@@ -43,12 +55,11 @@ feature 'Seller register order' do
       click_on 'Buscar'
     end
     click_on 'Cadastrar pedido'
-    choose product.name
+    choose 'Email Marketing'
     click_on 'Cadastrar Pedido'
 
     expect(current_path).to eq order_path(1)
-    expect(page).to have_content(product.name)
-    expect(page).to have_content('R$ 25,00')
+    expect(page).to have_content('Email Marketing')
     expect(page).to have_content(customer.company_name)
     expect(page).to have_content('Em Aberto')
     expect(page).to have_content(user.email)

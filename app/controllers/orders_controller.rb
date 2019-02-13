@@ -15,16 +15,22 @@ class OrdersController < ApplicationController
   def new
     @customer = Customer.find(params[:customer_id])
     @order = Order.new
+    begin
+      @products = Services::Product.all_products
+    rescue StandardError
+      redirect_to root_path, notice: 'Não foi possível conectar ao servidor'
+    end
   end
 
   def create
-    @order = order_build(params[:order][:product_id])
-    if @order.save
-      CustomerMailer.order_summary(@order.id).deliver
-      redirect_to @order
-    else
-      render :new
+    begin
+      @product = Services::Product.get_product(params[:order][:product_id])
+    rescue StandardError
+      redirect_to root_path, notice: 'Não foi possível conectar ao servidor'
     end
+    @product.save
+    @order = order_build(@product.id)
+    order_validation(@order)
   end
 
   def show; end
@@ -44,25 +50,21 @@ class OrdersController < ApplicationController
 
   def approve
     if @order.approve_order(user: current_user)
-      post_request_approve(order: @order)
-    else
-      redirect_to @order, alert: t('orders.approve.failure')
+      return post_request_approve(order: @order)
     end
+
+    redirect_to @order, alert: t('orders.approve.failure')
   end
 
   def send_approval
     if !@order.creator?(user: current_user) && !current_user.admin?
-      redirect_to orders_path, notice: t('orders.approve.unauthorized')
-      return
+      return redirect_to orders_path, notice: t('orders.approve.unauthorized')
     end
+
     post_request_approve(order: @order)
   end
 
   private
-
-  def verify_user
-    current_user.admin?
-  end
 
   def set_order
     @order = Order.find(params[:id])
@@ -80,6 +82,16 @@ class OrdersController < ApplicationController
     product = Product.find(product_id)
     current_user.orders.new(customer: customer, product: product,
                             status: 0)
+  end
+
+  def order_validation(order)
+    if order.save
+      CustomerMailer.order_summary(order.id).deliver
+      redirect_to order
+    else
+      @products = Services::Product.all_products
+      render :new
+    end
   end
 
   def post_request_approve(order:)

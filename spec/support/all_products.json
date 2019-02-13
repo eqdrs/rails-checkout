@@ -1,0 +1,20 @@
+[ 
+  {
+    "id":1,
+    "name":"Email Marketing",
+    "description":"Email marketing para criação de promoções",
+    "category":"Email" 
+  },
+  {
+    "id":2,
+    "name":"Criador de Sites",
+    "description":"Criar sites de maneira fácil com o criador de sites",
+    "category":"Sites"
+  },
+  {
+    "id":3,
+    "name":"Email",
+    "description":"Email profissional",
+    "category":"Email"
+  } 
+]
