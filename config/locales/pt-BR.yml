@@ -58,5 +58,16 @@ pt-BR:
   individuals:
     search:
       not_found: 'CPF não encontrado'
+  users:
+    messages:
+      inactive_user: "Usuário %{email} desativado"
+      unauthorized: 'Você não está autorizado para essa ação'
+    manage:
+      active: 'Ativo'
+      inactive: 'Inativo'
+      deactivate: 'Desativar'
+      no_users: 'Sem vendedores'
+    messages:
+      inactive_user: 'O usuário %{email} foi desativado'
     create:
       success: 'Cliente cadastrado com sucesso'

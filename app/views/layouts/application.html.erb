@@ -66,6 +66,8 @@
             <li><%= link_to 'Visualizar Clientes', customers_path, class: 'ls-ico-users', role: 'menuitem'%></li>
             <% if current_user.admin? %>
               <li><%= link_to 'Cadastrar usuário', register_path, class: 'ls-ico-user-add', role: 'menuitem' %></li>
+              <li><%= link_to 'Administrar usuários', manage_users_path, class: 'ls-ico-user', 
+                              id: 'admin_manage_users', role: 'menuitem' %></li>
             <% end %>
           </ul>
         </nav>

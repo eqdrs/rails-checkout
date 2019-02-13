@@ -61,6 +61,7 @@ class OrdersController < ApplicationController
       redirect_to orders_path, notice: t('orders.approve.unauthorized')
       return
     end
+
     post_request_approve(order: @order)
   end
 
