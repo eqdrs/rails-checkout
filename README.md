@@ -63,13 +63,13 @@ A API espera receber uma requisição GET no endpoint `/api/v1/customers/(:id)/o
 ```json
 [
   {
-  "id":1,
-  "status":"approved",
-  "product_id":1,
-  "created_at":"2019-02-06T16:35:50.098Z",
-  "updated_at":"2019-02-06T16:35:50.098Z",
-  "user_id":1,
-  "customer_id":1
+    "id":1,
+    "status":"approved",
+    "product_id":1,
+    "created_at":"2019-02-06T16:35:50.098Z",
+    "updated_at":"2019-02-06T16:35:50.098Z",
+    "user_id":1,
+    "customer_id":1
   },
   {
     "id":2,
@@ -98,7 +98,8 @@ token: 'TOKEN DA APLICAÇÃO (A DEFINIR)'
 ### Body da requisição
 ```
 {
-  customer: {
+  customer:
+  {
     id,
     name,
     address,
@@ -112,10 +113,17 @@ token: 'TOKEN DA APLICAÇÃO (A DEFINIR)'
     created_at,
     updated_at
   },
-  product: {
+  product:
+  {
     id,
     name,
     price,
+    description,
+    category,
+    plan_name,
+    plan_description,
+    period,
+    product_id,
     created_at,
     updated_at
   }
