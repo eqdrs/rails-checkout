@@ -10,9 +10,9 @@
 <%= form_with model: @order, url: customer_orders_path(@customer), class: "ls-form row", local: true do |f|%>
   <fieldset>
   <div class="ls-label col-md-12 col-sm-4">
-      <h5>PRODUTOS</h5>
+      <h5 class='ls-xs-margin-top ls-xs-margin-bottom'>PRODUTOS</h5>
       </br>
-      <div class="ls-box" style="height: 276px; overflow-y: scroll;">
+      <div class="ls-box" style="height: 400px; overflow-y: scroll;">
         <% @products.each do |product| %>
           <div class="ls-box ls-md-space">
           <div class="row">
