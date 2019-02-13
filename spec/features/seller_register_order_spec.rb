@@ -78,7 +78,7 @@ feature 'Seller register order' do
       .to_return(body: File.read('spec/support/all_products.json').to_s,
                  status: 200)
 
-    stub_request(:get, 'http://localhost:3000/api/v1/products/plans')
+    stub_request(:get, 'http://localhost:3000/api/v1/products/1/plans')
       .to_return(body: File.read('spec/support/all_plans.json').to_s,
                  status: 200)
 
@@ -92,7 +92,7 @@ feature 'Seller register order' do
     click_on 'Avançar'
 
     expect(page).to have_content('1')
-    expect(page).to have_content('Básico')
+    expect(page).to have_content('Basico')
     expect(page).to have_content('Plano básico do produto')
     expect(page).to have_content('2')
     expect(page).to have_content('Avançado')

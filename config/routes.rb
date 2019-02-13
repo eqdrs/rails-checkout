@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     post 'approve', on: :member
     post 'send_approval', on: :member
     get 'plans', on: :member
+    post 'choosed_plan', on: :member
   end
 
   resources :customers, only: [] do

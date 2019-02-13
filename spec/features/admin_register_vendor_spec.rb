@@ -9,7 +9,6 @@ feature 'Admin register vendor' do
     login_as(admin, scope: :user)
     visit root_path
     click_on 'Cadastrar usuário'
-    save_page
     fill_in 'Email', with: 'teste@vendas.com'
     fill_in 'CPF', with: '123456'
     select 'Vendedor', from: 'Função'
@@ -27,7 +26,6 @@ feature 'Admin register vendor' do
     login_as(admin, scope: :user)
     visit root_path
     click_on 'Cadastrar usuário'
-    save_page
     fill_in 'Email', with: ''
     fill_in 'CPF', with: ''
     select 'Vendedor', from: 'Função'

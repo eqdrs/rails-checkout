@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
     @customer = Customer.find(params[:customer_id])
     @order = Order.new
     begin
-      @products = Services::Product.all_products
+      @products = ProductsApi.all_products
     rescue StandardError
       redirect_to root_path, notice: 'Não foi possível conectar ao servidor'
     end
@@ -24,7 +24,7 @@ class OrdersController < ApplicationController
 
   def create
     begin
-      @product = Services::Product.get_product(params[:order][:product_id])
+      @product = ProductsApi.get_product(params[:order][:product_id])
     rescue StandardError
       redirect_to root_path, notice: 'Não foi possível conectar ao servidor'
     end
@@ -36,6 +36,11 @@ class OrdersController < ApplicationController
   def plans
     @order = Order.find(params[:id])
     @customer = @order.customer
+    begin
+      @plans = ProductsApi.all_plans(@order.id)
+    rescue StandardError
+      redirect_to root_path, notice: 'Não foi possível conectar ao servidor'
+    end
   end
 
   def show; end
@@ -94,7 +99,7 @@ class OrdersController < ApplicationController
       CustomerMailer.order_summary(order.id).deliver
       redirect_to plans_order_path(id: @order)
     else
-      @products = Services::Product.all_products
+      @products = ProductsApi.all_products
       render :new
     end
   end
