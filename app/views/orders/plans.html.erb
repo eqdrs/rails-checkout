@@ -1,11 +1,33 @@
 <%= render @customer %>
 
-<%= form_with model: @order, url: choosed_plan_order_path(@order), class: "ls-form row", local: true do |f|%>
+<fieldset>
+  <div class="ls-label col-md-12 col-sm-4">
+      <h5>PRODUTOS</h5>
+      </br>
+      <div class="ls-box" style="height: 276px; overflow-y: scroll;">
+          <div class="ls-box ls-md-space">
+          <div class="row">
+            <div class="col-md-2 ls-txt-center">
+            <span class="ls-ico-alone ls-ico-screen"></span>
+            </div>
+            <div class="col-md-10">
+              <h3 class="ls-title-5"><strong>
+              <%= @product.name %>
+              </strong></h3>
+              <p><strong>Descrição: </strong><%= @product.description %></p>
+              <p><strong>Categoria: </strong><%= @product.category %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </fieldset>
+
+<%= form_with model: @order, url: choosed_plan_order_path(@order), method: :post, class: "ls-form row", local: true do |f|%>
   <fieldset>
   <div class="ls-label col-md-12 col-sm-4">
       <h5>PLANOS</h5>
       </br>
-      <div class="ls-box" style="height: 276px; overflow-y: scroll;">
+      <div class="ls-box" style="height: 276px; overflow-y: scroll;" id="plans">
         <% @plans.each do |plans| %>
           <div class="ls-box ls-md-space">
           <div class="row">
