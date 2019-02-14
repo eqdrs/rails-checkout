@@ -41,5 +41,7 @@ module Vendas
     # Set default locale
     I18n.default_locale = :'pt-BR'
     config.products_app = config_for(:products_app)
+
+    config.time_zone = "America/Sao_Paulo"
   end
 end
