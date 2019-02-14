@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'User completes an order' do
   scenario 'successfully' do
     vendor = create(:vendor)
-    product = create(:product, plan_id: 1)
+    product = create(:product, product_id: 1, plan_id: 1)
     order = create(:order, user: vendor, product: product)
     login_as vendor
 
