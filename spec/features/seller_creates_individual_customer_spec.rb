@@ -43,11 +43,8 @@ feature 'Seller creates individual customer' do
   end
 
   scenario 'and must be logged in' do
-    skip
+    visit new_individual_path
 
-    visit root_path
-
-    expect(current_path).to eq new_user_session_path
-    expect(page).to_not have_link 'Cadastrar cliente'
+    expect(current_path).not_to eq new_individual_path
   end
 end

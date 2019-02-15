@@ -47,13 +47,8 @@ feature 'Seller creates company customer' do
   end
 
   scenario 'and must be logged in' do
-    skip
+    visit new_company_path
 
-    visit root_path
-    click_on 'Cadastrar Cliente'
-
-    expect(current_path).to_not eq new_customer_path
-    expect(page).to_not have_css('h1', text: 'Cadastrar Cliente')
-    expect(page).to have_content('Log in')
+    expect(current_path).to_not eq new_company_path
   end
 end

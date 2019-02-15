@@ -1,12 +1,16 @@
 class ProductsApi
   def self.format_products(products)
-    Array.new(products.size) { |i| Product.new(products[i]) }
+    Array.new(products.size) do |i|
+      products[i].delete('icon')
+      Product.new(products[i])
+    end
   end
 
   def self.get_product(id)
     uri = URI("#{Rails.configuration.products_app['get_products']}/#{id}")
     response = JSON.parse(Net::HTTP.get(uri))
     response['product_id'] = response.delete('id')
+    response.delete('icon')
     Product.new(response)
   end
 

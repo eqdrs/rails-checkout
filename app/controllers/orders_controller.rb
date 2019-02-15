@@ -50,7 +50,7 @@ class OrdersController < ApplicationController
     rescue StandardError
       redirect_to root_path, notice: 'Não foi possível conectar ao servidor'
     end
-    @product.set_infos(@plan['product_id'], @plan['name'], @plan['description'])
+    @product.set_infos(@plan['plan_id'], @plan['name'], @plan['description'])
     redirect_to finish_order_path(@order)
   end
 
