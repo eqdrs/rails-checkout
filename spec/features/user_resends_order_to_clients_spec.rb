@@ -28,6 +28,6 @@ feature 'User resends order to clients' do
 
     visit orders_path
 
-    expect(page).to have_css('td', text: 'Aprovado (Não enviado)')
+    expect(page).to have_css('td', text: 'Não enviado')
   end
 end

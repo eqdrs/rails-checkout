@@ -20,7 +20,11 @@
             <td><%= order.product.name %></td>
             <td>
               <%= t("orders.show.#{order.status}") %>
-              <%= "(#{t('.not_sent')})" if order.approved? && order.not_sent? %>
+              <% if order.approved? && order.not_sent? %>
+              <span class="ls-tag-danger">
+                <%= "#{t('.not_sent')}" %>
+              </span>
+              <% end %>
             </td>
             <td><%= link_to 'Detalhes', order, class: 'ls-btn' %></td>
           </tr>

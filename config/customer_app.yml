@@ -1,3 +1,7 @@
+production:
+  url_address: 'localhost'
+  url_port: 4000
+  send_order_endpoint: '/api/v1/order/new'
 development:
   url_address: 'localhost'
   url_port: 4000
