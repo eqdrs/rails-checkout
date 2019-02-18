@@ -9,7 +9,7 @@
 
 product = Product.create(name: 'Host', description: 'Produto host', category: 'Hosts',
                          product_id: 2, plan_name: 'Básico', plan_description: 'Plano básico',
-                         price: 24.0)
+                         price: 24.0, period: 'Semestral')
 
 vendor = User.create!(email: 'vendor@vendas.com', password: '12345678', role: :vendor)
 user = User.create!(email: 'admin@vendas.com', password: '12345678', role: :admin)
