@@ -24,7 +24,8 @@ class OrdersController < ApplicationController
     begin
       @product = ProductsApi.get_product(params[:order][:product_id])
     rescue StandardError
-      redirect_to root_path, notice: 'Não foi possível conectar ao servidor'
+      flash[:notice] = 'Não foi possível conectar ao servidor'
+      return redirect_to root_path
     end
     @product.save
     @order = Order.create(user: current_user, customer_id: params[:customer_id],
@@ -48,10 +49,9 @@ class OrdersController < ApplicationController
       @plan = ProductsApi.get_plan(@product.product_id,
                                    params[:order][:plan_id])
     rescue StandardError
-      redirect_to root_path, notice: 'Não foi possível conectar ao servidor'
+      return redirect_to root_path, notice: t('errors.unreachable_host')
     end
-    @product.set_infos(@plan['plan_id'], @plan['name'], @plan['description'])
-    redirect_to finish_order_path(@order)
+    redirect_to_last_step(product: @product, plan: @plan)
   end
 
   def show; end
@@ -117,23 +117,6 @@ class OrdersController < ApplicationController
     redirect_to orders_path
   end
 
-  def order_build(product_id)
-    customer = Customer.find(params[:customer_id])
-    product = Product.find(product_id)
-    current_user.orders.new(customer: customer, product: product,
-                            status: 0)
-  end
-
-  def order_validation(order)
-    if order.save
-      CustomerMailer.order_summary(order.id).deliver
-      redirect_to plans_order_path(id: @order)
-    else
-      @products = ProductsApi.all_products
-      render :new
-    end
-  end
-
   def post_request_approve(order:)
     return already_sent(order: order) if order.sent?
 
@@ -157,6 +140,11 @@ class OrdersController < ApplicationController
 
   def already_sent(order:)
     redirect_to order, notice: t('orders.approve.already_sent')
+  end
+
+  def redirect_to_last_step(product:, plan:)
+    product.set_infos(plan['plan_id'], plan['name'], plan['description'])
+    redirect_to finish_order_path(@order)
   end
 end
 # rubocop:enable Metrics/ClassLength

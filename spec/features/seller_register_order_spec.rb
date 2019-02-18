@@ -77,4 +77,73 @@ feature 'Seller register order' do
     expect(page).to have_content('Plano Basico Basico mesmo')
     expect(page).to have_content('R$ 30,00')
   end
+
+  scenario 'and is shown an error if the products API is offline' do
+    stub_request(:get, Rails.configuration.products_app['get_products'])
+      .to_return(body: File.read('spec/support/all_products.json'),
+                 status: 200)
+    stub_request(:get, "#{Rails.configuration.products_app['get_products']}/1")
+      .to_raise(StandardError)
+
+    user = create(:user)
+    customer = create(:individual)
+
+    login_as user
+
+    visit new_customer_order_path(customer)
+    choose 'Email Marketing'
+    click_on 'Avançar'
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content('Não foi possível conectar ao servidor')
+  end
+
+  scenario 'and is shown an error if doesnt get plans list' do
+    stub_request(:get, Rails.configuration.products_app['get_products'])
+      .to_return(body: File.read('spec/support/all_products.json'),
+                 status: 200)
+    stub_request(:get, "#{Rails.configuration.products_app['get_products']}/1")
+      .to_return(body: File.read('spec/support/show_product.json'),
+                 status: 200)
+    stub_request(:get, "#{Rails.configuration.products_app['get_products']}/"\
+                       '1/plans').to_raise(StandardError)
+
+    user = create(:user)
+    customer = create(:individual)
+
+    login_as user
+    visit new_customer_order_path(customer)
+    choose 'Email Marketing'
+    click_on 'Avançar'
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content('Não foi possível conectar ao servidor')
+  end
+
+  scenario 'and is shown an error if cant select the chosen plan' do
+    stub_request(:get, Rails.configuration.products_app['get_products'])
+      .to_return(body: File.read('spec/support/all_products.json'),
+                 status: 200)
+    stub_request(:get, "#{Rails.configuration.products_app['get_products']}/1")
+      .to_return(body: File.read('spec/support/show_product.json'),
+                 status: 200)
+    stub_request(:get, "#{Rails.configuration.products_app['get_products']}/"\
+                 '1/plans')
+      .to_return(body: File.read('spec/support/all_plans.json', status: 200))
+    stub_request(:get, "#{Rails.configuration.products_app['get_products']}/"\
+                 '1/plans/1').to_raise(StandardError)
+
+    user = create(:user)
+    customer = create(:individual)
+
+    login_as user
+    visit new_customer_order_path(customer)
+    choose 'Email Marketing'
+    click_on 'Avançar'
+    choose 'Basico'
+    click_on 'Avançar'
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content('Não foi possível conectar ao servidor')
+  end
 end

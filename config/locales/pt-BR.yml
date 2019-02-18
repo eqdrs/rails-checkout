@@ -52,8 +52,8 @@ pt-BR:
       client_reason: 'Motivo para o cliente'
       approved_at: 'Aprovada em'
       approved_by: 'Aprovada por'
-      approval_send_error: 'O pedido não foi enviado para API de Clientes'
-      approval_resend: 'Reenviar para API de Clientes'
+      approval_send_error: 'O pedido não foi enviado para a Central de Clientes'
+      approval_resend: 'Reenviar para Central de Clientes'
     cancel:
       cancel_message: 'Pedido cancelado com sucesso'
   companies:
@@ -78,4 +78,5 @@ pt-BR:
     create:
       success: 'Cliente cadastrado com sucesso'
       not_found: 'CPF não encontrado'
-
+  errors:
+    unreachable_host: 'Não foi possível conectar ao servidor'
