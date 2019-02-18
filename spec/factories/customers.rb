@@ -10,6 +10,7 @@ FactoryBot.define do
       type { 'Individual' }
     end
     factory :company, class: 'Company' do
+      company_name { 'CompanyName' }
       cnpj { FFaker::IdentificationBR.cnpj }
       contact { FFaker::Lorem.word }
       type { 'Company' }

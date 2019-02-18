@@ -18,6 +18,7 @@ pt-BR:
         current_password: 'Senha atual'
       customer:
         name: 'Nome'
+        company_name: 'Razão social'
         address: 'Endereço'
         phone: 'Telefone'
         contact: 'Contato'

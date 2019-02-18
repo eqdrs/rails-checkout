@@ -4,4 +4,8 @@ class Customer < ApplicationRecord
 
   validates :name, :email, :address,
             :phone, presence: true
+
+  def as_json(options: nil)
+    super.merge("type": type)
+  end
 end
