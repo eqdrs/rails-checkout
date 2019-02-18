@@ -18,3 +18,6 @@ customer = Individual.create!(name: 'Kamyla Aragão', address: 'Rua Wallace Alme
 Individual.create!(name: 'Everton Quadros', address: 'Alameda Jaú', cpf: '39565551041', phone: '(11) 9085-1123', email: 'everton@email.com.br', user: vendor)
 
 Order.create!(product: product, status: :open, customer: customer, user: vendor)
+not_sent_order = Order.create!(product: product, status: :approved, sent_to_client_app: :not_sent, customer: customer, user: vendor)
+
+order_approval = OrderApproval.create!(user: user, order: not_sent_order)
