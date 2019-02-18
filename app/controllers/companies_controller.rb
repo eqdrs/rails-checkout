@@ -9,7 +9,7 @@ class CompaniesController < ApplicationController
     @company = Company.new company_params
     @company.user = current_user
     if @company.save
-      redirect_to @company, notice: I18n.t('.success')
+      redirect_to @company, notice: I18n.t('companies.create.success')
     else
       render :new
     end
@@ -32,7 +32,7 @@ class CompaniesController < ApplicationController
   private
 
   def company_params
-    params.require(:company).permit(:name, :cnpj, :contact, :address,
-                                    :phone, :email)
+    params.require(:company).permit(:name, :company_name, :cnpj, :contact,
+                                    :address, :phone, :email)
   end
 end

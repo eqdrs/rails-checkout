@@ -7,7 +7,8 @@ feature 'Seller creates company customer' do
     login_as user
     visit root_path
     click_on 'Pessoa jurídica'
-    fill_in 'Nome', with: 'Facebook'
+    fill_in 'Nome', with: 'Cola-Cola'
+    fill_in 'Razão social', with: 'Coca-Cola Indústrias Ltda.'
     fill_in 'Endereço', with: 'Rua das palmas n 23 - Jundiá - MG'
     fill_in 'CNPJ', with: '17.298.092/0001-30'
     fill_in 'E-mail', with: 'facebook@teste.com'
@@ -16,7 +17,7 @@ feature 'Seller creates company customer' do
     click_on 'Cadastrar'
 
     expect(current_path).to eq company_path(1)
-    expect(page).to have_content('Facebook')
+    expect(page).to have_content('Coca-Cola Indústrias Ltda.')
     expect(page).to have_content('Rua das palmas n 23 - Jundiá - MG')
     expect(page).to have_content('17.298.092/0001-30')
     expect(page).to have_content('facebook@teste.com')
@@ -31,6 +32,7 @@ feature 'Seller creates company customer' do
     login_as user
     visit new_company_path
     fill_in 'Nome', with: ''
+    fill_in 'Razão social', with: ''
     fill_in 'Endereço', with: ''
     fill_in 'CNPJ', with: ''
     fill_in 'E-mail', with: ''
@@ -39,6 +41,8 @@ feature 'Seller creates company customer' do
     click_on 'Cadastrar'
 
     expect(page).to have_content("Nome #{I18n.t('errors.messages.blank')}")
+    expect(page).to have_content('Razão '\
+                                 "social #{I18n.t('errors.messages.blank')}")
     expect(page).to have_content("Endereço #{I18n.t('errors.messages.blank')}")
     expect(page).to have_content("CNPJ #{I18n.t('errors.messages.blank')}")
     expect(page).to have_content("Telefone #{I18n.t('errors.messages.blank')}")
