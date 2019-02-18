@@ -1,4 +1,4 @@
-<div class="col-md-6 col-md-offset-3">
+<div>
   <% if @order.cancelled_order %>
     <% @order.cancelled_order.errors.full_messages.each do |message|%>
       <div class="ls-alert-danger">
@@ -7,18 +7,18 @@
     <% end %>
   <% end %>
 
-  <h1>Cancelamento do pedido <%= @order.id %></h1>
+  <h1 class="ls-title-intro ls-ico-cancel-circle">Cancelamento do pedido <%= @order.id %></h1>
   <br>
-  <h3>Cliente: <%= @order.customer.name %></h3>
+  <h4>Cliente: <%= @order.customer.name %></h4>
   <br>
-  <%= form_with url: cancel_order_path(@order), local: true do |f| %>
+  <%= form_with url: cancel_order_path(@order), local: true, class: 'form-control col-md-6' do |f| %>
     <fieldset>
     <label class="ls-label">
-      <b class="ls-label-text">Motivo interno (opcional)</b>
+      <p class="ls-label-text">Motivo interno (opcional)</p>
       <%= f.text_area :internal_reason %>
     </label>
     <label class="ls-label">
-      <b class="ls-label-text">Motivo para o cliente</b>
+      <p class="ls-label-text">Motivo para o cliente</p>
       <%= f.text_area :client_reason %>
     </label>
     </fieldset>
