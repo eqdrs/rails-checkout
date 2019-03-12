@@ -1,14 +1,14 @@
 production:
-  url_address: 'localhost'
-  url_port: 4000
+  url_address: 'clientes'
+  url_port: 5000
   send_order_endpoint: '/api/v1/order/new'
 development:
-  url_address: 'localhost'
-  url_port: 4000
+  url_address: 'clientes'
+  url_port: 5000
   send_order_endpoint: '/api/v1/order/new'
   token: ''
 test:
-  url_address: 'localhost'
-  url_port: 4000
+  url_address: 'clientes'
+  url_port: 5000
   send_order_endpoint: 'api/v1/order/new'
   token: ''

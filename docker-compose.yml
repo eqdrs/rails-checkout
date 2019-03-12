@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  db_vendas:
+    image: postgres:9.6
+    container_name: db_vendas
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+
+  web:
+    container_name: vendas
+    build: .
+    volumes:
+      - .:/home
+    ports:
+      - 4000:3000
+    depends_on:
+      - db_vendas
+
+networks:
+  default:
+    external:
+      name: skynet
