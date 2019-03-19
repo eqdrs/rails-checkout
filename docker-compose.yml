@@ -9,13 +9,13 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+      - venda-data:/var/lib/postgresql/data
 
   web:
     container_name: vendas
     build: .
     volumes:
-      - .:/home
+      - .:/usr/venda/home
     ports:
       - 4000:3000
     depends_on:
@@ -25,3 +25,6 @@ networks:
   default:
     external:
       name: skynet
+
+volumes:
+  venda-data:

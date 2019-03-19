@@ -5,7 +5,7 @@ describe CustomerMailer do
     it 'should send email to customer' do
       order = create(:order)
 
-      mail = CustomerMailer.order_summary(order.customer.id)
+      mail = CustomerMailer.order_summary(order.id)
 
       expect(mail.to).to include(order.customer.email)
       expect(mail.subject).to eq 'Resumo do pedido'

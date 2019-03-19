@@ -14,7 +14,7 @@ feature 'Seller creates individual customer' do
     fill_in 'Telefone', with: '(15)2435-1324'
     click_on 'Cadastrar'
 
-    expect(current_path).to eq individual_path(1)
+    expect(current_path).to eq individual_path(Customer.last)
     expect(page).to have_content('Kamyla Costa de Almeida')
     expect(page).to have_content('Rua das palmas n 23 - Jundiá - MG')
     expect(page).to have_content('148.804.177-69')

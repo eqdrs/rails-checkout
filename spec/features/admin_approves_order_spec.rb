@@ -63,7 +63,7 @@ feature 'Admin approves order' do
     order = Order.create!(status: :approved, customer: customer,
                           product: product, user: user)
 
-    page.driver.submit :post, '/orders/1/approve', {}
+    page.driver.submit :post, "/orders/#{order.id}/approve", {}
 
     expect(current_path).to eq order_path(order)
     expect(page).to have_content('não pôde ser aprovado')
@@ -90,7 +90,7 @@ feature 'Admin approves order' do
     order = Order.create!(customer: customer, product: product, user: user,
                           status: 0)
 
-    page.driver.submit :post, '/orders/1/approve', {}
+    page.driver.submit :post, "/orders/#{order.id}/approve", {}
 
     expect(current_path).to eq order_path(order)
     expect(page).to have_content('não pôde ser aprovado')

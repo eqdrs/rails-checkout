@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Seller views products details on order register screen' do
   scenario 'Successfully' do
-    stub_request(:get, 'http://localhost:3000/api/v1/products')
+    stub_request(:get, Rails.configuration.products_app['get_products'])
       .to_return(body: File.read('spec/support/all_products.json').to_s,
                  status: 200)
 
@@ -33,7 +33,7 @@ feature 'Seller views products details on order register screen' do
   end
 
   scenario 'and receive an error in case the API is off' do
-    stub_request(:get, 'http://localhost:3000/api/v1/products')
+    stub_request(:get, Rails.configuration.products_app['get_products'])
       .to_return(body: '',
                  status: 500)
 

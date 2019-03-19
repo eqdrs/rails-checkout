@@ -125,7 +125,7 @@ feature 'User cancels order' do
                        client: 'Motivo para o cliente')
 
     login_as user
-    page.driver.submit :post, '/orders/1/cancel',
+    page.driver.submit :post, "/orders/#{Order.last.id}/cancel",
                        internal: 'Motivo interno',
                        client: 'Motivo para o cliente'
 

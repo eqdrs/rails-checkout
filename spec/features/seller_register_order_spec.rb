@@ -2,15 +2,16 @@ require 'rails_helper'
 
 feature 'Seller register order' do
   scenario 'User select product and see all plans available' do
-    stub_request(:get, 'http://localhost:3000/api/v1/products/1')
+    stub_request(:get, "#{Rails.configuration.products_app['get_products']}/1")
       .to_return(body: File.read('spec/support/show_product.json').to_s,
                  status: 200)
 
-    stub_request(:get, 'http://localhost:3000/api/v1/products')
+    stub_request(:get, Rails.configuration.products_app['get_products'])
       .to_return(body: File.read('spec/support/all_products.json').to_s,
                  status: 200)
 
-    stub_request(:get, 'http://localhost:3000/api/v1/products/1/plans')
+    stub_request(:get,
+                 "#{Rails.configuration.products_app['get_products']}/1/plans")
       .to_return(body: File.read('spec/support/all_plans.json').to_s,
                  status: 200)
 
@@ -34,18 +35,20 @@ feature 'Seller register order' do
   end
 
   scenario 'User select product, plan, period and see details of order' do
-    stub_request(:get, 'http://localhost:3000/api/v1/products/1')
+    stub_request(:get, "#{Rails.configuration.products_app['get_products']}/1")
       .to_return(body: File.read('spec/support/show_product.json').to_s,
                  status: 200)
 
-    stub_request(:get, 'http://localhost:3000/api/v1/products')
+    stub_request(:get, Rails.configuration.products_app['get_products'])
       .to_return(body: File.read('spec/support/all_products.json').to_s,
                  status: 200)
 
-    stub_request(:get, 'http://localhost:3000/api/v1/products/1/plans')
+    stub_request(:get,
+                 "#{Rails.configuration.products_app['get_products']}/1/plans")
       .to_return(body: File.read('spec/support/all_plans.json').to_s,
                  status: 200)
-    stub_request(:get, 'http://localhost:3000/api/v1/products/1/plans/1')
+    stub_request :get,
+                 "#{Rails.configuration.products_app['get_products']}/1/plans/1"
       .to_return(body: File.read('spec/support/show_plan.json').to_s,
                  status: 200)
 
@@ -68,7 +71,7 @@ feature 'Seller register order' do
     select 'Semestral', from: 'period'
     click_on 'commit'
 
-    expect(current_path).to eq order_path(1)
+    expect(current_path).to eq order_path(Order.last.id)
     expect(page).to have_content('Email Marketing')
     expect(page).to have_content(customer.company_name)
     expect(page).to have_content('Em Aberto')

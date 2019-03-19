@@ -14,7 +14,7 @@ describe 'Api post orders to clients' do
       .and_return(http_response)
     allow(http_response).to receive(:code).and_return(201)
 
-    post '/orders/1/approve'
+    post "/orders/#{Order.last.id}/send_approval"
     follow_redirect!
 
     expect(response.body).to include(I18n.t('orders.approve.success'))
@@ -33,11 +33,10 @@ describe 'Api post orders to clients' do
       .and_return(http_response)
     allow(http_response).to receive(:code).and_return(500)
 
-    post '/orders/1/approve'
+    post "/orders/#{Order.last.id}/send_approval"
     follow_redirect!
 
     expect(response.body).to include(I18n.t('orders.approve.warning'))
-    expect(response.body).to include(I18n.t('orders.show.approval_resend'))
   end
 
   it 'and it shows an error if an exception was raised sending the request' do
@@ -51,11 +50,10 @@ describe 'Api post orders to clients' do
       .with(Rails.configuration.customer_app['send_order_endpoint'], any_args)
       .and_raise('Unable to open TCP connection')
 
-    post '/orders/1/approve'
+    post "/orders/#{Order.last.id}/send_approval"
     follow_redirect!
 
     expect(response.body).to include(I18n.t('orders.approve.warning'))
-    expect(response.body).to include(I18n.t('orders.show.approval_resend'))
   end
 
   it 'and it allows the admin to resend the order to Clients successfully' do
@@ -72,7 +70,7 @@ describe 'Api post orders to clients' do
       .and_return(http_response)
     allow(http_response).to receive(:code).and_return(201)
 
-    post '/orders/1/send_approval'
+    post "/orders/#{Order.last.id}/send_approval"
     follow_redirect!
 
     expect(response.body).to include(I18n.t('orders.approve.success'))
@@ -91,7 +89,7 @@ describe 'Api post orders to clients' do
       .and_return(http_response)
     allow(http_response).to receive(:code).and_return(201)
 
-    post '/orders/1/send_approval'
+    post "/orders/#{Order.last.id}/send_approval"
     follow_redirect!
 
     expect(response.body).to include(I18n.t('orders.approve.success'))
@@ -102,7 +100,7 @@ describe 'Api post orders to clients' do
     login_as admin
     create(:order, status: :approved, sent_to_client_app: :sent)
 
-    post '/orders/1/send_approval'
+    post "/orders/#{Order.last.id}/send_approval"
     follow_redirect!
 
     expect(response.body).to include(I18n.t('orders.approve.already_sent'))
@@ -114,7 +112,7 @@ describe 'Api post orders to clients' do
     login_as vendor
     create(:order, user: other_vendor, status: :approved)
 
-    post '/orders/1/send_approval'
+    post "/orders/#{Order.last.id}/send_approval"
     follow_redirect!
 
     expect(response.body).to include(I18n.t('orders.approve.unauthorized'))
@@ -123,7 +121,7 @@ describe 'Api post orders to clients' do
   it 'and visitors cant resend orders' do
     create(:order, user: create(:vendor), status: :approved)
 
-    post '/orders/1/send_approval'
+    post "/orders/#{Order.last.id}/send_approval"
 
     expect(response).to redirect_to new_user_session_path
   end

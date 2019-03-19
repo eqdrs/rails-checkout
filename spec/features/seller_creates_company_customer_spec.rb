@@ -16,7 +16,7 @@ feature 'Seller creates company customer' do
     fill_in 'Contato', with: 'Mark Zuck'
     click_on 'Cadastrar'
 
-    expect(current_path).to eq company_path(1)
+    expect(current_path).to eq company_path(Company.last)
     expect(page).to have_content('Coca-Cola Indústrias Ltda.')
     expect(page).to have_content('Rua das palmas n 23 - Jundiá - MG')
     expect(page).to have_content('17.298.092/0001-30')
