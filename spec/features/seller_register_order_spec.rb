@@ -47,8 +47,9 @@ feature 'Seller register order' do
                  "#{Rails.configuration.products_app['get_products']}/1/plans")
       .to_return(body: File.read('spec/support/all_plans.json').to_s,
                  status: 200)
-    stub_request :get,
-                 "#{Rails.configuration.products_app['get_products']}/1/plans/1"
+    stub_request(:get,
+                 "#{Rails.configuration.products_app['get_products']}"\
+                 "/1/plans/1")
       .to_return(body: File.read('spec/support/show_plan.json').to_s,
                  status: 200)
 
