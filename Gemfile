@@ -6,7 +6,7 @@ ruby '2.6.1'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'coffee-rails', '~> 4.2'
 gem 'cpf_cnpj'
-gem 'devise'
+gem "devise", ">= 4.6.0"
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'locastyle'
